@@ -1,0 +1,11 @@
+VARIABLE_NAME=VALUE;
+AllignWeight=0.4;
+SeperationWeight=1;
+CohesionWeigth=0.6;
+WanderWeight=0.8;
+WanderOffSet=100;
+WanderRadius=50;
+WanderRate=0.8;
+AllignRadius=300;
+SeperationRadius=50;
+CohesionRadius=200;
