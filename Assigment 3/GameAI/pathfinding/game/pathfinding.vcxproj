@@ -123,11 +123,18 @@
     <ClInclude Include="PathfindingDebugContent.h" />
     <ClInclude Include="PathSmoothing.h" />
     <ClInclude Include="PathToMessage.h" />
+    <ClInclude Include="PlayerMoveMessage.h" />
+    <ClInclude Include="PlayerRotateMessage.h" />
+    <ClInclude Include="PlayerShootMessage.h" />
+    <ClInclude Include="PlayerSwapControllMessage.h" />
     <ClInclude Include="PriorityQueue(NEW).h" />
     <ClInclude Include="SmoothPathFinding.h" />
+<<<<<<< HEAD
+=======
     <ClInclude Include="SpawnRandomEnemyMessage.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TankMovement.h" />
+>>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Arrive.cpp" />
@@ -172,10 +179,17 @@
     <ClCompile Include="PathfindingDebugContent.cpp" />
     <ClCompile Include="PathSmoothing.cpp" />
     <ClCompile Include="PathToMessage.cpp" />
+    <ClCompile Include="PlayerMoveMessage.cpp" />
+    <ClCompile Include="PlayerRotateMessage.cpp" />
+    <ClCompile Include="PlayerShootMessage.cpp" />
+    <ClCompile Include="PlayerSwapControllMessage.cpp" />
     <ClCompile Include="SmoothPathFinding.cpp" />
+<<<<<<< HEAD
+=======
     <ClCompile Include="SpawnRandomEnemyMessage.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankMovement.cpp" />
+>>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

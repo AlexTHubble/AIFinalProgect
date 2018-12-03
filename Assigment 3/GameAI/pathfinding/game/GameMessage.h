@@ -6,10 +6,30 @@
 enum MessageType
 {
 	INVALID_MESSAGE_TYPE = -1,
-	PLAYER_MOVETO_MESSAGE = 0,
-	PATH_TO_MESSAGE = 1,
-	SPAWN_RANDOM_ENEMEY = 2,
-	END_GAME_MESSAGE = 3
+	PATH_TO_MESSAGE = 0,
+	END_GAME_MESSAGE = 1,
+	PLAYER_ROTATE_MESSAGE = 2,
+	PLAYER_ACCLERATE_MESSAGE = 3,
+	PLAYER_FIRE_MESSAGE = 4,
+	PLAYER_SWAP_CONTROLL = 5
+};
+
+enum Player
+{
+	P1 = 0,
+	P2 = 1
+};
+
+enum Direction
+{
+	Left = 0,
+	Right = 1
+};
+
+enum Accleration
+{
+	ACCELERATING = 0,
+	DECCELERATING = 1
 };
 
 class GameMessage : public Trackable

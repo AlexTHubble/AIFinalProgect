@@ -194,9 +194,6 @@
       <Filter>Header Files\Tank</Filter>
 >>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
     </ClInclude>
-    <ClInclude Include="Tank.h">
-      <Filter>Header Files\Tank</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Game.cpp">
@@ -344,9 +341,6 @@
     <ClCompile Include="TankMovement.cpp">
       <Filter>Source Files\Tank</Filter>
 >>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
-    </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files\Tank</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
