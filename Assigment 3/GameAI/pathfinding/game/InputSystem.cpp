@@ -3,6 +3,7 @@
 #include "Unit.h"
 #include "UnitManager.h"
 
+
 InputSystem::InputSystem(SpriteManager* spriteManager, UnitManager* unitManager, IDType aiSpriteID)
 {
 	mpSpriteManager = spriteManager;
@@ -28,57 +29,125 @@ void InputSystem::cleanup()
 
 void InputSystem::update()
 {
-	SDL_PumpEvents();
-	int x, y;
-	SDL_GetMouseState(&x, &y);
+	
 
-	SDL_PumpEvents();
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		//*****************************Press down systems********************************
+		if (event.type == SDL_KEYDOWN)
+		{
+			int keyCode = event.key.keysym.sym;
 
+			if (keyCode == SDLK_ESCAPE)
+			{
+				//End game
+				std::cout << "End game" << std::endl;
+				GameMessage * pMessage = new EndGameMessage();
+				mpMessageManager->addMessage(pMessage, 0);
+			}
+			else if (keyCode == SDLK_q)
+			{
+				//P1 Fire
+				GameMessage * pMessage = new PlayerShootMessage(Player::P1);
+				mpMessageManager->addMessage(pMessage, 0);
+			}
+			else if (keyCode == SDLK_e)
+			{
+				//P1 swap controll
+				GameMessage * pMessage = new PlayerSwapControll(Player::P1);
+				mpMessageManager->addMessage(pMessage, 0);
+			}
+			else if (keyCode == SDLK_KP_7)
+			{
+				//P2 fire
+				GameMessage * pMessage = new PlayerShootMessage(Player::P2);
+				mpMessageManager->addMessage(pMessage, 0);
+			}
+			else if (keyCode == SDLK_KP_9)
+			{
+				//P2 swaped controll
+				GameMessage * pMessage = new PlayerSwapControll(Player::P2);
+				mpMessageManager->addMessage(pMessage, 0);
+			}
+
+		}
+
+
+	}
+	//*****************************Press held systems********************************
+	SDL_PumpEvents();
 	{
 		//get keyboard state
 		const Uint8 *state = SDL_GetKeyboardState(NULL);
 
-		if (SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_LEFT))
-		{
-			static Vector2D lastPos(0.0f, 0.0f);
-			Vector2D pos(x, y);
-			if (lastPos.getX() != pos.getX() || lastPos.getY() != pos.getY())
-			{
-				
-				GameMessage* pMessage = new PathToMessage(lastPos, pos);
-				mpMessageManager->addMessage(pMessage, 0);
-				lastPos = pos;
-			}
-		}
+		//****************************************Misc controll systems***************************************************
 
 
-		if (state[SDL_SCANCODE_F])
+		//****************************************P1 controll systems***************************************************
+		if (state[SDL_SCANCODE_W])
 		{
-			dynamic_cast<GameApp*>(gpGame)->setPathDepthFirst();
-		}
-
-		if (state[SDL_SCANCODE_D])
-		{
-			dynamic_cast<GameApp*>(gpGame)->setPathDijsktra();
-		}
-
-		if (state[SDL_SCANCODE_A])
-		{
-			dynamic_cast<GameApp*>(gpGame)->setPathAstar();
+			//moveP1 forward
+			GameMessage* pMessage = new PlayerMoveMessage(Player::P1, Accleration::ACCELERATING);
+			mpMessageManager->addMessage(pMessage, 0);
 		}
 
 		if (state[SDL_SCANCODE_S])
 		{
-			GameMessage* pMessage = new SpawnRandomEnemyMessage(mpUnitManager, mpSpriteManager, mAiSpriteID, 10);
+			//Move P1 backwards
+			GameMessage* pMessage = new PlayerMoveMessage(Player::P1, Accleration::DECCELERATING);
+			mpMessageManager->addMessage(pMessage, 0);
+
+		}
+		
+		if (state[SDL_SCANCODE_A])
+		{
+			//Rotate P1 left
+			GameMessage* pMessage = new PlayerRotateMessage(Player::P1, Direction::Left);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
 
-		//if escape key was down then exit the loop
-		if (state[SDL_SCANCODE_ESCAPE])
+		if (state[SDL_SCANCODE_D])
 		{
-			GameMessage* pMessage = new EndGameMessage();
+			//Rotate P1 Right
+			GameMessage* pMessage = new PlayerRotateMessage(Player::P1, Direction::Right);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
+
+
+		//****************************************P2 controll systems***************************************************
+
+		if (state[SDL_SCANCODE_KP_8])
+		{
+			//P2 move forward
+			GameMessage* pMessage = new PlayerMoveMessage(Player::P2, Accleration::ACCELERATING);
+			mpMessageManager->addMessage(pMessage, 0);
+		}
+
+		if (state[SDL_SCANCODE_KP_5])
+		{
+			//P2 move backwards
+			GameMessage* pMessage = new PlayerMoveMessage(Player::P2, Accleration::DECCELERATING);
+			mpMessageManager->addMessage(pMessage, 0);
+		}
+
+		if (state[SDL_SCANCODE_KP_4])
+		{
+			//P2 rotate Left
+			GameMessage* pMessage = new PlayerRotateMessage(Player::P2, Direction::Left);
+			mpMessageManager->addMessage(pMessage, 0);
+		}
+
+		if (state[SDL_SCANCODE_KP_6])
+		{
+			//P2 rotate right
+			GameMessage* pMessage = new PlayerRotateMessage(Player::P2, Direction::Right);
+			mpMessageManager->addMessage(pMessage, 0);
+		}
+
+
+
+
 	}
 
 	mpMessageManager->processMessagesForThisframe();

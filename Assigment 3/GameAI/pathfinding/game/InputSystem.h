@@ -8,10 +8,12 @@
 #include "GraphicsBufferManager.h"
 #include "GraphicsSystem.h"
 #include "GameMessageManager.h"
-#include "PathToMessage.h"
 #include "Game.h"
-#include "SpawnRandomEnemyMessage.h"
 #include "EndGameMessage.h"
+#include "PlayerMoveMessage.h"
+#include "PlayerRotateMessage.h"
+#include "PlayerShootMessage.h"
+#include "PlayerSwapControllMessage.h"
 
 class InputSystem : public Trackable
 {
