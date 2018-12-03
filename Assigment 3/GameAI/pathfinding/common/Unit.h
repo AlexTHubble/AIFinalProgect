@@ -50,6 +50,11 @@ public:
 	void setSteering(Steering::SteeringType type, Vector2D targetLoc, UnitID targetUnitID);
 	void updateTarget();
 
+protected:
+	Unit(const Sprite& sprite);
+	void SetMaxSpeed(float maxSpeed) { mMaxSpeed = maxSpeed; };
+	void SetMaxRotVel(float maxVel) { mMaxRotVel = maxVel; };
+
 private:
 	UnitID mID;
 	ComponentID mPhysicsComponentID;
@@ -66,9 +71,6 @@ private:
 	Path* mPath;
 	bool ShouldUpdateTarget;
 	int mCurrentNode;
-
-	Unit(const Sprite& sprite);
-
 
 	Unit(Unit&);//invalidate copy constructor
 	void operator=(Unit&);//invalidate assignment operator

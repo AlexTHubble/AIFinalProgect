@@ -16,7 +16,7 @@ TankMovement::TankMovement(float maxSpeed, float maxRotateSpeed, float movementM
 	SetIsRotating(false);
 	SetIsMovementBuffed(false);
 	//Init buff timer
-	mMovementBuffTimer = 0.0f;
+	mMovementBuffTimer = 0;
 }
 
 TankMovement::~TankMovement()
@@ -24,13 +24,13 @@ TankMovement::~TankMovement()
 
 }
 
-void TankMovement::UpdateMovement()
+void TankMovement::UpdateMovement(int elapsedTime)
 {
 	//Adjust movement buffed timer
 	if (mIsMovementBuffed)
 	{
 		//Decrement timer
-		mMovementBuffTimer -= 0.0f;
+		mMovementBuffTimer -= elapsedTime;
 		//If buff time is over
 		if (mMovementBuffTimer < 0)
 		{
@@ -62,12 +62,12 @@ void TankMovement::RotateCounterClockwise()
 	SetCurrentAngle();
 }
 
-void TankMovement::MovementBuff(float movementMultiplier, float durationSeconds)
+void TankMovement::MovementBuff(float movementMultiplier, int durationMiliseconds)
 {
 	if (mIsMovementBuffed)
 	{
 		//Increase timer and change multiplier
-		mMovementBuffTimer += durationSeconds;
+		mMovementBuffTimer += durationMiliseconds;
 		SetMovementMultiplier(movementMultiplier);
 	}
 	else
@@ -75,7 +75,7 @@ void TankMovement::MovementBuff(float movementMultiplier, float durationSeconds)
 		//Set buffed to true
 		SetIsMovementBuffed(true);
 		//Set timer and multiplier
-		mMovementBuffTimer = durationSeconds;
+		mMovementBuffTimer = durationMiliseconds;
 		SetMovementMultiplier(mMovementMultiplier);
 	}
 }

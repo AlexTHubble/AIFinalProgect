@@ -11,14 +11,14 @@ public:
 	//Destructor
 	~TankMovement();
 	//Update
-	void UpdateMovement();
+	void UpdateMovement(int elapsedTime);
 	//Movement
 	void MoveForward();
 	void MoveBackwards();
 	void RotateClockwise();
 	void RotateCounterClockwise();
 	//Buff Function
-	void MovementBuff(float movementMultiplier, float seconds);
+	void MovementBuff(float movementMultiplier, int miliseconds);
 	//Variable Accessors
 	float GetMovementSpeed() { return mMoveSpeed; };
 	float GetRotateSpeed() { return mRotateSpeed; };
@@ -50,7 +50,7 @@ private:
 	float mCurrentAngle;
 	float mMaxMoveSpeed;
 	float mMaxRotateSpeed;
-	float mMovementBuffTimer;
+	int mMovementBuffTimer;
 	float mMovementMultiplier;
 	//Bool Checks
 	bool mIsMovementBuffed;
