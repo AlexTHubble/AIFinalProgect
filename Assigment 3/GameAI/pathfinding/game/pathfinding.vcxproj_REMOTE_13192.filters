@@ -153,6 +153,9 @@
     <ClInclude Include="PathToMessage.h">
       <Filter>Header Files\Messages</Filter>
     </ClInclude>
+    <ClInclude Include="SpawnRandomEnemyMessage.h">
+      <Filter>Header Files\Messages</Filter>
+    </ClInclude>
     <ClInclude Include="..\common\Unit.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
@@ -177,22 +180,8 @@
     <ClInclude Include="EndGameMessage.h">
       <Filter>Header Files\Messages</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="PlayerRotateMessage.h">
-      <Filter>Header Files\Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerShootMessage.h">
-      <Filter>Header Files\Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMoveMessage.h">
-      <Filter>Header Files\Messages</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSwapControllMessage.h">
-      <Filter>Header Files\Messages</Filter>
-=======
     <ClInclude Include="TankMovement.h">
       <Filter>Header Files\Tank</Filter>
->>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +290,9 @@
     <ClCompile Include="PathToMessage.cpp">
       <Filter>Source Files\Messages</Filter>
     </ClCompile>
+    <ClCompile Include="SpawnRandomEnemyMessage.cpp">
+      <Filter>Source Files\Messages</Filter>
+    </ClCompile>
     <ClCompile Include="..\common\Unit.cpp">
       <Filter>Common\Source Files</Filter>
     </ClCompile>
@@ -325,22 +317,8 @@
     <ClCompile Include="EndGameMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="PlayerRotateMessage.cpp">
-      <Filter>Source Files\Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerShootMessage.cpp">
-      <Filter>Source Files\Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMoveMessage.cpp">
-      <Filter>Source Files\Messages</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerSwapControllMessage.cpp">
-      <Filter>Source Files\Messages</Filter>
-=======
     <ClCompile Include="TankMovement.cpp">
       <Filter>Source Files\Tank</Filter>
->>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
     </ClCompile>
   </ItemGroup>
 </Project>
