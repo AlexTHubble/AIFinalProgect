@@ -177,7 +177,6 @@
     <ClInclude Include="EndGameMessage.h">
       <Filter>Header Files\Messages</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="PlayerRotateMessage.h">
       <Filter>Header Files\Messages</Filter>
     </ClInclude>
@@ -189,10 +188,9 @@
     </ClInclude>
     <ClInclude Include="PlayerSwapControllMessage.h">
       <Filter>Header Files\Messages</Filter>
-=======
+    </ClInclude>
     <ClInclude Include="TankMovement.h">
       <Filter>Header Files\Tank</Filter>
->>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
     </ClInclude>
     <ClInclude Include="Tank.h">
       <Filter>Header Files\Tank</Filter>
@@ -328,7 +326,6 @@
     <ClCompile Include="EndGameMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="PlayerRotateMessage.cpp">
       <Filter>Source Files\Messages</Filter>
     </ClCompile>
@@ -340,10 +337,9 @@
     </ClCompile>
     <ClCompile Include="PlayerSwapControllMessage.cpp">
       <Filter>Source Files\Messages</Filter>
-=======
+    </ClCompile>
     <ClCompile Include="TankMovement.cpp">
       <Filter>Source Files\Tank</Filter>
->>>>>>> 6f09b2743a6fa50a121c2d13bacc728727d65209
     </ClCompile>
     <ClCompile Include="Tank.cpp">
       <Filter>Source Files\Tank</Filter>
