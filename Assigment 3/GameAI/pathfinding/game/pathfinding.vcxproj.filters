@@ -183,6 +183,9 @@
     <ClInclude Include="TankMovement.h">
       <Filter>Header Files\Tank</Filter>
     </ClInclude>
+    <ClInclude Include="Tank.h">
+      <Filter>Header Files\Tank</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Game.cpp">
@@ -318,6 +321,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TankMovement.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank.cpp">
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
   </ItemGroup>
