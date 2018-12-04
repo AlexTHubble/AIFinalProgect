@@ -47,10 +47,14 @@ public:
 	void setToUpdateTarget(bool update) { ShouldUpdateTarget = update; };
 	void resetPath();
 	UnitID getID() { return mID; };
+	//Tank Functions
+	TankMovement* Movement() { return mpTankMovement; };
+	void SetMaxMoveSpeed(float maxSpeed) { SetMaxSpeed(maxSpeed); };
+	void SetMaxRotateSpeed(float maxSpeed) { SetMaxRotateSpeed(maxSpeed); };
 
 	void setSteering(Steering::SteeringType type, Vector2D targetLoc, UnitID targetUnitID);
 	void updateTarget();
-	TankMovement* Movment() { return NULL; };
+	void update(int elapsedTime);
 
 protected:
 	Unit(const Sprite& sprite);
@@ -73,6 +77,9 @@ private:
 	Path* mPath;
 	bool ShouldUpdateTarget;
 	int mCurrentNode;
+
+	//Class Instances
+	TankMovement* mpTankMovement;
 
 	Unit(Unit&);//invalidate copy constructor
 	void operator=(Unit&);//invalidate assignment operator
