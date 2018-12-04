@@ -32,8 +32,7 @@ public:
 
 	void draw() const;
 	float getFacing() const;
-	void update(float elapsedTime){};
-
+	void update(int elapsedTime);
 
 	PositionComponent* getPositionComponent() const;
 	PhysicsComponent* getPhysicsComponent() const;
@@ -54,7 +53,6 @@ public:
 
 	void setSteering(Steering::SteeringType type, Vector2D targetLoc, UnitID targetUnitID);
 	void updateTarget();
-	void update(int elapsedTime);
 
 protected:
 	Unit(const Sprite& sprite);

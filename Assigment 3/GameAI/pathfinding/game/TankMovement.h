@@ -2,6 +2,7 @@
 #define TANK_MOVEMENT_H
 
 #include "Trackable.h"
+#include <Vector2D.h>
 
 class TankMovement : public Trackable
 {
@@ -17,6 +18,8 @@ public:
 	void MoveBackwards();
 	void RotateClockwise();
 	void RotateCounterClockwise();
+	void ZeroOutMovement();
+	void ZeroOutRotate();
 	//Buff Function
 	void MovementBuff(float movementMultiplier, int miliseconds);
 	//Variable Accessors

@@ -23,13 +23,15 @@ enum Player
 enum Direction
 {
 	Left = 0,
-	Right = 1
+	Right = 1,
+	Stop = 2
 };
 
 enum Accleration
 {
 	ACCELERATING = 0,
-	DECCELERATING = 1
+	DECCELERATING = 1,
+	NONE = 2
 };
 
 class GameMessage : public Trackable

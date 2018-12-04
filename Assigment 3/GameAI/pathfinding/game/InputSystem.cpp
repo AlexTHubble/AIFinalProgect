@@ -29,8 +29,6 @@ void InputSystem::cleanup()
 
 void InputSystem::update()
 {
-	
-
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -91,13 +89,17 @@ void InputSystem::update()
 			GameMessage* pMessage = new PlayerMoveMessage(Player::P1, Accleration::ACCELERATING);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
-
-		if (state[SDL_SCANCODE_S])
+		else if (state[SDL_SCANCODE_S])
 		{
 			//Move P1 backwards
 			GameMessage* pMessage = new PlayerMoveMessage(Player::P1, Accleration::DECCELERATING);
 			mpMessageManager->addMessage(pMessage, 0);
-
+		}
+		else
+		{
+			//Stop P1 movement
+			GameMessage* pMessage = new PlayerMoveMessage(Player::P1, Accleration::NONE);
+			mpMessageManager->addMessage(pMessage, 0);
 		}
 		
 		if (state[SDL_SCANCODE_A])
@@ -106,11 +108,16 @@ void InputSystem::update()
 			GameMessage* pMessage = new PlayerRotateMessage(Player::P1, Direction::Left);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
-
-		if (state[SDL_SCANCODE_D])
+		else if (state[SDL_SCANCODE_D])
 		{
 			//Rotate P1 Right
 			GameMessage* pMessage = new PlayerRotateMessage(Player::P1, Direction::Right);
+			mpMessageManager->addMessage(pMessage, 0);
+		}
+		else
+		{
+			//Stop Rotate P1
+			GameMessage* pMessage = new PlayerRotateMessage(Player::P1, Direction::Stop);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
 

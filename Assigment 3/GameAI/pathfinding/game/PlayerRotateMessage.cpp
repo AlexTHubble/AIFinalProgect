@@ -30,6 +30,10 @@ void PlayerRotateMessage::process()
 			std::cout << "Player 1 rotating right" << std::endl;
 			tankMovment->RotateClockwise();
 			break;
+		case Stop: //If no rotation input
+			std::cout << "Player 1 No Rotate" << std::endl;
+			tankMovment->ZeroOutRotate();
+			break;
 		default: //ERROR
 			std::cout << "ERROR: player 1 has no rotate direction assigned" << std::endl;
 			break;
@@ -43,6 +47,9 @@ void PlayerRotateMessage::process()
 			break;
 		case Right: //If right
 			std::cout << "Player 2 rotating right" << std::endl;
+			break;
+		case Stop: //If no rotation input
+			std::cout << "Player 2 No Rotate" << std::endl;
 			break;
 		default: //ERROR
 			std::cout << "ERROR: Player 2 has no rotation assigned" << std::endl;

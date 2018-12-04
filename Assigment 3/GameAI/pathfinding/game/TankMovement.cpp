@@ -26,6 +26,7 @@ TankMovement::~TankMovement()
 
 void TankMovement::UpdateMovement(int elapsedTime)
 {
+
 	//Adjust movement buffed timer
 	if (mIsMovementBuffed)
 	{
@@ -60,6 +61,16 @@ void TankMovement::RotateCounterClockwise()
 {
 	SetRotateSpeed(-mMaxRotateSpeed * mMovementMultiplier);
 	SetCurrentAngle();
+}
+
+void TankMovement::ZeroOutMovement()
+{
+	SetMovementSpeed(0);
+}
+
+void TankMovement::ZeroOutRotate()
+{
+	SetRotateSpeed(0);
 }
 
 void TankMovement::MovementBuff(float movementMultiplier, int durationMiliseconds)
