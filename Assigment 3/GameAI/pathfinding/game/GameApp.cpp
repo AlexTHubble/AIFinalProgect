@@ -20,13 +20,16 @@
 #include "PathfindingDebugContent.h"
 #include "DijsktraPathfinder.h"
 #include "InputSystem.h"
+#include <iostream>
+
 
 #include <SDL.h>
 #include <fstream>
 #include <vector>
 
 const int GRID_SQUARE_SIZE = 32;
-const std::string gFileName = "pathgrid.txt";
+const std::string gFileName = "MapList.txt";
+const std::string gMapFolder = "Maps/";
 
 GameApp::GameApp()
 :mpMessageManager(NULL)
@@ -56,15 +59,10 @@ bool GameApp::init()
 	//create and load the Grid, GridBuffer, and GridRenderer
 	mpGrid = new Grid(mpGraphicsSystem->getWidth(), mpGraphicsSystem->getHeight(), GRID_SQUARE_SIZE);
 	mpGridVisualizer = new GridVisualizer( mpGrid );
-	std::ifstream theStream( gFileName );
-	mpGrid->load( theStream );
+	
+	loadMapList();
 
-	//create the GridGraph for pathfinding
-	mpGridGraph = new GridGraph(mpGrid);
-	//init the nodes and connections
-	mpGridGraph->init();
-
-	mpPathfinder = new Dijsktra(mpGridGraph, true);
+	loadMap(0);
 
 	//load buffers
 	mpGraphicsBufferManager->loadBuffer(mBackgroundBufferID, "wallpaper.bmp");
@@ -135,7 +133,6 @@ void GameApp::processLoop()
 
 	mpMessageManager->processMessagesForThisframe();
 
-
 	//should be last thing in processLoop
 	Game::processLoop();
 }
@@ -203,4 +200,48 @@ void GameApp::setPathDepthFirst()
 	//sets up debug
 	PathfindingDebugContent* pContent = new PathfindingDebugContent(mpPathfinder);
 	mpDebugDisplay = new DebugDisplay(Vector2D(0, 12), pContent);
+}
+
+//Loads all the maps into the file
+void GameApp::loadMapList() 
+{
+	bool endOfFile = false;
+	std::string data;
+	ifstream file(gMapFolder + gFileName);
+
+	if (file.is_open())
+	{
+		while (!file.eof() && !endOfFile)
+		{
+			getline(file, data, ';');
+			if (data == "EOF")
+			{
+				endOfFile = true;
+			}
+			else
+			{
+				mMapList.push_back(gMapFolder + data);
+			}
+		}
+		file.close();
+	}
+}
+
+void GameApp::loadMap(int mapIndex)
+{
+	std::ifstream theStream(mMapList[mapIndex]);
+	mpGrid->load(theStream);
+
+	if(mpGridGraph != NULL)
+		delete mpGridGraph;
+
+	//create the GridGraph for pathfinding
+	mpGridGraph = new GridGraph(mpGrid);
+	//init the nodes and connections
+	mpGridGraph->init();
+
+	if (mpPathfinder != NULL)
+		delete mpPathfinder;
+
+	mpPathfinder = new Dijsktra(mpGridGraph, true);
 }
