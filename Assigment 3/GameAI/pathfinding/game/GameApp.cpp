@@ -84,6 +84,7 @@ bool GameApp::init()
 	mpInputSystem->init();
 
 	mpMasterTimer->start();
+
 	return true;
 }
 

@@ -14,6 +14,7 @@
 #include "Defines.h"
 #include "UnitManager.h"
 #include "ComponentManager.h"
+#include "..\game\Tank.h"
 
 Game* gpGame = NULL;
 
@@ -80,6 +81,10 @@ bool Game::init()
 	{
 		pEnemyArrow = mpSpriteManager->createAndManageSprite(AI_ICON_SPRITE_ID, pAIBuffer, 0, 0, (float)pAIBuffer->getWidth(), (float)pAIBuffer->getHeight());
 	}
+
+	//Create p1
+	Unit* pUnit = mpUnitManager->createPlayerUnit(*pEnemyArrow);
+	pUnit->getPositionComponent()->setPosition(Vector2D(300, 300));
 
 	return true;
 }

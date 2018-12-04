@@ -18,7 +18,7 @@ public:
 	//Accessors
 	void SetMaxMoveSpeed(float maxSpeed) { SetMaxSpeed(maxSpeed); };
 	void SetMaxRotateSpeed(float maxSpeed) { SetMaxRotateSpeed(maxSpeed); };
-	TankMovement* Movement() { return mpTankMovement; };
+	virtual TankMovement* Movement() { return mpTankMovement; };
 private:
 	//Class Instances
 	TankMovement* mpTankMovement;

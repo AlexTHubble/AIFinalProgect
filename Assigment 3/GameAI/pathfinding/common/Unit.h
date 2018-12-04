@@ -19,6 +19,7 @@ class SteeringComponent;
 class Sprite;
 class UnitManager;
 class Path;
+class TankMovement;
 
 const Uint32 DEFAULT_QUEUE_CAPACITY = 8;
 
@@ -49,6 +50,7 @@ public:
 
 	void setSteering(Steering::SteeringType type, Vector2D targetLoc, UnitID targetUnitID);
 	void updateTarget();
+	TankMovement* Movment() { return NULL; };
 
 protected:
 	Unit(const Sprite& sprite);
