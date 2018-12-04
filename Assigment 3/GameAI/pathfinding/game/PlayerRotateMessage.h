@@ -3,6 +3,7 @@
 
 #include "GameMessage.h"
 #include "UnitManager.h"
+#include "Game.h"
 
 class PlayerRotateMessage : public GameMessage
 {

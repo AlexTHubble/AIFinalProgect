@@ -1,5 +1,6 @@
 #include "PlayerMoveMessage.h"
 #include "TankMovement.h"
+#include "Unit.h"
 
 PlayerMoveMessage::PlayerMoveMessage(Player playerMoving, Accleration acceleration)
 	:GameMessage(PLAYER_ACCLERATE_MESSAGE)
@@ -14,7 +15,7 @@ PlayerMoveMessage::~PlayerMoveMessage()
 
 void PlayerMoveMessage::process()
 {
-	TankMovement * tankMovment = gpGame->getUnitManager()->getPlayerUnit()->Movment();
+	TankMovement * tankMovment = gpGame->getUnitManager()->getPlayerUnit()->Movement();
 
 	switch (mPlayerMoving) //This handles bolth players rotation and direction based on input
 	{

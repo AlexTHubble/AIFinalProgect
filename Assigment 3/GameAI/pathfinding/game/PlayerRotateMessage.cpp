@@ -1,4 +1,6 @@
 #include "PlayerRotateMessage.h"
+#include "TankMovement.h"
+#include "Unit.h"
 
 PlayerRotateMessage::PlayerRotateMessage(Player playerToRotate, Direction direction)
 	:GameMessage(PLAYER_ROTATE_MESSAGE)
@@ -13,6 +15,8 @@ PlayerRotateMessage::~PlayerRotateMessage()
 
 void PlayerRotateMessage::process()
 {
+	TankMovement * tankMovment = gpGame->getUnitManager()->getPlayerUnit()->Movement();
+
 	switch (mPlayerToRotate) //This handles bolth players rotation and direction based on input
 	{
 	case P1: //If player 1
@@ -20,9 +24,11 @@ void PlayerRotateMessage::process()
 		{
 		case Left: //If left
 			std::cout << "Player 1 rotating left" << std::endl;
+			tankMovment->RotateCounterClockwise();
 			break;
 		case Right: //If right
 			std::cout << "Player 1 rotating right" << std::endl;
+			tankMovment->RotateClockwise();
 			break;
 		default: //ERROR
 			std::cout << "ERROR: player 1 has no rotate direction assigned" << std::endl;
