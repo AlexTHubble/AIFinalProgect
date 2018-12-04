@@ -34,6 +34,7 @@ Unit::~Unit()
 {
 	delete mPath;
 	mPath = nullptr;
+	delete mpTankMovement;
 }
 
 void Unit::draw() const
