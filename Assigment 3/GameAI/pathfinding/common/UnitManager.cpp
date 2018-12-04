@@ -166,6 +166,7 @@ void UnitManager::updateAll(float elapsedTime)
 {
 	for (auto it = mUnitMap.begin(); it != mUnitMap.end(); ++it)
 	{
+		it->second->update(elapsedTime);
 		it->second->updateTarget();
 	}
 }

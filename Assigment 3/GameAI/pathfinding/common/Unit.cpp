@@ -135,7 +135,11 @@ void Unit::updateTarget()
 
 void Unit::update(int elapsedTime)
 {
+	std::cout << "here" << std::endl;
+	//Update movement in tank movement script
 	mpTankMovement->UpdateMovement(elapsedTime);
-	SetMaxMoveSpeed(mpTankMovement->GetMovementSpeed());
-	SetMaxRotateSpeed(mpTankMovement->GetRotateSpeed());
+	//Set facing
+	getPositionComponent()->setFacing(mpTankMovement->GetCurrentAngleRadians());
+	//Set movement
+	getPositionComponent()->setPosition(getPositionComponent()->getPosition() *  mpTankMovement->GetCurrentAngleRadians());
 }
