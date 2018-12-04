@@ -10,6 +10,7 @@ Champlain College
 
 #include "Game.h"
 #include "InputSystem.h"
+#include <vector>
 
 //forward declarations
 class GraphicsBuffer;
@@ -48,6 +49,9 @@ public:
 	void setPathAstar();
 	void setPathDijsktra();
 	void setPathDepthFirst();
+	void loadMapList();
+	
+
 private:
 	GameMessageManager* mpMessageManager;
 	Grid* mpGrid;
@@ -57,6 +61,9 @@ private:
 	InputSystem *mpInputSystem;
 
 	GridPathfinder* mpPathfinder;
+	std::vector<std::string> mMapList ;
+
+	void loadMap(int mapIndex);
 
 };
 
