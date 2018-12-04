@@ -23,7 +23,7 @@ public:
 	//Buff Function
 	void MovementBuff(float movementMultiplier, int miliseconds);
 	//Variable Accessors
-	float GetMovementSpeed() { return mMoveSpeed; };
+	float GetMovementSpeed() { std::cout << mMoveSpeed << std::endl;  return mMoveSpeed; };
 	float GetRotateSpeed() { return mRotateSpeed; };
 	float GetCurrentAngleDegrees() { return mCurrentAngle; };
 	float GetCurrentAngleRadians();

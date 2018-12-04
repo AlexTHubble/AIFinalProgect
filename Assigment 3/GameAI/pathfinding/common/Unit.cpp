@@ -24,7 +24,7 @@ Unit::Unit(const Sprite& sprite)
 	,mSteeringComponentID(INVALID_COMPONENT_ID)
 	,mShowTarget(false)
 {
-	mpTankMovement = new TankMovement(5.0f, 1.0f); // <--- Hard coded values for max speeds
+	mpTankMovement = new TankMovement(20.0f, 1.0f); // <--- Hard coded values for max speeds
 	mCurrentNode = 0;
 	ShouldUpdateTarget = false;
 	mPath = nullptr;
@@ -135,13 +135,17 @@ void Unit::update(int elapsedTime)
 {
 	PhysicsData data = getPhysicsComponent()->getData();
 
+	//Debug helper
 	std::cout << getPositionComponent()->getPosition().getX() << ", " << getPositionComponent()->getPosition().getY() << std::endl;
 	//Update movement in tank movement script
 	mpTankMovement->UpdateMovement(elapsedTime);
 	//Set rotation
 	data.rotVel = mpTankMovement->GetRotateSpeed();
 	//Set movement
-	data.vel = (mpTankMovement->GetMovementSpeed(), mpTankMovement->GetMovementSpeed()) * getFacing();
+	float temp = getFacing() - (PI / 2);
+	Vector2D currentDirection = Vector2D(cos(temp), sin(temp));
+
+	data.vel = currentDirection * mpTankMovement->GetMovementSpeed();
 
 	getPhysicsComponent()->setData(data);
 }
