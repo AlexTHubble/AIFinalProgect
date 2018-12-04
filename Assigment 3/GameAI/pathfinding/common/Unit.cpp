@@ -14,6 +14,7 @@
 #include "Steering.h"
 #include "../game/Node.h"
 #include "Grid.h"
+#include "../game/TankMovement.h"
 
 
 Unit::Unit(const Sprite& sprite) 
@@ -23,6 +24,7 @@ Unit::Unit(const Sprite& sprite)
 	,mSteeringComponentID(INVALID_COMPONENT_ID)
 	,mShowTarget(false)
 {
+	mpTankMovement = new TankMovement(2.0f, 1.0f); // <--- Hard coded values for max speeds
 	mCurrentNode = 0;
 	ShouldUpdateTarget = false;
 	mPath = nullptr;
@@ -128,4 +130,11 @@ void Unit::updateTarget()
 
 
 	}
+}
+
+void Unit::update(int elapsedTime)
+{
+	mpTankMovement->UpdateMovement(elapsedTime);
+	SetMaxMoveSpeed(mpTankMovement->GetMovementSpeed());
+	SetMaxRotateSpeed(mpTankMovement->GetRotateSpeed());
 }

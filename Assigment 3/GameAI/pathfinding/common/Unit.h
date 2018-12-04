@@ -19,6 +19,7 @@ class SteeringComponent;
 class Sprite;
 class UnitManager;
 class Path;
+class TankMovement;
 
 const Uint32 DEFAULT_QUEUE_CAPACITY = 8;
 
@@ -46,9 +47,14 @@ public:
 	void setToUpdateTarget(bool update) { ShouldUpdateTarget = update; };
 	void resetPath();
 	UnitID getID() { return mID; };
+	//Tank Functions
+	TankMovement* Movement() { return mpTankMovement; };
+	void SetMaxMoveSpeed(float maxSpeed) { SetMaxSpeed(maxSpeed); };
+	void SetMaxRotateSpeed(float maxSpeed) { SetMaxRotateSpeed(maxSpeed); };
 
 	void setSteering(Steering::SteeringType type, Vector2D targetLoc, UnitID targetUnitID);
 	void updateTarget();
+	void update(int elapsedTime);
 
 protected:
 	Unit(const Sprite& sprite);
@@ -71,6 +77,9 @@ private:
 	Path* mPath;
 	bool ShouldUpdateTarget;
 	int mCurrentNode;
+
+	//Class Instances
+	TankMovement* mpTankMovement;
 
 	Unit(Unit&);//invalidate copy constructor
 	void operator=(Unit&);//invalidate assignment operator
