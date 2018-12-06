@@ -15,9 +15,10 @@
 #include "../game/Node.h"
 #include "Grid.h"
 #include "../game/TankMovement.h"
+#include "../game/PlayerControlledState.h"
 
 
-Unit::Unit(const Sprite& sprite) 
+Unit::Unit(const Sprite& sprite, UnitID idToBeSet)
 	:mSprite(sprite)
 	,mPositionComponentID(INVALID_COMPONENT_ID)
 	,mPhysicsComponentID(INVALID_COMPONENT_ID)
@@ -28,6 +29,18 @@ Unit::Unit(const Sprite& sprite)
 	mCurrentNode = 0;
 	ShouldUpdateTarget = false;
 	mPath = nullptr;
+
+	//Sets up the state machine for the new class
+	mpUnitStateMachine = new StateMachine();
+	PlayerControlledState* pPlayerControlledState = new PlayerControlledState(0, mpTankMovement, idToBeSet);
+
+	//TODO set up transitions
+
+	//Adds the states
+	mpUnitStateMachine->addState(pPlayerControlledState);
+
+	//set the initial state
+	mpUnitStateMachine->setInitialStateID(0);
 }
 
 Unit::~Unit()
@@ -131,21 +144,15 @@ void Unit::updateTarget()
 	}
 }
 
+StateMachine * Unit::getStateMachine()
+{
+	if (mpUnitStateMachine != nullptr)
+		return mpUnitStateMachine;
+	else
+		return nullptr;
+}
+
 void Unit::update(int elapsedTime)
 {
-	PhysicsData data = getPhysicsComponent()->getData();
-
-	//Debug helper
-	std::cout << getPositionComponent()->getPosition().getX() << ", " << getPositionComponent()->getPosition().getY() << std::endl;
-	//Update movement in tank movement script
-	mpTankMovement->UpdateMovement(elapsedTime);
-	//Set rotation
-	data.rotVel = mpTankMovement->GetRotateSpeed();
-	//Set movement
-	float temp = getFacing() - (PI / 2);
-	Vector2D currentDirection = Vector2D(cos(temp), sin(temp));
-
-	data.vel = currentDirection * mpTankMovement->GetMovementSpeed();
-
-	getPhysicsComponent()->setData(data);
+	mpUnitStateMachine->update(elapsedTime);
 }

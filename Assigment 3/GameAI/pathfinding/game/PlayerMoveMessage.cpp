@@ -1,5 +1,4 @@
 #include "PlayerMoveMessage.h"
-#include "TankMovement.h"
 #include "Unit.h"
 
 PlayerMoveMessage::PlayerMoveMessage(Player playerMoving, Accleration acceleration)
@@ -19,8 +18,7 @@ void PlayerMoveMessage::process()
 
 	if (player != nullptr)
 	{
-		TankMovement * tankMovment = player->Movement();
-
+		StateMachine* playerStateMachine = player->getStateMachine();
 		switch (mPlayerMoving) //This handles bolth players rotation and direction based on input
 		{
 
@@ -30,15 +28,15 @@ void PlayerMoveMessage::process()
 			{
 			case ACCELERATING: //If accelerating
 				std::cout << "Player 1 accelerating" << std::endl;
-				tankMovment->MoveForward();
+				playerStateMachine->handleMovmentInput(true, false);
 				break;
 			case DECCELERATING: //If decelerating
 				std::cout << "Player 1 decelerating" << std::endl;
-				tankMovment->MoveBackwards();
+				playerStateMachine->handleMovmentInput(false, true);
 				break;
 			case NONE: //If no input
 				std::cout << "Player 1 No Movement" << std::endl;
-				tankMovment->ZeroOutMovement();
+				playerStateMachine->handleMovmentInput(false, false);
 				break;
 			default: //ERROR
 				std::cout << "ERROR: player 1 has no accleration" << std::endl;

@@ -123,6 +123,7 @@
     <ClInclude Include="PathfindingDebugContent.h" />
     <ClInclude Include="PathSmoothing.h" />
     <ClInclude Include="PathToMessage.h" />
+    <ClInclude Include="PlayerControlledState.h" />
     <ClInclude Include="PlayerMoveMessage.h" />
     <ClInclude Include="PlayerRotateMessage.h" />
     <ClInclude Include="PlayerShootMessage.h" />
@@ -130,7 +131,7 @@
     <ClInclude Include="PriorityQueue(NEW).h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SmoothPathFinding.h" />
-    <ClInclude Include="Tank.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="TankMovement.h" />
   </ItemGroup>
   <ItemGroup>
@@ -176,12 +177,13 @@
     <ClCompile Include="PathfindingDebugContent.cpp" />
     <ClCompile Include="PathSmoothing.cpp" />
     <ClCompile Include="PathToMessage.cpp" />
+    <ClCompile Include="PlayerControlledState.cpp" />
     <ClCompile Include="PlayerMoveMessage.cpp" />
     <ClCompile Include="PlayerRotateMessage.cpp" />
     <ClCompile Include="PlayerShootMessage.cpp" />
     <ClCompile Include="PlayerSwapControllMessage.cpp" />
     <ClCompile Include="SmoothPathFinding.cpp" />
-    <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TankMovement.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

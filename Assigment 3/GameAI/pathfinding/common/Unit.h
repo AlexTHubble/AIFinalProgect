@@ -9,6 +9,7 @@
 #include "PositionComponent.h"
 #include "Sprite.h"
 #include "Steering.h"
+#include "../game/StateMachine.h"
 
 //#include "CircularQueue.h"
 //#include "Transaction.h"
@@ -53,9 +54,10 @@ public:
 
 	void setSteering(Steering::SteeringType type, Vector2D targetLoc, UnitID targetUnitID);
 	void updateTarget();
+	StateMachine* getStateMachine();
 
 protected:
-	Unit(const Sprite& sprite);
+	Unit(const Sprite& sprite, UnitID idToBeSet);
 	void SetMaxSpeed(float maxSpeed) { mMaxSpeed = maxSpeed; };
 	void SetMaxRotVel(float maxVel) { mMaxRotVel = maxVel; };
 
@@ -81,6 +83,8 @@ private:
 
 	Unit(Unit&);//invalidate copy constructor
 	void operator=(Unit&);//invalidate assignment operator
+
+	StateMachine* mpUnitStateMachine;
 
 	friend class UnitManager;
 };

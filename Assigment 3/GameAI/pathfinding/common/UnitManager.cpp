@@ -8,7 +8,6 @@
 #include "..\game\Graph.h"
 #include "Grid.h"
 #include "..\game\GridGraph.h"
-#include "..\game\Tank.h"
 
 
 UnitID UnitManager::msNextUnitID = PLAYER_UNIT_ID + 1;
@@ -36,8 +35,7 @@ Unit* UnitManager::createUnit(const Sprite& sprite, bool shouldWrap, const Posit
 	Byte* ptr = mPool.allocateObject();
 	if (ptr != NULL)
 	{
-		//create unit
-		pUnit = new (ptr)Unit(sprite);//placement new
+
 
 		UnitID theID = id;
 		if (theID == INVALID_UNIT_ID)
@@ -45,6 +43,9 @@ Unit* UnitManager::createUnit(const Sprite& sprite, bool shouldWrap, const Posit
 			theID = msNextUnitID;
 			msNextUnitID++;
 		}
+
+		//create unit
+		pUnit = new (ptr)Unit(sprite, theID);//placement new
 
 		//place in map
 		mUnitMap[theID] = pUnit;

@@ -14,7 +14,6 @@
 #include "Defines.h"
 #include "UnitManager.h"
 #include "ComponentManager.h"
-#include "..\game\Tank.h"
 
 Game* gpGame = NULL;
 

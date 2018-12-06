@@ -40,6 +40,15 @@
     <Filter Include="Source Files\Tank">
       <UniqueIdentifier>{bd172fe0-2bdf-4c3a-9161-613debbb92c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\StateMachine">
+      <UniqueIdentifier>{b98f7bb9-7af9-44ae-ab18-049db6fb941d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachine">
+      <UniqueIdentifier>{dfa2ae7c-310d-4d67-9382-41fa4fabf404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachine\States">
+      <UniqueIdentifier>{d1d7b774-7620-4916-a59a-61e94ca8a6f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\Game.h">
@@ -192,11 +201,14 @@
     <ClInclude Include="TankMovement.h">
       <Filter>Header Files\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="Tank.h">
-      <Filter>Header Files\Tank</Filter>
-    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header Files\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControlledState.h">
+      <Filter>Header Files\StateMachine\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -344,8 +356,11 @@
     <ClCompile Include="TankMovement.cpp">
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files\Tank</Filter>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source Files\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControlledState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
