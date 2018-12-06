@@ -18,6 +18,7 @@ public:
 	virtual void handleMovmentInput(bool accelerating, bool decelerating);
 	virtual void handleSwapInput();
 	virtual void handleFireInput();
+	virtual void cleanupTransitions();
 private:
 	TankMovement * mpTankMovment;
 	UnitID mUnitId;

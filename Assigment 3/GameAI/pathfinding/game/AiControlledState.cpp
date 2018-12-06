@@ -40,3 +40,14 @@ void AIControlledState::handleSwapInput()
 void AIControlledState::handleFireInput()
 {
 }
+
+void AIControlledState::cleanupTransitions()
+{
+	for (std::map<TransitionType, StateTransition*>::iterator transition = mTransitions.begin(); transition != mTransitions.end(); ++transition)
+	{
+		if (transition->second != nullptr)
+		{
+			delete transition->second;
+		}
+	}
+}

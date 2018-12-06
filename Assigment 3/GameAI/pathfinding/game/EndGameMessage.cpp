@@ -17,6 +17,7 @@ void EndGameMessage::process()
 
 	for (std::map<UnitID, Unit*>::iterator unit = mUnitMap.begin(); unit != mUnitMap.end(); ++unit)
 	{
+		unit->second->getStateMachine()->cleanupStates();
 		gpGame->getUnitManager()->deleteUnit(unit->second->getID());
 	}
 

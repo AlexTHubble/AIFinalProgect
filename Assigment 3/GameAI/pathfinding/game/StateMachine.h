@@ -33,6 +33,8 @@ public:
 	void addTransition( StateTransition* pTransition );
 	inline const SM_idType& getID() const { return mID; };
 
+	virtual void cleanupTransitions();
+
 	virtual void onEntrance()=0;//code to run when the state is entered
 	virtual void onExit()=0;//code to run when the state is exitted
 	virtual StateTransition* update(int elapsedTime)=0;//code to run each frame - returning NULL means no transition
@@ -63,7 +65,7 @@ class StateMachine:public Trackable
 {
 public:
 	StateMachine():mpCurrentState(NULL),mInitialStateID(-1){};
-	~StateMachine(){};
+	~StateMachine();
 
 	void addState( StateMachineState* pState );
 	void setInitialStateID( const SM_idType& id ){ mInitialStateID = id; };
@@ -74,6 +76,8 @@ public:
 	void handleMovmentInput(bool accelerating, bool decelerating);
 	void handleSwapInput();
 	void handleFireInput();
+
+	void cleanupStates();
 
 protected:
 	void transitionToState( const SM_idType& targetID );//call onExit for old state and onEntrance for the new state

@@ -57,6 +57,7 @@ Unit::~Unit()
 	delete mPath;
 	mPath = nullptr;
 	delete mpTankMovement;
+	delete mpUnitStateMachine;
 }
 
 void Unit::draw() const

@@ -76,3 +76,14 @@ void PlayerControlledState::handleSwapInput()
 void PlayerControlledState::handleFireInput()
 {
 }
+
+void PlayerControlledState::cleanupTransitions()
+{
+	for (std::map<TransitionType, StateTransition*>::iterator transition = mTransitions.begin(); transition != mTransitions.end(); ++transition)
+	{
+		if (transition->second != nullptr)
+		{
+			delete transition->second;
+		}
+	}
+}

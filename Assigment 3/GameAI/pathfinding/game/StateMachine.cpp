@@ -3,11 +3,23 @@
 
 StateMachineState::~StateMachineState()
 {
+
 }
 
 void StateMachineState::addTransition( StateTransition* pTransition )
 {
 	mTransitions[ pTransition->getTransitionType()] = pTransition;
+}
+
+void StateMachineState::cleanupTransitions()
+{
+	for (std::map<TransitionType, StateTransition*>::iterator transition = mTransitions.begin(); transition != mTransitions.end(); ++transition)
+	{
+		if (transition->second != nullptr)
+		{
+			delete transition->second;
+		}
+	}
 }
 
 void StateMachineState::handleMovmentInput(bool accelerating, bool decelerating)
@@ -22,6 +34,11 @@ void StateMachineState::handleFireInput()
 {
 }
 
+
+StateMachine::~StateMachine()
+{
+
+}
 
 void StateMachine::addState( StateMachineState* pState )
 {
@@ -52,6 +69,18 @@ void StateMachine::handleFireInput()
 {
 	if (mpCurrentState != nullptr)
 		mpCurrentState->handleFireInput();
+}
+
+void StateMachine::cleanupStates()
+{
+	for (std::map<SM_idType, StateMachineState*>::iterator state = mStates.begin(); state != mStates.end(); ++state)
+	{
+		if (state->second != nullptr)
+		{
+			state->second->cleanupTransitions();
+			delete state->second;
+		}
+	}
 }
 
 void StateMachine::update(int elapsedTime)
