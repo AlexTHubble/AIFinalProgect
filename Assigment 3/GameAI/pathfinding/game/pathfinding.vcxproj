@@ -103,6 +103,7 @@
     <ClInclude Include="..\common\SteeringComponent.h" />
     <ClInclude Include="..\common\Unit.h" />
     <ClInclude Include="..\common\UnitManager.h" />
+    <ClInclude Include="AiControlledState.h" />
     <ClInclude Include="Compare.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="DebugContent.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="..\common\SteeringComponent.cpp" />
     <ClCompile Include="..\common\Unit.cpp" />
     <ClCompile Include="..\common\UnitManager.cpp" />
+    <ClCompile Include="AiControlledState.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DebugDisplay.cpp" />
     <ClCompile Include="DepthFirstPathfinder.cpp" />

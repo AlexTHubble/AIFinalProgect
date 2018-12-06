@@ -3,9 +3,13 @@
 #include "UnitManager.h"
 #include "Game.h"
 #include "Unit.h"
+#include <iostream>
+
+using namespace std;
 
 void PlayerControlledState::onEntrance()
 {
+	mTransferToAIControll = false;
 }
 
 void PlayerControlledState::onExit()
@@ -14,7 +18,17 @@ void PlayerControlledState::onExit()
 
 StateTransition * PlayerControlledState::update(int elapsedTime)
 {
-	std::cout << "Update from statemachine!" << std::endl;
+	std::cout << "Update from player controlled statemachine!" << std::endl;
+
+	if (mTransferToAIControll) //If the state has been marked to transition into the new state...
+	{
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(AI_CONTROLLED_STATE);
+		if (iter != mTransitions.end())//found?
+		{
+			StateTransition* pTransition = iter->second;
+			return pTransition;
+		}
+	}
 
 	//Gets data
 	PhysicsData data = gpGame->getUnitManager()->getUnit(mUnitId)->getPhysicsComponent()->getData();
@@ -29,6 +43,8 @@ StateTransition * PlayerControlledState::update(int elapsedTime)
 	data.vel = currentDirection * mpTankMovment->GetMovementSpeed();
 
 	gpGame->getUnitManager()->getUnit(mUnitId)->getPhysicsComponent()->setData(data);
+
+
 
 	return NULL;//no transition
 }
@@ -54,6 +70,7 @@ void PlayerControlledState::handleMovmentInput(bool accelerating, bool decelerat
 
 void PlayerControlledState::handleSwapInput()
 {
+	mTransferToAIControll = true;
 }
 
 void PlayerControlledState::handleFireInput()

@@ -210,6 +210,9 @@
     <ClInclude Include="PlayerControlledState.h">
       <Filter>Header Files\StateMachine\States</Filter>
     </ClInclude>
+    <ClInclude Include="AiControlledState.h">
+      <Filter>Header Files\StateMachine\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Game.cpp">
@@ -360,6 +363,9 @@
       <Filter>Source Files\StateMachine</Filter>
     </ClCompile>
     <ClCompile Include="PlayerControlledState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AiControlledState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

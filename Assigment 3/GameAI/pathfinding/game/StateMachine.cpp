@@ -65,6 +65,7 @@ void StateMachine::update(int elapsedTime)
 	StateTransition* pTransition = mpCurrentState->update(elapsedTime);
 	if( pTransition != NULL )
 	{
+		std::cout << "------------------------------ " << pTransition->getTargetStateID() << std::endl;
 		transitionToState( pTransition->getTargetStateID() );
 	}
 }

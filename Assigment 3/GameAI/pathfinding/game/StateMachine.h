@@ -18,8 +18,8 @@ class StateTransition;
 enum TransitionType
 {
 	INVALID_TRANSITION_TYPE = -1,
-	KABOOM_TRANSITION = 0,
-	END_GAME_TRANSITION = 1
+	PLAYER_CONTROLLED_STATE = 0,
+	AI_CONTROLLED_STATE = 1
 };
 
 typedef int SM_idType;

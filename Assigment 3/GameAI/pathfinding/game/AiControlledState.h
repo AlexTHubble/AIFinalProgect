@@ -1,16 +1,15 @@
 #pragma once
-#ifndef PLAYER_CONTROLLED_STATE_H
-#define PLAYER_CONTROLLED_STATE_H
+#ifndef AI_CONTROLLED_STATE_H
+#define AI_CONTROLLED_STATE_H
 
 #include "StateMachine.h"
 #include "TankMovement.h"
 #include "Defines.h"
 
-
-class PlayerControlledState : public StateMachineState
+class AIControlledState : public StateMachineState
 {
 public:
-	PlayerControlledState(const SM_idType& id, TankMovement* tankMovment, UnitID unitId) :StateMachineState(id) { mpTankMovment = tankMovment; mUnitId = unitId; };
+	AIControlledState(const SM_idType& id, TankMovement* tankMovment, UnitID unitId) :StateMachineState(id) { mpTankMovment = tankMovment; mUnitId = unitId; };
 
 	virtual void onEntrance();
 	virtual void onExit();
@@ -21,7 +20,7 @@ public:
 private:
 	TankMovement * mpTankMovment;
 	UnitID mUnitId;
-	bool mTransferToAIControll = false;
+	bool mTransferToPlayerControll = false;
 };
 
-#endif //!PLAYER_CONTROLLED_STATE_H
+#endif //!AI_CONTROLLED_STATE_H
