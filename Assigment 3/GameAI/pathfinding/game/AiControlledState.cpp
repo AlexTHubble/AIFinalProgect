@@ -32,6 +32,8 @@ void AIControlledState::onEntrance()
 	Node* to = pGridGraph->getNodeClosestToLocation(mEnemyPlayerLoc);
 
 	gpGame->getUnitManager()->getUnit(mUnitId)->setPath(smoothPathfinding->findPath(from, to));
+
+	delete smoothPathfinding;
 }
 
 void AIControlledState::onExit()
@@ -142,6 +144,8 @@ void AIControlledState::pathfindToPlayer()
 		Node* to = pGridGraph->getNodeClosestToLocation(mEnemyPlayerLoc);
 
 		gpGame->getUnitManager()->getUnit(mUnitId)->setPath(smoothPathfinding->findPath(from, to));
+
+		delete smoothPathfinding;
 	}
 	gpGame->getUnitManager()->getUnit(mUnitId)->updateTarget();
 	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(true);
