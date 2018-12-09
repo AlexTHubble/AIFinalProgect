@@ -5,11 +5,15 @@
 #include "StateMachine.h"
 #include "TankMovement.h"
 #include "Defines.h"
+#include "Node.h"
 
 class AIControlledState : public StateMachineState
 {
 public:
-	AIControlledState(const SM_idType& id, TankMovement* tankMovment, UnitID unitId) :StateMachineState(id) { mpTankMovment = tankMovment; mUnitId = unitId; };
+	AIControlledState(const SM_idType& id, TankMovement* tankMovment, UnitID unitId) :StateMachineState(id) {
+		mpTankMovment = tankMovment; 
+		mUnitId = unitId;
+	};
 
 	virtual void onEntrance();
 	virtual void onExit();
@@ -23,6 +27,13 @@ private:
 	TankMovement * mpTankMovment;
 	UnitID mUnitId;
 	bool mTransferToPlayerControll = false;
+	Vector2D mEnemyPlayerLoc;
+	float mDistanceToTargetForStop = 10;
+	Node* mPlayerNode;
+
+	bool testForPlayerSeen();
+	bool testForPowerUpSeen();
+	void pathfindToPlayer();
 };
 
 #endif //!AI_CONTROLLED_STATE_H

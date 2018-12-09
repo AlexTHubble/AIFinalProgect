@@ -24,6 +24,8 @@ private:
 	TankMovement * mpTankMovment;
 	UnitID mUnitId;
 	bool mTransferToAIControll = false;
+
+
 };
 
 #endif //!PLAYER_CONTROLLED_STATE_H

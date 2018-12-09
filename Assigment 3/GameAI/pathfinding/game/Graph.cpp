@@ -1,5 +1,7 @@
 #include "Graph.h"
 #include "Connection.h"
+#include "Grid.h"
+#include "GameApp.h"
 
 Graph::Graph()
 {
@@ -52,5 +54,30 @@ Node* Graph::getNode( int index )
 	{
 		return NULL;
 	}
+}
+
+Node * Graph::getNodeClosestToLocation(Vector2D targetLocation)
+{
+	Node* closestNode = mNodes[0];
+	float closestDistance = 99999; //Set to something arbitraily large to represent infinity
+	GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
+
+	Grid* pGrid = pGame->getGrid();
+
+	for (int i = 0; i < mNodes.size(); i++)
+	{
+		Vector2D nodeLocation = pGrid->getULCornerOfSquare(mNodes[i]->getId());
+		Vector2D direction = targetLocation - nodeLocation;
+		float distance = direction.getLength();
+
+
+		if (distance < closestDistance)
+		{
+			closestNode = mNodes[i];
+			closestDistance = distance;
+		}
+	}
+
+	return closestNode;
 }
 

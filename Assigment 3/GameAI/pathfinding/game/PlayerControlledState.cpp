@@ -18,7 +18,6 @@ void PlayerControlledState::onExit()
 
 StateTransition * PlayerControlledState::update(int elapsedTime)
 {
-	std::cout << "Update from player controlled statemachine!" << std::endl;
 
 	if (mTransferToAIControll) //If the state has been marked to transition into the new state...
 	{
@@ -103,3 +102,4 @@ void PlayerControlledState::cleanupTransitions()
 		}
 	}
 }
+

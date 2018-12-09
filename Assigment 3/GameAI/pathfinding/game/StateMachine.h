@@ -4,6 +4,8 @@
 
 #include <map>
 #include <Trackable.h>
+#include "Path.h"
+#include "Steering.h"
 
 /*Collection of base classes to implement a StateMachine.  Heavily borrowed from
 	Millington text.
@@ -19,7 +21,9 @@ enum TransitionType
 {
 	INVALID_TRANSITION_TYPE = -1,
 	PLAYER_CONTROLLED_STATE = 0,
-	AI_CONTROLLED_STATE = 1
+	AI_CONTROLLED_STATE = 1,
+	AI_SHOOTING_AT_PLAYER_STATE = 2,
+	AI_PATHING_TO_POWERUP_STATE = 3
 };
 
 typedef int SM_idType;
@@ -42,6 +46,8 @@ public:
 	virtual void handleRotateInput(bool left, bool right);
 	virtual void handleSwapInput();
 	virtual void handleFireInput();
+	//virtual Path* getPath();
+	//virtual Steering* getSteering();
 
 protected:
 	SM_idType mID;
