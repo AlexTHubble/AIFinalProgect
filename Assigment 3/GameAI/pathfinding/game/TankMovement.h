@@ -40,7 +40,10 @@ private:
 	void SetRotateSpeed(float speed) { mRotateSpeed = speed; };
 	void SetCurrentAngle();
 	void SetMaxMovementSpeed(float maxSpeed) { mMaxMoveSpeed = maxSpeed; };
-	void SetMaxRotateSpeed(float maxSpeed) { mMaxRotateSpeed = maxSpeed; };
+	void SetMaxRotateSpeed(float maxSpeed) {
+		mMaxRotateSpeed = maxSpeed; 
+		std::cout << "Max rotate speed set to: " << mMaxRotateSpeed << std::endl;
+	};
 	void SetIsMovementBuffed(bool buffed) { mIsMovementBuffed = buffed; };
 	void SetIsMoving(bool moving) { mIsMoving = moving; };
 	void SetIsRotating(bool rotating) { mIsRotating = rotating; };
@@ -48,8 +51,8 @@ private:
 	//Reset Functions
 	void EndMovementBuff();
 	//Movement Variables
-	float mMoveSpeed;
-	float mRotateSpeed;
+	float mMoveSpeed = 0;
+	float mRotateSpeed = 0;
 	float mCurrentAngle;
 	float mMaxMoveSpeed;
 	float mMaxRotateSpeed;

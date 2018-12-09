@@ -78,7 +78,7 @@ Unit* UnitManager::createPlayerUnit(const Sprite& sprite, bool shouldWrap /*= tr
 	return createUnit(sprite, shouldWrap, posData, physicsData, PLAYER_UNIT_ID);
 }
 
-Unit * UnitManager::createPlayer2Unit(const Sprite & sprite, bool shouldWrap, const PositionData & posData, const PhysicsData & physicsData)
+Unit * UnitManager::createPlayer2Unit(const Sprite & sprite, bool shouldWrap /*= true*/, const PositionData & posData /*= ZERO_POSITION_DATA*/, const PhysicsData & physicsData /*= ZERO_PHYSICS_DATA*/)
 {
 	return createUnit(sprite, shouldWrap, posData, physicsData, PLAYER2_UNIT_ID);
 }

@@ -58,10 +58,10 @@ void PlayerMoveMessage::process()
 				break;
 			case NONE: //If no input
 				std::cout << "Player 2 No Movement" << std::endl;
+				player2StateMachine->handleMovmentInput(false, false);
 				break;
 			default: //ERROR
 				std::cout << "ERROR: Player 2 has no accleration assigned" << std::endl;
-				player2StateMachine->handleMovmentInput(false, false);
 				break;
 			}
 			break;

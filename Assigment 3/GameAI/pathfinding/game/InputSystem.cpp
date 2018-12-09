@@ -130,11 +130,16 @@ void InputSystem::update()
 			GameMessage* pMessage = new PlayerMoveMessage(Player::P2, Accleration::ACCELERATING);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
-
-		if (state[SDL_SCANCODE_KP_5])
+		else if (state[SDL_SCANCODE_KP_5])
 		{
 			//P2 move backwards
 			GameMessage* pMessage = new PlayerMoveMessage(Player::P2, Accleration::DECCELERATING);
+			mpMessageManager->addMessage(pMessage, 0);
+		}
+		else
+		{
+			//Stop P2 movement
+			GameMessage* pMessage = new PlayerMoveMessage(Player::P2, Accleration::NONE);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
 
@@ -144,14 +149,18 @@ void InputSystem::update()
 			GameMessage* pMessage = new PlayerRotateMessage(Player::P2, Direction::Left);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
-
-		if (state[SDL_SCANCODE_KP_6])
+		else if (state[SDL_SCANCODE_KP_6])
 		{
 			//P2 rotate right
 			GameMessage* pMessage = new PlayerRotateMessage(Player::P2, Direction::Right);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
-
+		else
+		{
+			//Stop Rotate P2
+			GameMessage* pMessage = new PlayerRotateMessage(Player::P2, Direction::Stop);
+			mpMessageManager->addMessage(pMessage, 0);
+		}
 
 
 
