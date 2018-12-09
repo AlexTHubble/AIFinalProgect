@@ -39,6 +39,7 @@ public:
 	virtual void onExit()=0;//code to run when the state is exitted
 	virtual StateTransition* update(int elapsedTime)=0;//code to run each frame - returning NULL means no transition
 	virtual void handleMovmentInput(bool accelerating, bool decelerating);
+	virtual void handleRotateInput(bool left, bool right);
 	virtual void handleSwapInput();
 	virtual void handleFireInput();
 
@@ -74,6 +75,7 @@ public:
 	void start();//go to the initial state
 
 	void handleMovmentInput(bool accelerating, bool decelerating);
+	void handleRotateInput(bool left, bool right);
 	void handleSwapInput();
 	void handleFireInput();
 

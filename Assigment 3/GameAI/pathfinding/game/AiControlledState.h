@@ -15,6 +15,7 @@ public:
 	virtual void onExit();
 	virtual StateTransition* update(int elapsedTime);
 	virtual void handleMovmentInput(bool accelerating, bool decelerating);
+	virtual void handleRotateInput(bool left, bool right);
 	virtual void handleSwapInput();
 	virtual void handleFireInput();
 	virtual void cleanupTransitions();

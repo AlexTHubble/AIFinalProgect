@@ -14,6 +14,7 @@ struct PositionData;
 struct PhysicsData;
 
 const UnitID PLAYER_UNIT_ID = 0;
+const UnitID PLAYER2_UNIT_ID = 1;
 
 
 class UnitManager : public Trackable
@@ -26,6 +27,7 @@ public:
 
 	Unit* createUnit(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA, const UnitID& id = INVALID_UNIT_ID);
 	Unit* createPlayerUnit(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA);
+	Unit* createPlayer2Unit(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA);
 	Unit* createRandomUnit(const Sprite& sprite);
 
 	Unit* getUnit(const UnitID& id) const;
@@ -36,6 +38,7 @@ public:
 	void updateAll(float elapsedTime);
 
 	Unit* getPlayerUnit() const { return getUnit(PLAYER_UNIT_ID); };
+	Unit* getPlayer2Unit() const { return getUnit(PLAYER2_UNIT_ID); };
 
 	std::map<UnitID, Unit*> getUnitMap() { return mUnitMap; };
 

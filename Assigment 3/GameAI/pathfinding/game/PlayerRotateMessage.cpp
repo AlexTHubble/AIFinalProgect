@@ -15,12 +15,13 @@ PlayerRotateMessage::~PlayerRotateMessage()
 
 void PlayerRotateMessage::process()
 {
-	Unit* player = gpGame->getUnitManager()->getPlayerUnit();
+	Unit* player1 = gpGame->getUnitManager()->getPlayerUnit();
+	Unit* player2 = gpGame->getUnitManager()->getPlayer2Unit();
 
-	if (player != nullptr)
+	if (player1 != nullptr && player2 != nullptr)
 	{
-		TankMovement * tankMovment = player->Movement();
-
+		StateMachine* player1StateMachine = player1->getStateMachine();
+		StateMachine* player2StateMachine = player2->getStateMachine();
 		switch (mPlayerToRotate) //This handles bolth players rotation and direction based on input
 		{
 		case P1: //If player 1
@@ -28,15 +29,15 @@ void PlayerRotateMessage::process()
 			{
 			case Left: //If left
 				std::cout << "Player 1 rotating left" << std::endl;
-				tankMovment->RotateCounterClockwise();
+				player1StateMachine->handleRotateInput(true, false);
 				break;
 			case Right: //If right
 				std::cout << "Player 1 rotating right" << std::endl;
-				tankMovment->RotateClockwise();
+				player1StateMachine->handleRotateInput(false, true);
 				break;
 			case Stop: //If no rotation input
 				std::cout << "Player 1 No Rotate" << std::endl;
-				tankMovment->ZeroOutRotate();
+				player1StateMachine->handleRotateInput(false, false);
 				break;
 			default: //ERROR
 				std::cout << "ERROR: player 1 has no rotate direction assigned" << std::endl;
@@ -48,12 +49,15 @@ void PlayerRotateMessage::process()
 			{
 			case Left: //If left
 				std::cout << "Player 2 rotating left" << std::endl;
+				player2StateMachine->handleRotateInput(true, false);
 				break;
 			case Right: //If right
 				std::cout << "Player 2 rotating right" << std::endl;
+				player2StateMachine->handleRotateInput(false, true);
 				break;
 			case Stop: //If no rotation input
 				std::cout << "Player 2 No Rotate" << std::endl;
+				player2StateMachine->handleRotateInput(false, false);
 				break;
 			default: //ERROR
 				std::cout << "ERROR: Player 2 has no rotation assigned" << std::endl;

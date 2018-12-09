@@ -68,6 +68,22 @@ void PlayerControlledState::handleMovmentInput(bool accelerating, bool decelerat
 	}
 }
 
+void PlayerControlledState::handleRotateInput(bool left, bool right)
+{
+	if (left)
+	{
+		mpTankMovment->RotateCounterClockwise();
+	}
+	else if (right)
+	{
+		mpTankMovment->RotateClockwise();
+	}
+	else
+	{
+		mpTankMovment->ZeroOutRotate();
+	}
+}
+
 void PlayerControlledState::handleSwapInput()
 {
 	mTransferToAIControll = true;

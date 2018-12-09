@@ -78,6 +78,11 @@ Unit* UnitManager::createPlayerUnit(const Sprite& sprite, bool shouldWrap /*= tr
 	return createUnit(sprite, shouldWrap, posData, physicsData, PLAYER_UNIT_ID);
 }
 
+Unit * UnitManager::createPlayer2Unit(const Sprite & sprite, bool shouldWrap, const PositionData & posData, const PhysicsData & physicsData)
+{
+	return createUnit(sprite, shouldWrap, posData, physicsData, PLAYER2_UNIT_ID);
+}
+
 
 Unit* UnitManager::createRandomUnit(const Sprite& sprite)
 {

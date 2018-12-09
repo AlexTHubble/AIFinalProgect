@@ -32,6 +32,10 @@ void AIControlledState::handleMovmentInput(bool accelerating, bool decelerating)
 {
 }
 
+void AIControlledState::handleRotateInput(bool left, bool right)
+{
+}
+
 void AIControlledState::handleSwapInput()
 {
 	mTransferToPlayerControll = true;

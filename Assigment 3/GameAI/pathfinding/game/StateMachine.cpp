@@ -26,6 +26,10 @@ void StateMachineState::handleMovmentInput(bool accelerating, bool decelerating)
 {
 }
 
+void StateMachineState::handleRotateInput(bool left, bool right)
+{
+}
+
 void StateMachineState::handleSwapInput()
 {
 }
@@ -57,6 +61,12 @@ void StateMachine::handleMovmentInput(bool accelerating, bool decelerating)
 {
 	if(mpCurrentState != nullptr)
 		mpCurrentState->handleMovmentInput(accelerating, decelerating);
+}
+
+void StateMachine::handleRotateInput(bool left, bool right)
+{
+	if (mpCurrentState != nullptr)
+		mpCurrentState->handleRotateInput(left, right);
 }
 
 void StateMachine::handleSwapInput()

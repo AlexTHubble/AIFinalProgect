@@ -82,8 +82,12 @@ bool Game::init()
 	}
 
 	//Create p1
-	Unit* pUnit = mpUnitManager->createPlayerUnit(*pEnemyArrow);
-	pUnit->getPositionComponent()->setPosition(Vector2D(300, 300));
+	Unit* pPlayer1 = mpUnitManager->createPlayerUnit(*pEnemyArrow);
+	pPlayer1->getPositionComponent()->setPosition(Vector2D(300, 300));
+
+	//Create p2
+	Unit* pPlayer2 = mpUnitManager->createPlayer2Unit(*pEnemyArrow);
+	pPlayer2->getPositionComponent()->setPosition(Vector2D(500, 300));
 
 	return true;
 }
