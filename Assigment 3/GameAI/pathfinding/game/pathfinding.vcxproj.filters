@@ -49,9 +49,6 @@
     <Filter Include="Header Files\StateMachine\States">
       <UniqueIdentifier>{d1d7b774-7620-4916-a59a-61e94ca8a6f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\StateMachine\States">
-      <UniqueIdentifier>{9884f1f1-5beb-445e-88b0-bcbed286d9e1}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\Game.h">
@@ -201,6 +198,9 @@
     <ClInclude Include="PlayerSwapControllMessage.h">
       <Filter>Header Files\Messages</Filter>
     </ClInclude>
+    <ClInclude Include="TankMovement.h">
+      <Filter>Header Files\Tank</Filter>
+    </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
@@ -213,7 +213,7 @@
     <ClInclude Include="AiControlledState.h">
       <Filter>Header Files\StateMachine\States</Filter>
     </ClInclude>
-    <ClInclude Include="TankMovement.h">
+    <ClInclude Include="Collision.h">
       <Filter>Header Files\Tank</Filter>
     </ClInclude>
   </ItemGroup>
@@ -366,10 +366,13 @@
       <Filter>Source Files\StateMachine</Filter>
     </ClCompile>
     <ClCompile Include="PlayerControlledState.cpp">
-      <Filter>Source Files\StateMachine\States</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AiControlledState.cpp">
-      <Filter>Source Files\StateMachine\States</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
