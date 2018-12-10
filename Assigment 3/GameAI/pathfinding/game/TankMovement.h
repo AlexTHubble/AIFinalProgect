@@ -23,7 +23,7 @@ public:
 	//Buff Function
 	void MovementBuff(float movementMultiplier, int miliseconds);
 	//Variable Accessors
-	float GetMovementSpeed() { std::cout << mMoveSpeed << std::endl;  return mMoveSpeed; };
+	float GetMovementSpeed() { return mMoveSpeed; };
 	float GetRotateSpeed() { return mRotateSpeed; };
 	float GetCurrentAngleDegrees() { return mCurrentAngle; };
 	float GetCurrentAngleRadians();
@@ -40,10 +40,7 @@ private:
 	void SetRotateSpeed(float speed) { mRotateSpeed = speed; };
 	void SetCurrentAngle();
 	void SetMaxMovementSpeed(float maxSpeed) { mMaxMoveSpeed = maxSpeed; };
-	void SetMaxRotateSpeed(float maxSpeed) {
-		mMaxRotateSpeed = maxSpeed; 
-		std::cout << "Max rotate speed set to: " << mMaxRotateSpeed << std::endl;
-	};
+	void SetMaxRotateSpeed(float maxSpeed) {mMaxRotateSpeed = maxSpeed; };
 	void SetIsMovementBuffed(bool buffed) { mIsMovementBuffed = buffed; };
 	void SetIsMoving(bool moving) { mIsMoving = moving; };
 	void SetIsRotating(bool rotating) { mIsRotating = rotating; };

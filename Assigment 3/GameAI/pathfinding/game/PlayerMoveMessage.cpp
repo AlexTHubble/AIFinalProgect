@@ -29,15 +29,12 @@ void PlayerMoveMessage::process()
 			switch (mPlayerAccerlation) //Handles the direction
 			{
 			case ACCELERATING: //If accelerating
-				std::cout << "Player 1 accelerating" << std::endl;
 				player1StateMachine->handleMovmentInput(true, false);
 				break;
 			case DECCELERATING: //If decelerating
-				std::cout << "Player 1 decelerating" << std::endl;
 				player1StateMachine->handleMovmentInput(false, true);
 				break;
 			case NONE: //If no input
-				std::cout << "Player 1 No Movement" << std::endl;
 				player1StateMachine->handleMovmentInput(false, false);
 				break;
 			default: //ERROR
@@ -49,15 +46,12 @@ void PlayerMoveMessage::process()
 			switch (mPlayerAccerlation) //Handles direction
 			{
 			case ACCELERATING: //If accerlating
-				std::cout << "Player 2 accerlating" << std::endl;
 				player2StateMachine->handleMovmentInput(true, false);
 				break;
 			case DECCELERATING: //If decelerating
-				std::cout << "Player 2 declerating" << std::endl;
 				player2StateMachine->handleMovmentInput(false, true);
 				break;
 			case NONE: //If no input
-				std::cout << "Player 2 No Movement" << std::endl;
 				player2StateMachine->handleMovmentInput(false, false);
 				break;
 			default: //ERROR

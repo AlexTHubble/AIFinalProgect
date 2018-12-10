@@ -53,6 +53,7 @@ StateTransition * PlayerControlledState::update(int elapsedTime)
 		gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->setData(posData);
 	}
 
+	delete collision;
 	return NULL;//no transition
 }
 

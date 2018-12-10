@@ -28,15 +28,12 @@ void PlayerRotateMessage::process()
 			switch (mDirection) //Handles the direction
 			{
 			case Left: //If left
-				std::cout << "Player 1 rotating left" << std::endl;
 				player1StateMachine->handleRotateInput(true, false);
 				break;
 			case Right: //If right
-				std::cout << "Player 1 rotating right" << std::endl;
 				player1StateMachine->handleRotateInput(false, true);
 				break;
 			case Stop: //If no rotation input
-				std::cout << "Player 1 No Rotate" << std::endl;
 				player1StateMachine->handleRotateInput(false, false);
 				break;
 			default: //ERROR
@@ -48,15 +45,12 @@ void PlayerRotateMessage::process()
 			switch (mDirection) //Handles direction
 			{
 			case Left: //If left
-				std::cout << "Player 2 rotating left" << std::endl;
 				player2StateMachine->handleRotateInput(true, false);
 				break;
 			case Right: //If right
-				std::cout << "Player 2 rotating right" << std::endl;
 				player2StateMachine->handleRotateInput(false, true);
 				break;
 			case Stop: //If no rotation input
-				std::cout << "Player 2 No Rotate" << std::endl;
 				player2StateMachine->handleRotateInput(false, false);
 				break;
 			default: //ERROR
