@@ -36,6 +36,10 @@ bool Collision::CheckForCollisions(Unit* unit)
 
 bool Collision::InsideGridBlock(int index, Unit* unit)
 {
+	//References
+	//https://stackoverflow.com/questions/31022269/collision-detection-between-two-rectangles-in-java
+	//https://silentmatt.com/rectangle-intersection/
+
 	//Get Grid
 	Grid* grid = dynamic_cast<GameApp*>(gpGame)->getGrid();
 	//Unit Center and radius spacing
