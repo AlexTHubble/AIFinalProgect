@@ -3,6 +3,7 @@
 #include "UnitManager.h"
 #include "Game.h"
 #include "Unit.h"
+#include "Collision.h"
 #include <iostream>
 
 using namespace std;
@@ -31,7 +32,7 @@ StateTransition * PlayerControlledState::update(int elapsedTime)
 
 	//Gets data
 	PhysicsData data = gpGame->getUnitManager()->getUnit(mUnitId)->getPhysicsComponent()->getData();
-
+	//Movement update
 	mpTankMovment->UpdateMovement(elapsedTime);
 	//Set rotation
 	data.rotVel = mpTankMovment->GetRotateSpeed();
@@ -43,7 +44,14 @@ StateTransition * PlayerControlledState::update(int elapsedTime)
 
 	gpGame->getUnitManager()->getUnit(mUnitId)->getPhysicsComponent()->setData(data);
 
-
+	//Check collision
+	Collision* collision = new Collision();
+	if (collision->CheckForCollisions(gpGame->getUnitManager()->getUnit(mUnitId)))
+	{
+		PositionData posData = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getData();
+		posData.pos -= currentDirection;
+		gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->setData(posData);
+	}
 
 	return NULL;//no transition
 }

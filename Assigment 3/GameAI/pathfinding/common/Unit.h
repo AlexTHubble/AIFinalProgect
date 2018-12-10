@@ -47,6 +47,7 @@ public:
 	void setToUpdateTarget(bool update) { ShouldUpdateTarget = update; };
 	void resetPath();
 	UnitID getID() { return mID; };
+	Sprite* getSprite() { return &mSprite; };
 	//Tank Functions
 	TankMovement* Movement() { return mpTankMovement; };
 	void SetMaxMoveSpeed(float maxSpeed) { SetMaxSpeed(maxSpeed); };
