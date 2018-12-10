@@ -14,7 +14,7 @@ Collision::~Collision()
 
 }
 
-bool Collision::CheckForCollisions(Unit* unit)
+void Collision::CheckForCollisions(Unit* unit)
 {
 	//Get Grid
 	Grid* grid = dynamic_cast<GameApp*>(gpGame)->getGrid();
@@ -27,11 +27,10 @@ bool Collision::CheckForCollisions(Unit* unit)
 		{
 			if (InsideGridBlock(i, unit))
 			{
-				return true;
+				TankWallCollision(unit);
 			}
 		}
 	}
-	return false;
 }
 
 bool Collision::InsideGridBlock(int index, Unit* unit)
@@ -43,14 +42,14 @@ bool Collision::InsideGridBlock(int index, Unit* unit)
 	//Get Grid
 	Grid* grid = dynamic_cast<GameApp*>(gpGame)->getGrid();
 	//Unit Center and radius spacing
-	float unitXOffset = (unit->getSprite()->getWidth() / 2.0f);
-	float unitYOffset = (unit->getSprite()->getHeight() / 2.0f);
+	float unitXOffset = (unit->getSprite()->getWidth());
+	float unitYOffset = (unit->getSprite()->getHeight());
 	float unitX = unit->getPositionComponent()->getPosition().getX();
 	float unitY = unit->getPositionComponent()->getPosition().getY();
 	//-------------------------------------------------------------------//
 	//Unit UL and BR corners
-	float unitULX = (unitX - unitXOffset);
-	float unitULY = (unitY - unitYOffset);
+	float unitULX = (unitX);
+	float unitULY = (unitY);
 	float unitBRX = (unitX + unitXOffset);
 	float unitBRY = (unitY + unitYOffset);
 	//Grid block UL and BR corners
@@ -64,8 +63,14 @@ bool Collision::InsideGridBlock(int index, Unit* unit)
 	if (unitULX < gridBlockBRX && unitBRX > gridBlockULX &&
 		unitULY < gridBlockBRY && unitBRY > gridBlockULY)
 	{
+		TankWallCollision(unit);
 		return true;
 	}
 	//All opposite edges don't overlap
 	return false;
+}
+
+void Collision::TankWallCollision(Unit* unit)
+{
+	std::cout << "Colliding With Wall" << std::endl;
 }

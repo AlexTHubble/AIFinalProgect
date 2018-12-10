@@ -13,7 +13,7 @@ public:
 	//Deconstructor
 	~Collision();
 	//Update
-	bool CheckForCollisions(Unit* unit);
+	void CheckForCollisions(Unit* unit);
 
 private:
 	//Variables
@@ -22,6 +22,7 @@ private:
 
 	//Functions
 	bool InsideGridBlock(int index, Unit* unit);
+	void TankWallCollision(Unit* unit);
 };
 
 #endif // !COLLISION_H

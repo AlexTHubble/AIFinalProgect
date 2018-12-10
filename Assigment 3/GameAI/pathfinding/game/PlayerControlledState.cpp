@@ -46,12 +46,7 @@ StateTransition * PlayerControlledState::update(int elapsedTime)
 
 	//Check collision
 	Collision* collision = new Collision();
-	if (collision->CheckForCollisions(gpGame->getUnitManager()->getUnit(mUnitId)))
-	{
-		PositionData posData = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getData();
-		posData.pos -= currentDirection;
-		gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->setData(posData);
-	}
+	collision->CheckForCollisions(gpGame->getUnitManager()->getUnit(mUnitId));
 
 	delete collision;
 	return NULL;//no transition
