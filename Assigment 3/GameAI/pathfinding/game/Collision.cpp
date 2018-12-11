@@ -29,12 +29,15 @@ void Collision::CheckForCollisions(Unit* unit)
 		}
 	}
 	//Search through Unitmanager for bullets
-	for (int j = 0; j < gpGame->getUnitManager()->getBulletMap().size(); j++)
+	for (int j = 0; j < gpGame->getUnitManager()->getUnitMap().size(); j++)
 	{
-		if (HitByBullet(unit, gpGame->getUnitManager()->getBulletMap()[j]))
+		if (gpGame->getUnitManager()->getUnitMap()[j]->getTag() == "Bullet")
 		{
-			//Hit by bullet
-			std::cout << "Hit by Bullet" << std::endl;
+			if (HitByBullet(unit, gpGame->getUnitManager()->getUnitMap()[j]))
+			{
+				//Hit by bullet
+				std::cout << "Hit by Bullet" << std::endl;
+			}
 		}
 	}
 }
