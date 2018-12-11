@@ -11,7 +11,7 @@
 #include "..\game\StateMachine.h"
 
 
-UnitID UnitManager::msNextUnitID = PLAYER_UNIT_ID + 1;
+UnitID UnitManager::msNextUnitID = PLAYER2_UNIT_ID + 1;
 
 using namespace std;
 
