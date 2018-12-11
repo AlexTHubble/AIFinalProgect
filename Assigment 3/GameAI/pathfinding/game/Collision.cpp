@@ -28,6 +28,15 @@ void Collision::CheckForCollisions(Unit* unit)
 			InsideGridBlock(i, unit);
 		}
 	}
+	//Search through Unitmanager for bullets
+	for (int j = 0; j < gpGame->getUnitManager()->getBulletMap().size(); j++)
+	{
+		if (HitByBullet(unit, gpGame->getUnitManager()->getBulletMap()[j]))
+		{
+			//Hit by bullet
+			std::cout << "Hit by Bullet" << std::endl;
+		}
+	}
 }
 
 void Collision::InsideGridBlock(int index, Unit* unit)
@@ -61,6 +70,34 @@ void Collision::InsideGridBlock(int index, Unit* unit)
 		unitULY < gridBlockBRY && unitBRY > gridBlockULY)
 	{
 		TankWallCollision(unit);
+	}
+}
+
+bool Collision::HitByBullet(Unit * player, Unit * bullet)
+{
+	//Unit Center and radius spacing
+	float unitX = player->getPositionComponent()->getPosition().getX();
+	float unitY = player->getPositionComponent()->getPosition().getY();
+	//-------------------------------------------------------------------//
+	//Bullet center and radius
+	float bulletRadius = (bullet->getSprite()->getWidth());
+	float bulletX = bullet->getPositionComponent()->getPosition().getX();
+	float bulletY = bullet->getPositionComponent()->getPosition().getY();
+	
+	//Check to see if player is within radius of bullet
+	float yDiff = unitY - bulletY;
+	float xDiff = unitX - bulletX;
+	//Get distance between points
+	float distance = std::sqrtf((xDiff * xDiff) + (yDiff * yDiff));
+	//If within radius of bullet
+	if (distance <= bulletRadius)
+	{
+		return true;
+	}
+	//If outside radius of bullet
+	else
+	{
+		return false;
 	}
 }
 
