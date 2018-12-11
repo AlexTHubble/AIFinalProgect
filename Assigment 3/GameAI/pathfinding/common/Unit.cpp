@@ -19,6 +19,7 @@
 #include "../game/AiControlledState.h"
 #include "../game/AiAimingAtPlayerState.h"
 #include "../game/BulletState.h"
+#include "../game/ShootProjectile.h"
 
 
 Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
@@ -180,6 +181,15 @@ void Unit::reducePlayerHp(int hpToReduceBy)
 void Unit::shootBullet()
 {
 	//ToDo
+	Unit* bullet;
+	bullet = gpGame->getUnitManager()->createBullet();
+
+	bullet->getPositionComponent()->setPosition(getPositionComponent()->getPosition());
+	bullet->getPositionComponent()->setFacing(getFacing());
+
+	ShootProjectile shootProjectile;
+	shootProjectile.Shoot(bullet);
+
 }
 
 void Unit::setTag(string tag)

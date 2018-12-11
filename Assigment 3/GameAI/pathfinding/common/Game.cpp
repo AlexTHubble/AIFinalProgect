@@ -91,8 +91,10 @@ bool Game::init()
 	pPlayer2->getPositionComponent()->setPosition(Vector2D(500, 300));
 	pPlayer2->setTag("Player2");
 
-	Unit* pBulletTest = mpUnitManager->createBullet(*pEnemyArrow);
-	pBulletTest->getPositionComponent()->setPosition(Vector2D(500, 100));
+	mpUnitManager->setBulletSprite(pEnemyArrow);
+
+	//Unit* pBulletTest = mpUnitManager->createBullet();
+	//pBulletTest->getPositionComponent()->setPosition(Vector2D(500, 100));
 
 	return true;
 }

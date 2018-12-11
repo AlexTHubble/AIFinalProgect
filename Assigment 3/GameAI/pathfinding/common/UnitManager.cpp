@@ -73,7 +73,7 @@ Unit* UnitManager::createUnit(const Sprite& sprite, bool shouldWrap, const Posit
 	return pUnit;
 }
 
-Unit * UnitManager::createBullet(const Sprite & sprite, bool shouldWrap, const PositionData & posData, const PhysicsData & physicsData, const UnitID & id)
+Unit * UnitManager::createBullet(bool shouldWrap, const PositionData & posData, const PhysicsData & physicsData, const UnitID & id)
 {
 	Unit* pUnit = NULL;
 
@@ -90,7 +90,7 @@ Unit * UnitManager::createBullet(const Sprite & sprite, bool shouldWrap, const P
 		}
 
 		//create unit
-		pUnit = new (ptr)Unit(sprite, theID, BULLET_STATE);//placement new
+		pUnit = new (ptr)Unit(*mpBulletSprite, theID, BULLET_STATE);//placement new
 
 											 //place in map
 		mUnitMap[theID] = pUnit;

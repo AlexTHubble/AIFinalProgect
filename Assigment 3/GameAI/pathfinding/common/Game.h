@@ -66,6 +66,8 @@ protected:
 	float mLoopTargetTime;
 	bool mShouldExit;
 
+	
+
 	//should be somewhere else
 	Font* mpFont;
 
