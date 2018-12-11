@@ -31,9 +31,6 @@ void PlayerMoveMessage::process()
 			case ACCELERATING: //If accelerating
 				player1StateMachine->handleMovmentInput(true, false);
 				break;
-			case DECCELERATING: //If decelerating
-				player1StateMachine->handleMovmentInput(false, true);
-				break;
 			case NONE: //If no input
 				player1StateMachine->handleMovmentInput(false, false);
 				break;
@@ -47,9 +44,6 @@ void PlayerMoveMessage::process()
 			{
 			case ACCELERATING: //If accerlating
 				player2StateMachine->handleMovmentInput(true, false);
-				break;
-			case DECCELERATING: //If decelerating
-				player2StateMachine->handleMovmentInput(false, true);
 				break;
 			case NONE: //If no input
 				player2StateMachine->handleMovmentInput(false, false);

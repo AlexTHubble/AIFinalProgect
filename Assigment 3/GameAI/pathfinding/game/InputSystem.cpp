@@ -89,12 +89,6 @@ void InputSystem::update()
 			GameMessage* pMessage = new PlayerMoveMessage(Player::P1, Accleration::ACCELERATING);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
-		else if (state[SDL_SCANCODE_S])
-		{
-			//Move P1 backwards
-			GameMessage* pMessage = new PlayerMoveMessage(Player::P1, Accleration::DECCELERATING);
-			mpMessageManager->addMessage(pMessage, 0);
-		}
 		else
 		{
 			//Stop P1 movement
@@ -128,12 +122,6 @@ void InputSystem::update()
 		{
 			//P2 move forward
 			GameMessage* pMessage = new PlayerMoveMessage(Player::P2, Accleration::ACCELERATING);
-			mpMessageManager->addMessage(pMessage, 0);
-		}
-		else if (state[SDL_SCANCODE_KP_5])
-		{
-			//P2 move backwards
-			GameMessage* pMessage = new PlayerMoveMessage(Player::P2, Accleration::DECCELERATING);
 			mpMessageManager->addMessage(pMessage, 0);
 		}
 		else
