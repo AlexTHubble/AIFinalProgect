@@ -89,6 +89,9 @@ bool Game::init()
 	Unit* pPlayer2 = mpUnitManager->createPlayer2Unit(*pEnemyArrow);
 	pPlayer2->getPositionComponent()->setPosition(Vector2D(500, 300));
 
+	Unit* pBulletTest = mpUnitManager->createBullet(*pEnemyArrow);
+	pBulletTest->getPositionComponent()->setPosition(Vector2D(500, 100));
+
 	return true;
 }
 

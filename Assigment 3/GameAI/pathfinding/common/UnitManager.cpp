@@ -103,7 +103,7 @@ Unit * UnitManager::createBullet(const Sprite & sprite, bool shouldWrap, const P
 		pUnit = new (ptr)Unit(sprite, theID, BULLET_STATE);//placement new
 
 											 //place in map
-		mBulletMap[theID] = pUnit;
+		mUnitMap[theID] = pUnit;
 
 		//assign id and increment nextID counter
 		pUnit->mID = theID;
@@ -121,6 +121,8 @@ Unit * UnitManager::createBullet(const Sprite & sprite, bool shouldWrap, const P
 		pUnit->mMaxAcc = MAX_ACC;
 		pUnit->mMaxRotAcc = MAX_ROT_ACC;
 		pUnit->mMaxRotVel = MAX_ROT_VEL;
+
+		pUnit->setTag("Bullet");
 
 	}
 

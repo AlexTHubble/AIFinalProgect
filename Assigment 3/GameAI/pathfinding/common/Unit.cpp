@@ -179,6 +179,10 @@ void Unit::shootBullet()
 	//ToDo
 }
 
+void Unit::setTag(string tag)
+{
+}
+
 void Unit::update(int elapsedTime)
 {
 	mpUnitStateMachine->update(elapsedTime);

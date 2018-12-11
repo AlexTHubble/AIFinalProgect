@@ -58,6 +58,8 @@ public:
 	StateMachine* getStateMachine();
 	void reducePlayerHp(int hpToReduceBy);
 	void shootBullet();
+	void setTag(string tag);
+	string getTag() { return mTag; };
 
 protected:
 	Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn);
@@ -76,6 +78,8 @@ private:
 	float mMaxRotAcc;
 	float mMaxRotVel;
 	bool mShowTarget;
+
+	string mTag;
 
 	Path* mPath;
 	bool ShouldUpdateTarget;
