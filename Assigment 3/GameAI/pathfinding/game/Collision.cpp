@@ -29,9 +29,7 @@ void Collision::CheckForCollisions(Unit* unit)
 		}
 	}
 	//Search through Unitmanager for bullets
-
 	std::map<UnitID, Unit*>unitMap = gpGame->getUnitManager()->getUnitMap();
-
 	for (std::map<UnitID, Unit*>::iterator unitIter = unitMap.begin(); unitIter != unitMap.end(); ++unitIter)
 	{
 		if (unitIter->second->getTag() == "Bullet")
@@ -75,7 +73,10 @@ void Collision::InsideGridBlock(int index, Unit* unit)
 	if (unitULX < gridBlockBRX && unitBRX > gridBlockULX &&
 		unitULY < gridBlockBRY && unitBRY > gridBlockULY)
 	{
-		TankWallCollision(unit);
+		if(unit->getTag() == "Player1" || unit->getTag() == "Player2")
+			TankWallCollision(unit);
+		if (unit->getTag() == "Bullet")
+			gpGame->getUnitManager()->setToDeleteUnit(unit->getID());
 	}
 }
 
