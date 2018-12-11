@@ -11,6 +11,8 @@ using namespace std;
 void PlayerControlledState::onEntrance()
 {
 	mTransferToAIControll = false;
+	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(false);
+	gpGame->getUnitManager()->getUnit(mUnitId)->setSteering(Steering::NONE, NULL, mUnitId);
 }
 
 void PlayerControlledState::onExit()

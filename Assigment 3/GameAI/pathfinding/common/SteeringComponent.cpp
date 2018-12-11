@@ -39,7 +39,7 @@ void SteeringComponent::setData(const SteeringData& data)
 	{
 		case Steering::SEEK:
 		{
-			//cleanup old steering - todo: check for already existing steering and reuse if possible
+			//cleanup old steering
 			delete mpSteering;
 			//create new steering
 			mpSteering = new SeekSteering(data.ownerID, data.targetLoc, data.targetID, false);
@@ -71,6 +71,14 @@ void SteeringComponent::setData(const SteeringData& data)
 			delete mpSteering;
 			//
 			mpSteering = new ArriveAndFace(data.ownerID, data.targetLoc, data.targetID, false);
+			break;
+		}
+		case Steering::NONE: //Used to reset steering to none
+		{
+			//cleanup old steering
+			delete mpSteering;
+			//create new steering
+			mpSteering = new SeekSteering(data.ownerID, data.targetLoc, data.targetID, false);
 			break;
 		}
 		default:

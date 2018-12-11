@@ -156,12 +156,6 @@
     <ClInclude Include="..\common\ComponentManager.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\common\Steering.h">
-      <Filter>Common\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\SteeringComponent.h">
-      <Filter>Common\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\common\PositionComponent.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
@@ -229,6 +223,12 @@
       <Filter>Common\Header Files\Steering</Filter>
     </ClInclude>
     <ClInclude Include="..\common\FaceSteering.h">
+      <Filter>Common\Header Files\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Steering.h">
+      <Filter>Common\Header Files\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\SteeringComponent.h">
       <Filter>Common\Header Files\Steering</Filter>
     </ClInclude>
   </ItemGroup>
@@ -323,12 +323,6 @@
     <ClCompile Include="..\common\ComponentManager.cpp">
       <Filter>Common\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\common\Steering.cpp">
-      <Filter>Common\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\common\SteeringComponent.cpp">
-      <Filter>Common\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\PhysicsComponent.cpp">
       <Filter>Common\Source Files</Filter>
     </ClCompile>
@@ -393,6 +387,12 @@
       <Filter>Common\Source Files\Steering</Filter>
     </ClCompile>
     <ClCompile Include="..\common\FaceSteering.cpp">
+      <Filter>Common\Source Files\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\SteeringComponent.cpp">
+      <Filter>Common\Source Files\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Steering.cpp">
       <Filter>Common\Source Files\Steering</Filter>
     </ClCompile>
   </ItemGroup>

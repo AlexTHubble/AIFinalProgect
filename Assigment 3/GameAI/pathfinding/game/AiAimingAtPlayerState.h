@@ -36,7 +36,6 @@ private:
 
 	bool testForPlayerSeen();
 	void aimAtPlayer();
-
 };
 
 #endif //!AI_AIMING_AT_PLAYER_STATE_H

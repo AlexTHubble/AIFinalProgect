@@ -48,6 +48,7 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet)
 	pAiControlledState->addTransition(pToPlayerControlledState);
 	pAiControlledState->addTransition(pToAiAimAtPlayerState);
 	PAiAimAtPlayerState->addTransition(pToAIControlledState);
+	PAiAimAtPlayerState->addTransition(pToPlayerControlledState);
 
 	//Adds the states
 	mpUnitStateMachine->addState(pPlayerControlledState);

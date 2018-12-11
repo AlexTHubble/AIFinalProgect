@@ -22,7 +22,8 @@ public:
 		FLEE,
 		FACE,
 		ARRIVEANDFACE,
-		STOP
+		STOP,
+		NONE
 	};
 
 	//constructors and destructors
