@@ -16,4 +16,5 @@ void ShootProjectile::Shoot(Unit * unit)
 	//Send bullet straight
 	PhysicsData phyData = unit->getPhysicsComponent()->getData();
 	phyData.vel = GetProjectileVelocity();
+	unit->getPhysicsComponent()->setData(phyData);
 }
