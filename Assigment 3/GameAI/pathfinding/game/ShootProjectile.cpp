@@ -3,7 +3,7 @@
 
 ShootProjectile::ShootProjectile()
 {
-
+	SetProjectileVelocity(10.0f);
 }
 
 ShootProjectile::~ShootProjectile()
