@@ -57,11 +57,10 @@ public:
 	virtual void handleRotateInput(bool left, bool right);
 	virtual void handleSwapInput();
 	virtual void handleFireInput();
-	//virtual Path* getPath();
-	//virtual Steering* getSteering();
 
 protected:
 	SM_idType mID;
+	UnitID mOwnerUnitId;
 	std::map<TransitionType, StateTransition*> mTransitions;
 };
 

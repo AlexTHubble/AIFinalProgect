@@ -33,6 +33,8 @@ public:
 	Unit* createRandomUnit(const Sprite& sprite);
 
 	Unit* getUnit(const UnitID& id) const;
+	void setToDeleteUnit(UnitID id);
+
 	void deleteUnit(const UnitID& id);
 	void deleteRandomUnit();
 
@@ -50,7 +52,10 @@ private:
 	static UnitID msNextUnitID;
 	MemoryPool mPool;
 	std::map<UnitID, Unit*> mUnitMap;
+	std::vector<Unit*> mToBeDeleted;
 
 	Sprite* mpBulletSprite;
+
+	void deleteUnitsFromDeletionVector();
 };
 

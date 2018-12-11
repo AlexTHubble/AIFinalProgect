@@ -10,9 +10,8 @@
 class BulletState : public StateMachineState
 {
 public:
-	BulletState(const SM_idType& id, UnitID unitId, UnitID unitWhoFiredBulletID) :StateMachineState(id) {
+	BulletState(const SM_idType& id, UnitID unitId) :StateMachineState(id) {
 		mUnitId = unitId;
-		mUnitBulletBelongsToo = unitWhoFiredBulletID;
 	};
 
 	virtual void onEntrance();
@@ -25,7 +24,6 @@ public:
 	virtual void cleanupTransitions();
 private:
 	UnitID mUnitId;
-	UnitID mUnitBulletBelongsToo;
 
 };
 

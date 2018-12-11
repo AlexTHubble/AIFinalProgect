@@ -39,7 +39,7 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	PlayerControlledState* pPlayerControlledState = new PlayerControlledState(PLAYER_CONTROLLED_STATE, mpTankMovement, idToBeSet);
 	AIControlledState* pAiControlledState = new AIControlledState(AI_CONTROLLED_STATE, mpTankMovement, idToBeSet);
 	AIAimAtPlayerState* pAiAimAtPlayerState = new AIAimAtPlayerState(AI_SHOOTING_AT_PLAYER_STATE, mpTankMovement, idToBeSet);
-	BulletState* pBulletState = new BulletState(BULLET_STATE, idToBeSet, 1);
+	BulletState* pBulletState = new BulletState(BULLET_STATE, idToBeSet);
 
 	//Sets up transitions
 	StateTransition* pToAIControlledState = new StateTransition(TO_AI_CONTROLLED_STATE, AI_CONTROLLED_STATE);
@@ -189,6 +189,8 @@ void Unit::shootBullet()
 
 	ShootProjectile shootProjectile;
 	shootProjectile.Shoot(bullet);
+
+	bullet->setOwnerID(mID);
 
 }
 

@@ -60,6 +60,8 @@ public:
 	void shootBullet();
 	void setTag(string tag);
 	string getTag() { return mTag; };
+	UnitID getOwnerID(){ return mOwnerID; };
+	void setOwnerID(UnitID owner) { mOwnerID = owner; };
 
 protected:
 	Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn);
@@ -68,6 +70,7 @@ protected:
 
 private:
 	UnitID mID;
+	UnitID mOwnerID;
 	ComponentID mPhysicsComponentID;
 	ComponentID mPositionComponentID;
 	ComponentID mSteeringComponentID;

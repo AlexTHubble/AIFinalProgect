@@ -208,6 +208,12 @@ Unit* UnitManager::getUnit(const UnitID& id) const
 	}
 }
 
+void UnitManager::setToDeleteUnit(UnitID id)
+{
+	mToBeDeleted.push_back(mUnitMap[id]);
+
+}
+
 void UnitManager::deleteUnit(const UnitID& id)
 {
 	auto it = mUnitMap.find(id);
@@ -268,4 +274,14 @@ void UnitManager::updateAll(float elapsedTime)
 		it->second->update(elapsedTime);
 		it->second->updateTarget();
 	}
+	deleteUnitsFromDeletionVector();
+}
+
+void UnitManager::deleteUnitsFromDeletionVector()
+{
+	for (int i = 0; i < mToBeDeleted.size(); i++)
+	{
+		deleteUnit(mToBeDeleted[i]->getID());
+	}
+	mToBeDeleted.clear();
 }
