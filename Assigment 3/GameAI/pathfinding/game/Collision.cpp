@@ -71,32 +71,40 @@ void Collision::TankWallCollision(Unit* unit)
 	//Get current direction
 	float temp = gpGame->getUnitManager()->getUnit(unit->getID())->getFacing() - (PI / 2);
 	Vector2D currentDirection = Vector2D(cos(temp), sin(temp));
-	//If looking up (towards top of screen)
-	if (currentDirection.getY() < 0.0f)
+	//If looking down
+	if (currentDirection.getY() > 0.0f)
 	{
-		//If looking at top right quadrant of screen
+		//If Y movement greater than X
+		if (phyData.vel.getY() > phyData.vel.getX())
+		{
+			posData.pos.setY(posData.pos.getY() - 1.0f);
+		}
+		//Adjust X
 		if (currentDirection.getX() > 0.0f)
 		{
-			std::cout << "Q1" << std::endl;
+			posData.pos.setX(posData.pos.getX() - 1.0f);
 		}
-		//If looking at top left quadrant of screen
 		else
 		{
-			std::cout << "Q2" << std::endl;
+			posData.pos.setX(posData.pos.getX() + 1.0f);
 		}
 	}
-	//If looking down (towards bottom of screen)
-	else
+	//If looking up
+	else 
 	{
-		//If looking at bottom left quadrant of screen
-		if (currentDirection.getX() < 0.0f)
+		//If Y movement greater than X
+		if (phyData.vel.getY() > phyData.vel.getX())
 		{
-			std::cout << "Q3" << std::endl;
+			posData.pos.setY(posData.pos.getY() + 1.0f);
 		}
-		//If looking at bottom right quadrant of screen
+		//Adjust X
+		if (currentDirection.getX() > 0.0f)
+		{
+			posData.pos.setX(posData.pos.getX() - 1.0f);
+		}
 		else
 		{
-			std::cout << "Q4" << std::endl;
+			posData.pos.setX(posData.pos.getX() + 1.0f);
 		}
 	}
 	//Stop velocity for collision
