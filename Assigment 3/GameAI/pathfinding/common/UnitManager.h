@@ -43,6 +43,8 @@ public:
 	Unit* getPlayer2Unit() const { return getUnit(PLAYER2_UNIT_ID); };
 
 	std::map<UnitID, Unit*> getUnitMap() { return mUnitMap; };
+	std::map<UnitID, Unit*> getBulletMap() { return mBulletMap; };
+	std::map<UnitID, Unit*> getPowerUpMap() { return mPowerUpMap; };
 
 private:
 	static UnitID msNextUnitID;
