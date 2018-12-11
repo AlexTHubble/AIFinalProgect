@@ -28,16 +28,21 @@ void Collision::CheckForCollisions(Unit* unit)
 			InsideGridBlock(i, unit);
 		}
 	}
-	//Search through Unitmanager for bullets
-	std::map<UnitID, Unit*>unitMap = gpGame->getUnitManager()->getUnitMap();
-	for (std::map<UnitID, Unit*>::iterator unitIter = unitMap.begin(); unitIter != unitMap.end(); ++unitIter)
+	//While unit is not a bullet
+	if (unit->getTag() != "Bullet")
 	{
-		if (unitIter->second->getTag() == "Bullet")
+		//Search through Unitmanager for bullets
+		std::map<UnitID, Unit*>unitMap = gpGame->getUnitManager()->getUnitMap();
+		for (std::map<UnitID, Unit*>::iterator unitIter = unitMap.begin(); unitIter != unitMap.end(); ++unitIter)
 		{
-			if (HitByBullet(unit, unitIter->second))
+			if (unitIter->second->getTag() == "Bullet")
 			{
-				//Hit by bullet
-				std::cout << "Hit by Bullet" << std::endl;
+				if (HitByBullet(unit, unitIter->second))
+				{
+					//Reduce units health and delete bullet
+					unit->reducePlayerHp(1);
+					gpGame->getUnitManager()->setToDeleteUnit(unitIter->second->getID());
+				}
 			}
 		}
 	}
@@ -99,9 +104,16 @@ bool Collision::HitByBullet(Unit * player, Unit * bullet)
 	//If within radius of bullet
 	if (distance <= bulletRadius)
 	{
-		return true;
+		if (player->getID() != bullet->getOwnerID())
+		{
+			std::cout << "BULLET ID: " << bullet->getOwnerID() << " | Player ID " << player->getID() << std::endl;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
-	//If outside radius of bullet
 	else
 	{
 		return false;
