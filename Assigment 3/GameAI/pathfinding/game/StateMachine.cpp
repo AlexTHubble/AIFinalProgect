@@ -41,7 +41,6 @@ void StateMachineState::handleFireInput()
 
 StateMachine::~StateMachine()
 {
-
 }
 
 void StateMachine::addState( StateMachineState* pState )

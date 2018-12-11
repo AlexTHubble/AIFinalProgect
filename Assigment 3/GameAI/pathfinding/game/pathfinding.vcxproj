@@ -103,6 +103,7 @@
     <ClInclude Include="..\common\SteeringComponent.h" />
     <ClInclude Include="..\common\Unit.h" />
     <ClInclude Include="..\common\UnitManager.h" />
+    <ClInclude Include="AiAimingAtPlayerState.h" />
     <ClInclude Include="AiControlledState.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Compare.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="..\common\SteeringComponent.cpp" />
     <ClCompile Include="..\common\Unit.cpp" />
     <ClCompile Include="..\common\UnitManager.cpp" />
+    <ClCompile Include="AiAimingAtPlayerState.cpp" />
     <ClCompile Include="AiControlledState.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Connection.cpp" />

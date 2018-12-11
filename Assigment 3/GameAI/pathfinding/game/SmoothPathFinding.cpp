@@ -10,6 +10,7 @@ SmoothPathFinding::SmoothPathFinding(Graph * pGraph)
 
 SmoothPathFinding::~SmoothPathFinding()
 {
+	std::cout << "Deconstructor " << std::endl;
 }
 
 Path * SmoothPathFinding::FindPath(Node * pFrom, Node * pTo)

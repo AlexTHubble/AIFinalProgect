@@ -219,6 +219,9 @@
     <ClInclude Include="ShootProjectile.h">
       <Filter>Header Files\Tank</Filter>
     </ClInclude>
+    <ClInclude Include="AiAimingAtPlayerState.h">
+      <Filter>Header Files\StateMachine\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Game.cpp">
@@ -379,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="ShootProjectile.cpp">
       <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="AiAimingAtPlayerState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

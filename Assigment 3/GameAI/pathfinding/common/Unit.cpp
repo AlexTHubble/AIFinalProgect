@@ -17,6 +17,7 @@
 #include "../game/TankMovement.h"
 #include "../game/PlayerControlledState.h"
 #include "../game/AiControlledState.h"
+#include "../game/AiAimingAtPlayerState.h"
 
 
 Unit::Unit(const Sprite& sprite, UnitID idToBeSet)
@@ -35,18 +36,22 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet)
 	mpUnitStateMachine = new StateMachine();
 	PlayerControlledState* pPlayerControlledState = new PlayerControlledState(0, mpTankMovement, idToBeSet);
 	AIControlledState* pAiControlledState = new AIControlledState(1, mpTankMovement, idToBeSet);
+	AIAimAtPlayerState* PAiAimAtPlayerState = new AIAimAtPlayerState(2, mpTankMovement, idToBeSet);
 
 	//Sets up transitions
 	StateTransition* pToAIControlledState = new StateTransition(AI_CONTROLLED_STATE, 1);
 	StateTransition* pToPlayerControlledState = new StateTransition(PLAYER_CONTROLLED_STATE, 0);
+	StateTransition* pToAiAimAtPlayerState = new StateTransition(AI_SHOOTING_AT_PLAYER_STATE, 2);
 
 	//Add transtions to states
 	pPlayerControlledState->addTransition(pToAIControlledState);
 	pAiControlledState->addTransition(pToPlayerControlledState);
+	pAiControlledState->addTransition(pToAiAimAtPlayerState);
 
 	//Adds the states
 	mpUnitStateMachine->addState(pPlayerControlledState);
 	mpUnitStateMachine->addState(pAiControlledState);
+	mpUnitStateMachine->addState(PAiAimAtPlayerState);
 
 	//set the initial state
 	mpUnitStateMachine->setInitialStateID(0);

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef AI_CONTROLLED_STATE_H
-#define AI_CONTROLLED_STATE_H
+#ifndef AI_AIMING_AT_PLAYER_STATE_H
+#define AI_AIMING_AT_PLAYER_STATE_H
 
 #include "StateMachine.h"
 #include "TankMovement.h"
@@ -8,11 +8,11 @@
 #include "Node.h"
 #include "SmoothPathFinding.h"
 
-class AIControlledState : public StateMachineState
+class AIAimAtPlayerState : public StateMachineState
 {
 public:
-	AIControlledState(const SM_idType& id, TankMovement* tankMovment, UnitID unitId) :StateMachineState(id) {
-		mpTankMovment = tankMovment; 
+	AIAimAtPlayerState(const SM_idType& id, TankMovement* tankMovment, UnitID unitId) :StateMachineState(id) {
+		mpTankMovment = tankMovment;
 		mUnitId = unitId;
 	};
 
@@ -30,15 +30,11 @@ private:
 	bool mTransferToPlayerControll = false;
 	Vector2D mEnemyPlayerLoc;
 	float mDistanceToTargetForStop = 30;
-	float mDistanceForPlayerSeen = 60;
 	Node* mPlayerNode;
 	Path* mUnitPath;
 	SmoothPathFinding* mSmoothPathfinding;
 
 	bool testForPlayerSeen();
-	bool testForPowerUpSeen();
-	void pathfindToPlayer();
-	void findAndApplyNewPath();
 };
 
-#endif //!AI_CONTROLLED_STATE_H
+#endif //!AI_AIMING_AT_PLAYER_STATE_H

@@ -3,8 +3,8 @@
 #include "Game.h"
 #include "Unit.h"
 #include "GameApp.h"
-#include "SmoothPathFinding.h"
 #include "GridGraph.h"
+#include "Path.h"
 
 using namespace std;
 
@@ -12,37 +12,24 @@ void AIControlledState::onEntrance()
 {
 	//This will kickstart the pathfinding prossess
 	mTransferToPlayerControll = false;
+
 	GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
-	GridGraph* pGridGraph = pGame->getGridGraph();
 
-	Node* from = pGridGraph->getNodeClosestToLocation(gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition());
 
-	SmoothPathFinding* smoothPathfinding = new SmoothPathFinding(pGridGraph);
+	mUnitPath = NULL;
 
-	//Gets the enemy player's location
-	if (mUnitId == 0) //If the player is p1
-	{
-		mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayer2Unit()->getPositionComponent()->getPosition();
-	}
-	else if(mUnitId == 1)//If the player is p2
-	{
-		mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition();
-	}
+	findAndApplyNewPath();
 
-	Node* to = pGridGraph->getNodeClosestToLocation(mEnemyPlayerLoc);
-
-	gpGame->getUnitManager()->getUnit(mUnitId)->setPath(smoothPathfinding->findPath(from, to));
-
-	delete smoothPathfinding;
 }
 
 void AIControlledState::onExit()
 {
+	//delete mUnitPath;
+	//delete mSmoothPathfinding;
 }
 
 StateTransition * AIControlledState::update(int elapsedTime)
 {
-	std::cout << "Updating from AI state!" << std::endl;
 
 	if (mTransferToPlayerControll) //If the state has been marked to transition into the new state...
 	{
@@ -107,6 +94,15 @@ void AIControlledState::cleanupTransitions()
 
 bool AIControlledState::testForPlayerSeen()
 {
+	//Gets the distance between the unit and it's target
+	Vector2D direction = mEnemyPlayerLoc - gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition();
+	float distance = direction.getLength();
+
+	if (distance < mDistanceForPlayerSeen)
+	{
+		return true;
+	}
+
 	return false;
 }
 
@@ -123,31 +119,40 @@ void AIControlledState::pathfindToPlayer()
 
 	if (distance < mDistanceToTargetForStop) //If the unit is within the desired distance, find a new path
 	{
-		mTransferToPlayerControll = false;
-		GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
-		GridGraph* pGridGraph = pGame->getGridGraph();
-
-		Node* from = pGridGraph->getNodeClosestToLocation(gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition());
-
-		SmoothPathFinding* smoothPathfinding = new SmoothPathFinding(pGridGraph);
-
-		//Gets the enemy player's location
-		if (mUnitId == 0) //If the player is p1
-		{
-			mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayer2Unit()->getPositionComponent()->getPosition();
-		}
-		else if (mUnitId == 1)//If the player is p2
-		{
-			mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition();
-		}
-
-		Node* to = pGridGraph->getNodeClosestToLocation(mEnemyPlayerLoc);
-
-		gpGame->getUnitManager()->getUnit(mUnitId)->setPath(smoothPathfinding->findPath(from, to));
-
-		delete smoothPathfinding;
+		findAndApplyNewPath();
 	}
+
 	gpGame->getUnitManager()->getUnit(mUnitId)->updateTarget();
+
+}
+
+void AIControlledState::findAndApplyNewPath()
+{
+	GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
+	GridGraph* pGridGraph = pGame->getGridGraph();
+	mSmoothPathfinding = new SmoothPathFinding(pGridGraph);
+	//mSmoothPathfinding = new SmoothPathFinding(pGridGraph);
+
+	//Gets the enemy player's location
+	if (mUnitId == 0) //If the player is p1
+	{
+		mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayer2Unit()->getPositionComponent()->getPosition();
+	}
+	else if (mUnitId == 1)//If the player is p2
+	{
+		mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition();
+	}
+
+	Node* from = pGridGraph->getNodeClosestToLocation(gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition());
+	Node* to = pGridGraph->getNodeClosestToLocation(mEnemyPlayerLoc);
+
+	
+	mUnitPath = mSmoothPathfinding->findPath(from, to);
+
+	gpGame->getUnitManager()->getUnit(mUnitId)->setPath(mUnitPath);
 	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(true);
 
+	delete mUnitPath;
+	//delete mSmoothPathfinding;
+	
 }
