@@ -27,16 +27,6 @@ void UnitManager::cleanup()
 	{
 		deleteUnit(unit->second->getID());
 	}
-
-	for (std::map<UnitID, Unit*>::iterator unit = mBulletMap.begin(); unit != mBulletMap.end(); ++unit)
-	{
-		deleteUnit(unit->second->getID());
-	}
-
-	for (std::map<UnitID, Unit*>::iterator unit = mPowerUpMap.begin(); unit != mPowerUpMap.end(); ++unit)
-	{
-		deleteUnit(unit->second->getID());
-	}
 }
 
 Unit* UnitManager::createUnit(const Sprite& sprite, bool shouldWrap, const PositionData& posData /*= ZERO_POSITION_DATA*/, const PhysicsData& physicsData /*= ZERO_PHYSICS_DATA*/, const UnitID& id)
@@ -149,7 +139,7 @@ Unit * UnitManager::createPowerUp(const Sprite & sprite, bool shouldWrap, const 
 		pUnit = new (ptr)Unit(sprite, theID, POWERUP_STATE);//placement new
 
 											 //place in map
-		mPowerUpMap[theID] = pUnit;
+		mUnitMap[theID] = pUnit;
 
 		//assign id and increment nextID counter
 		pUnit->mID = theID;
@@ -167,6 +157,8 @@ Unit * UnitManager::createPowerUp(const Sprite & sprite, bool shouldWrap, const 
 		pUnit->mMaxAcc = MAX_ACC;
 		pUnit->mMaxRotAcc = MAX_ROT_ACC;
 		pUnit->mMaxRotVel = MAX_ROT_VEL;
+
+		pUnit->setTag("PowerUP");
 
 	}
 
@@ -267,34 +259,11 @@ void UnitManager::drawAll() const
 	{
 		it->second->draw();
 	}
-
-	for (auto it = mBulletMap.begin(); it != mBulletMap.end(); ++it)
-	{
-		it->second->draw();
-	}
-
-	for (auto it = mPowerUpMap.begin(); it != mPowerUpMap.end(); ++it)
-	{
-		it->second->draw();
-	}
-
 }
 
 void UnitManager::updateAll(float elapsedTime)
 {
 	for (auto it = mUnitMap.begin(); it != mUnitMap.end(); ++it)
-	{
-		it->second->update(elapsedTime);
-		it->second->updateTarget();
-	}
-
-	for (auto it = mBulletMap.begin(); it != mBulletMap.end(); ++it)
-	{
-		it->second->update(elapsedTime);
-		it->second->updateTarget();
-	}
-
-	for (auto it = mPowerUpMap.begin(); it != mPowerUpMap.end(); ++it)
 	{
 		it->second->update(elapsedTime);
 		it->second->updateTarget();
