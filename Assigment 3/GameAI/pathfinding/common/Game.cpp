@@ -84,10 +84,12 @@ bool Game::init()
 	//Create p1
 	Unit* pPlayer1 = mpUnitManager->createPlayerUnit(*pEnemyArrow);
 	pPlayer1->getPositionComponent()->setPosition(Vector2D(300, 300));
+	pPlayer1->setTag("Player1");
 
 	//Create p2
 	Unit* pPlayer2 = mpUnitManager->createPlayer2Unit(*pEnemyArrow);
 	pPlayer2->getPositionComponent()->setPosition(Vector2D(500, 300));
+	pPlayer2->setTag("Player2");
 
 	Unit* pBulletTest = mpUnitManager->createBullet(*pEnemyArrow);
 	pBulletTest->getPositionComponent()->setPosition(Vector2D(500, 100));

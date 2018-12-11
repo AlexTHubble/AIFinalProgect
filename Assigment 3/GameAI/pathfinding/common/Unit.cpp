@@ -18,6 +18,7 @@
 #include "../game/PlayerControlledState.h"
 #include "../game/AiControlledState.h"
 #include "../game/AiAimingAtPlayerState.h"
+#include "../game/BulletState.h"
 
 
 Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
@@ -36,7 +37,8 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	mpUnitStateMachine = new StateMachine();
 	PlayerControlledState* pPlayerControlledState = new PlayerControlledState(PLAYER_CONTROLLED_STATE, mpTankMovement, idToBeSet);
 	AIControlledState* pAiControlledState = new AIControlledState(AI_CONTROLLED_STATE, mpTankMovement, idToBeSet);
-	AIAimAtPlayerState* PAiAimAtPlayerState = new AIAimAtPlayerState(AI_SHOOTING_AT_PLAYER_STATE, mpTankMovement, idToBeSet);
+	AIAimAtPlayerState* pAiAimAtPlayerState = new AIAimAtPlayerState(AI_SHOOTING_AT_PLAYER_STATE, mpTankMovement, idToBeSet);
+	BulletState* pBulletState = new BulletState(BULLET_STATE, idToBeSet, 1);
 
 	//Sets up transitions
 	StateTransition* pToAIControlledState = new StateTransition(TO_AI_CONTROLLED_STATE, AI_CONTROLLED_STATE);
@@ -47,13 +49,14 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	pPlayerControlledState->addTransition(pToAIControlledState);
 	pAiControlledState->addTransition(pToPlayerControlledState);
 	pAiControlledState->addTransition(pToAiAimAtPlayerState);
-	PAiAimAtPlayerState->addTransition(pToAIControlledState);
-	PAiAimAtPlayerState->addTransition(pToPlayerControlledState);
+	pAiAimAtPlayerState->addTransition(pToAIControlledState);
+	pAiAimAtPlayerState->addTransition(pToPlayerControlledState);
 
 	//Adds the states
 	mpUnitStateMachine->addState(pPlayerControlledState);
 	mpUnitStateMachine->addState(pAiControlledState);
-	mpUnitStateMachine->addState(PAiAimAtPlayerState);
+	mpUnitStateMachine->addState(pAiAimAtPlayerState);
+	mpUnitStateMachine->addState(pBulletState);
 
 	//set the initial state
 	mpUnitStateMachine->setInitialStateID(stateToStartIn);
@@ -181,6 +184,7 @@ void Unit::shootBullet()
 
 void Unit::setTag(string tag)
 {
+	mTag = tag;
 }
 
 void Unit::update(int elapsedTime)
