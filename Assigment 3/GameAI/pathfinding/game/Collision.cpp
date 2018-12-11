@@ -25,15 +25,12 @@ void Collision::CheckForCollisions(Unit* unit)
 	{
 		if (grid->getValueAtIndex(i))
 		{
-			if (InsideGridBlock(i, unit))
-			{
-				TankWallCollision(unit);
-			}
+			InsideGridBlock(i, unit);
 		}
 	}
 }
 
-bool Collision::InsideGridBlock(int index, Unit* unit)
+void Collision::InsideGridBlock(int index, Unit* unit)
 {
 	//References
 	//https://stackoverflow.com/questions/31022269/collision-detection-between-two-rectangles-in-java
@@ -64,13 +61,47 @@ bool Collision::InsideGridBlock(int index, Unit* unit)
 		unitULY < gridBlockBRY && unitBRY > gridBlockULY)
 	{
 		TankWallCollision(unit);
-		return true;
 	}
-	//All opposite edges don't overlap
-	return false;
 }
 
 void Collision::TankWallCollision(Unit* unit)
 {
-	std::cout << "Colliding With Wall" << std::endl;
+	PhysicsData phyData = unit->getPhysicsComponent()->getData();
+	PositionData posData = unit->getPositionComponent()->getData();
+	//Get current direction
+	float temp = gpGame->getUnitManager()->getUnit(unit->getID())->getFacing() - (PI / 2);
+	Vector2D currentDirection = Vector2D(cos(temp), sin(temp));
+	//If looking up (towards top of screen)
+	if (currentDirection.getY() < 0.0f)
+	{
+		//If looking at top right quadrant of screen
+		if (currentDirection.getX() > 0.0f)
+		{
+			std::cout << "Q1" << std::endl;
+		}
+		//If looking at top left quadrant of screen
+		else
+		{
+			std::cout << "Q2" << std::endl;
+		}
+	}
+	//If looking down (towards bottom of screen)
+	else
+	{
+		//If looking at bottom left quadrant of screen
+		if (currentDirection.getX() < 0.0f)
+		{
+			std::cout << "Q3" << std::endl;
+		}
+		//If looking at bottom right quadrant of screen
+		else
+		{
+			std::cout << "Q4" << std::endl;
+		}
+	}
+	//Stop velocity for collision
+	//phyData.vel = 0.0f;
+	//Set data
+	unit->getPhysicsComponent()->setData(phyData);
+	unit->getPositionComponent()->setData(posData);
 }

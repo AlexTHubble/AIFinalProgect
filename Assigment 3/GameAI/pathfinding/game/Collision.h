@@ -21,7 +21,7 @@ private:
 	//Accessors
 
 	//Functions
-	bool InsideGridBlock(int index, Unit* unit);
+	void InsideGridBlock(int index, Unit* unit);
 	void TankWallCollision(Unit* unit);
 };
 
