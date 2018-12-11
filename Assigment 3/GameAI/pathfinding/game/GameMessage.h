@@ -30,8 +30,7 @@ enum Direction
 enum Accleration
 {
 	ACCELERATING = 0,
-	DECCELERATING = 1,
-	NONE = 2
+	NONE = 1
 };
 
 class GameMessage : public Trackable
