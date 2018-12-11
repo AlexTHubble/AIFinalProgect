@@ -49,6 +49,15 @@
     <Filter Include="Header Files\StateMachine\States">
       <UniqueIdentifier>{d1d7b774-7620-4916-a59a-61e94ca8a6f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StateMachine\States">
+      <UniqueIdentifier>{15f660a7-8aa5-434c-b522-54facc3e6771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header Files\Steering">
+      <UniqueIdentifier>{55387b4c-3b57-4d41-939b-10855ed01590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source Files\Steering">
+      <UniqueIdentifier>{41c2f2b1-e3d0-4eef-9fba-58546908a1c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common\Game.h">
@@ -171,15 +180,6 @@
     <ClInclude Include="SmoothPathFinding.h">
       <Filter>Header Files\pathfinding</Filter>
     </ClInclude>
-    <ClInclude Include="..\common\ArriveAndFace.h">
-      <Filter>Common\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\FaceSteering.h">
-      <Filter>Common\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\common\Arrive.h">
-      <Filter>Common\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\common\SeekSteering.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
@@ -221,6 +221,15 @@
     </ClInclude>
     <ClInclude Include="AiAimingAtPlayerState.h">
       <Filter>Header Files\StateMachine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\ArriveAndFace.h">
+      <Filter>Common\Header Files\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Arrive.h">
+      <Filter>Common\Header Files\Steering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\FaceSteering.h">
+      <Filter>Common\Header Files\Steering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -338,15 +347,6 @@
     <ClCompile Include="SmoothPathFinding.cpp">
       <Filter>Source Files\pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="..\common\ArriveAndFace.cpp">
-      <Filter>Common\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\common\FaceSteering.cpp">
-      <Filter>Common\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\common\Arrive.cpp">
-      <Filter>Common\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\SeekSteering.cpp">
       <Filter>Common\Source Files</Filter>
     </ClCompile>
@@ -371,12 +371,6 @@
     <ClCompile Include="StateMachine.cpp">
       <Filter>Source Files\StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerControlledState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AiControlledState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
@@ -384,7 +378,22 @@
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
     <ClCompile Include="AiAimingAtPlayerState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\StateMachine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="AiControlledState.cpp">
+      <Filter>Source Files\StateMachine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControlledState.cpp">
+      <Filter>Source Files\StateMachine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\ArriveAndFace.cpp">
+      <Filter>Common\Source Files\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Arrive.cpp">
+      <Filter>Common\Source Files\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\FaceSteering.cpp">
+      <Filter>Common\Source Files\Steering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

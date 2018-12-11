@@ -20,6 +20,7 @@ public:
 		PATHSEEK,
 		ARRIVE,
 		FLEE,
+		FACE,
 		ARRIVEANDFACE,
 		STOP
 	};

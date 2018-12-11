@@ -85,21 +85,7 @@ Steering * FaceSteering::getSteering()
 	}
 
 	data.acc = 0;
-
-	//if (data.rotAcc > data.maxRotAcc) //If rotatating too fast, slow down
-	//{
-	//	data.rotAcc /= abs(data.rotAcc);
-	//	data.rotAcc *= data.maxRotAcc;
-	//}
-
-	//if (rotationSize > 0) //If the rotation is needed to go in a positive direction, move in a positive direction
-	//{
-	//	data.rotAcc = abs(data.rotAcc);
-	//}
-	//else if (rotationSize < 0) //If the rotation is needed to go in a negavitve direction, move in a negative direction
-	//{
-	//	data.rotAcc = -abs(data.rotAcc);
-	//}
+	data.vel = 0;
 
 	this->mData = data;
 	return this;

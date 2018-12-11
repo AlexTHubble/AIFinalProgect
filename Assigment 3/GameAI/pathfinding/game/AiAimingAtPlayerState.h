@@ -29,12 +29,14 @@ private:
 	UnitID mUnitId;
 	bool mTransferToPlayerControll = false;
 	Vector2D mEnemyPlayerLoc;
-	float mDistanceToTargetForStop = 30;
+	float mDistanceForPlayerSeen = 300;
 	Node* mPlayerNode;
 	Path* mUnitPath;
 	SmoothPathFinding* mSmoothPathfinding;
 
 	bool testForPlayerSeen();
+	void aimAtPlayer();
+
 };
 
 #endif //!AI_AIMING_AT_PLAYER_STATE_H
