@@ -8,6 +8,7 @@
 #include "..\game\Graph.h"
 #include "Grid.h"
 #include "..\game\GridGraph.h"
+#include "..\game\StateMachine.h"
 
 
 UnitID UnitManager::msNextUnitID = PLAYER_UNIT_ID + 1;
@@ -23,6 +24,16 @@ void UnitManager::cleanup()
 {
 
 	for (std::map<UnitID, Unit*>::iterator unit = mUnitMap.begin(); unit != mUnitMap.end(); ++unit)
+	{
+		deleteUnit(unit->second->getID());
+	}
+
+	for (std::map<UnitID, Unit*>::iterator unit = mBulletMap.begin(); unit != mBulletMap.end(); ++unit)
+	{
+		deleteUnit(unit->second->getID());
+	}
+
+	for (std::map<UnitID, Unit*>::iterator unit = mPowerUpMap.begin(); unit != mPowerUpMap.end(); ++unit)
 	{
 		deleteUnit(unit->second->getID());
 	}
@@ -45,7 +56,7 @@ Unit* UnitManager::createUnit(const Sprite& sprite, bool shouldWrap, const Posit
 		}
 
 		//create unit
-		pUnit = new (ptr)Unit(sprite, theID);//placement new
+		pUnit = new (ptr)Unit(sprite, theID, PLAYER_CONTROLLED_STATE);//placement new
 
 		//place in map
 		mUnitMap[theID] = pUnit;
@@ -56,6 +67,94 @@ Unit* UnitManager::createUnit(const Sprite& sprite, bool shouldWrap, const Posit
 		//create some components
 		ComponentManager* pComponentManager = gpGame->getComponentManager();
 		ComponentID id = pComponentManager->allocatePositionComponent(posData,shouldWrap);
+		pUnit->mPositionComponentID = id;
+		pUnit->mpPositionComponent = pComponentManager->getPositionComponent(id);
+		pUnit->mPhysicsComponentID = pComponentManager->allocatePhysicsComponent(pUnit->mPositionComponentID, physicsData);
+		pUnit->mSteeringComponentID = pComponentManager->allocateSteeringComponent(pUnit->mPhysicsComponentID);
+
+		//set max's
+		pUnit->mMaxSpeed = MAX_SPEED;
+		pUnit->mMaxAcc = MAX_ACC;
+		pUnit->mMaxRotAcc = MAX_ROT_ACC;
+		pUnit->mMaxRotVel = MAX_ROT_VEL;
+
+	}
+
+	return pUnit;
+}
+
+Unit * UnitManager::createBullet(const Sprite & sprite, bool shouldWrap, const PositionData & posData, const PhysicsData & physicsData, const UnitID & id)
+{
+	Unit* pUnit = NULL;
+
+	Byte* ptr = mPool.allocateObject();
+	if (ptr != NULL)
+	{
+
+
+		UnitID theID = id;
+		if (theID == INVALID_UNIT_ID)
+		{
+			theID = msNextUnitID;
+			msNextUnitID++;
+		}
+
+		//create unit
+		pUnit = new (ptr)Unit(sprite, theID, BULLET_STATE);//placement new
+
+											 //place in map
+		mBulletMap[theID] = pUnit;
+
+		//assign id and increment nextID counter
+		pUnit->mID = theID;
+
+		//create some components
+		ComponentManager* pComponentManager = gpGame->getComponentManager();
+		ComponentID id = pComponentManager->allocatePositionComponent(posData, shouldWrap);
+		pUnit->mPositionComponentID = id;
+		pUnit->mpPositionComponent = pComponentManager->getPositionComponent(id);
+		pUnit->mPhysicsComponentID = pComponentManager->allocatePhysicsComponent(pUnit->mPositionComponentID, physicsData);
+		pUnit->mSteeringComponentID = pComponentManager->allocateSteeringComponent(pUnit->mPhysicsComponentID);
+
+		//set max's
+		pUnit->mMaxSpeed = MAX_SPEED;
+		pUnit->mMaxAcc = MAX_ACC;
+		pUnit->mMaxRotAcc = MAX_ROT_ACC;
+		pUnit->mMaxRotVel = MAX_ROT_VEL;
+
+	}
+
+	return pUnit;
+}
+
+Unit * UnitManager::createPowerUp(const Sprite & sprite, bool shouldWrap, const PositionData & posData, const PhysicsData & physicsData, const UnitID & id)
+{
+	Unit* pUnit = NULL;
+
+	Byte* ptr = mPool.allocateObject();
+	if (ptr != NULL)
+	{
+
+
+		UnitID theID = id;
+		if (theID == INVALID_UNIT_ID)
+		{
+			theID = msNextUnitID;
+			msNextUnitID++;
+		}
+
+		//create unit
+		pUnit = new (ptr)Unit(sprite, theID, POWERUP_STATE);//placement new
+
+											 //place in map
+		mPowerUpMap[theID] = pUnit;
+
+		//assign id and increment nextID counter
+		pUnit->mID = theID;
+
+		//create some components
+		ComponentManager* pComponentManager = gpGame->getComponentManager();
+		ComponentID id = pComponentManager->allocatePositionComponent(posData, shouldWrap);
 		pUnit->mPositionComponentID = id;
 		pUnit->mpPositionComponent = pComponentManager->getPositionComponent(id);
 		pUnit->mPhysicsComponentID = pComponentManager->allocatePhysicsComponent(pUnit->mPositionComponentID, physicsData);
@@ -166,11 +265,34 @@ void UnitManager::drawAll() const
 	{
 		it->second->draw();
 	}
+
+	for (auto it = mBulletMap.begin(); it != mBulletMap.end(); ++it)
+	{
+		it->second->draw();
+	}
+
+	for (auto it = mPowerUpMap.begin(); it != mPowerUpMap.end(); ++it)
+	{
+		it->second->draw();
+	}
+
 }
 
 void UnitManager::updateAll(float elapsedTime)
 {
 	for (auto it = mUnitMap.begin(); it != mUnitMap.end(); ++it)
+	{
+		it->second->update(elapsedTime);
+		it->second->updateTarget();
+	}
+
+	for (auto it = mBulletMap.begin(); it != mBulletMap.end(); ++it)
+	{
+		it->second->update(elapsedTime);
+		it->second->updateTarget();
+	}
+
+	for (auto it = mPowerUpMap.begin(); it != mPowerUpMap.end(); ++it)
 	{
 		it->second->update(elapsedTime);
 		it->second->updateTarget();

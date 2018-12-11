@@ -20,7 +20,7 @@
 #include "../game/AiAimingAtPlayerState.h"
 
 
-Unit::Unit(const Sprite& sprite, UnitID idToBeSet)
+Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	:mSprite(sprite)
 	,mPositionComponentID(INVALID_COMPONENT_ID)
 	,mPhysicsComponentID(INVALID_COMPONENT_ID)
@@ -34,14 +34,14 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet)
 
 	//Sets up the state machine for the new class
 	mpUnitStateMachine = new StateMachine();
-	PlayerControlledState* pPlayerControlledState = new PlayerControlledState(0, mpTankMovement, idToBeSet);
-	AIControlledState* pAiControlledState = new AIControlledState(1, mpTankMovement, idToBeSet);
-	AIAimAtPlayerState* PAiAimAtPlayerState = new AIAimAtPlayerState(2, mpTankMovement, idToBeSet);
+	PlayerControlledState* pPlayerControlledState = new PlayerControlledState(PLAYER_CONTROLLED_STATE, mpTankMovement, idToBeSet);
+	AIControlledState* pAiControlledState = new AIControlledState(AI_CONTROLLED_STATE, mpTankMovement, idToBeSet);
+	AIAimAtPlayerState* PAiAimAtPlayerState = new AIAimAtPlayerState(AI_SHOOTING_AT_PLAYER_STATE, mpTankMovement, idToBeSet);
 
 	//Sets up transitions
-	StateTransition* pToAIControlledState = new StateTransition(AI_CONTROLLED_STATE, 1);
-	StateTransition* pToPlayerControlledState = new StateTransition(PLAYER_CONTROLLED_STATE, 0);
-	StateTransition* pToAiAimAtPlayerState = new StateTransition(AI_SHOOTING_AT_PLAYER_STATE, 2);
+	StateTransition* pToAIControlledState = new StateTransition(TO_AI_CONTROLLED_STATE, AI_CONTROLLED_STATE);
+	StateTransition* pToPlayerControlledState = new StateTransition(TO_PLAYER_CONTROLLED_STATE, PLAYER_CONTROLLED_STATE);
+	StateTransition* pToAiAimAtPlayerState = new StateTransition(TO_AI_SHOOTING_AT_PLAYER_STATE, AI_SHOOTING_AT_PLAYER_STATE);
 
 	//Add transtions to states
 	pPlayerControlledState->addTransition(pToAIControlledState);
@@ -56,7 +56,7 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet)
 	mpUnitStateMachine->addState(PAiAimAtPlayerState);
 
 	//set the initial state
-	mpUnitStateMachine->setInitialStateID(0);
+	mpUnitStateMachine->setInitialStateID(stateToStartIn);
 }
 
 Unit::~Unit()
@@ -167,6 +167,16 @@ StateMachine * Unit::getStateMachine()
 		return mpUnitStateMachine;
 	else
 		return nullptr;
+}
+
+void Unit::reducePlayerHp(int hpToReduceBy)
+{
+	mCurrentHP -= hpToReduceBy;
+}
+
+void Unit::shootBullet()
+{
+	//ToDo
 }
 
 void Unit::update(int elapsedTime)

@@ -26,6 +26,8 @@ public:
 	void cleanup();
 
 	Unit* createUnit(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA, const UnitID& id = INVALID_UNIT_ID);
+	Unit* createBullet(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA, const UnitID& id = INVALID_UNIT_ID);
+	Unit* createPowerUp(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA, const UnitID& id = INVALID_UNIT_ID);
 	Unit* createPlayerUnit(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA);
 	Unit* createPlayer2Unit(const Sprite& sprite, bool shouldWrap = true, const PositionData& posData = ZERO_POSITION_DATA, const PhysicsData& physicsData = ZERO_PHYSICS_DATA);
 	Unit* createRandomUnit(const Sprite& sprite);
@@ -46,5 +48,7 @@ private:
 	static UnitID msNextUnitID;
 	MemoryPool mPool;
 	std::map<UnitID, Unit*> mUnitMap;
+	std::map<UnitID, Unit*> mBulletMap;
+	std::map<UnitID, Unit*> mPowerUpMap;
 };
 

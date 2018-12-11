@@ -56,9 +56,11 @@ public:
 	void setSteering(Steering::SteeringType type, Vector2D targetLoc, UnitID targetUnitID);
 	void updateTarget();
 	StateMachine* getStateMachine();
+	void reducePlayerHp(int hpToReduceBy);
+	void shootBullet();
 
 protected:
-	Unit(const Sprite& sprite, UnitID idToBeSet);
+	Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn);
 	void SetMaxSpeed(float maxSpeed) { mMaxSpeed = maxSpeed; };
 	void SetMaxRotVel(float maxVel) { mMaxRotVel = maxVel; };
 
@@ -78,6 +80,7 @@ private:
 	Path* mPath;
 	bool ShouldUpdateTarget;
 	int mCurrentNode;
+	int mCurrentHP = 5;
 
 	//Class Instances
 	TankMovement* mpTankMovement;

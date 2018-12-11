@@ -12,7 +12,7 @@ void PlayerControlledState::onEntrance()
 {
 	mTransferToAIControll = false;
 	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(false);
-	gpGame->getUnitManager()->getUnit(mUnitId)->setSteering(Steering::NONE, NULL, mUnitId);
+ 	gpGame->getUnitManager()->getUnit(mUnitId)->setSteering(Steering::NONE, NULL, mUnitId);
 }
 
 void PlayerControlledState::onExit()
@@ -24,7 +24,7 @@ StateTransition * PlayerControlledState::update(int elapsedTime)
 
 	if (mTransferToAIControll) //If the state has been marked to transition into the new state...
 	{
-		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(AI_CONTROLLED_STATE);
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_AI_CONTROLLED_STATE);
 		if (iter != mTransitions.end())//found?
 		{
 			StateTransition* pTransition = iter->second;
@@ -96,6 +96,7 @@ void PlayerControlledState::handleSwapInput()
 
 void PlayerControlledState::handleFireInput()
 {
+	gpGame->getUnitManager()->getUnit(mUnitId)->shootBullet();
 }
 
 void PlayerControlledState::cleanupTransitions()

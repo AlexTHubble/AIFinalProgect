@@ -231,6 +231,12 @@
     <ClInclude Include="..\common\SteeringComponent.h">
       <Filter>Common\Header Files\Steering</Filter>
     </ClInclude>
+    <ClInclude Include="BulletState.h">
+      <Filter>Header Files\StateMachine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUpState.h">
+      <Filter>Header Files\StateMachine\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Game.cpp">
@@ -394,6 +400,12 @@
     </ClCompile>
     <ClCompile Include="..\common\Steering.cpp">
       <Filter>Common\Source Files\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletState.cpp">
+      <Filter>Source Files\StateMachine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUpState.cpp">
+      <Filter>Source Files\StateMachine\States</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

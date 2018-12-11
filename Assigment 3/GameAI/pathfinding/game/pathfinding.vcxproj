@@ -105,6 +105,7 @@
     <ClInclude Include="..\common\UnitManager.h" />
     <ClInclude Include="AiAimingAtPlayerState.h" />
     <ClInclude Include="AiControlledState.h" />
+    <ClInclude Include="BulletState.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Compare.h" />
     <ClInclude Include="Connection.h" />
@@ -131,6 +132,7 @@
     <ClInclude Include="PlayerRotateMessage.h" />
     <ClInclude Include="PlayerShootMessage.h" />
     <ClInclude Include="PlayerSwapControllMessage.h" />
+    <ClInclude Include="PowerUpState.h" />
     <ClInclude Include="PriorityQueue(NEW).h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShootProjectile.h" />
@@ -164,6 +166,7 @@
     <ClCompile Include="..\common\UnitManager.cpp" />
     <ClCompile Include="AiAimingAtPlayerState.cpp" />
     <ClCompile Include="AiControlledState.cpp" />
+    <ClCompile Include="BulletState.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DebugDisplay.cpp" />
@@ -189,6 +192,7 @@
     <ClCompile Include="PlayerRotateMessage.cpp" />
     <ClCompile Include="PlayerShootMessage.cpp" />
     <ClCompile Include="PlayerSwapControllMessage.cpp" />
+    <ClCompile Include="PowerUpState.cpp" />
     <ClCompile Include="ShootProjectile.cpp" />
     <ClCompile Include="SmoothPathFinding.cpp" />
     <ClCompile Include="StateMachine.cpp" />

@@ -33,7 +33,7 @@ StateTransition * AIControlledState::update(int elapsedTime)
 
 	if (mTransferToPlayerControll) //If the state has been marked to transition into the new state...
 	{
-		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(PLAYER_CONTROLLED_STATE);
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_PLAYER_CONTROLLED_STATE);
 		if (iter != mTransitions.end())//found?
 		{
 			StateTransition* pTransition = iter->second;
@@ -42,7 +42,7 @@ StateTransition * AIControlledState::update(int elapsedTime)
 	}
 	if (testForPlayerSeen()) //Run test to see if the unit is within range of the opposing player, if so transition to the appopriate state
 	{
-		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(AI_SHOOTING_AT_PLAYER_STATE);
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_AI_SHOOTING_AT_PLAYER_STATE);
 		if (iter != mTransitions.end())//found?
 		{
 			StateTransition* pTransition = iter->second;
@@ -51,7 +51,7 @@ StateTransition * AIControlledState::update(int elapsedTime)
 	}
 	if (testForPowerUpSeen())//Run test to see if the unit is within range of a powerup, if so transition to the appopriate state
 	{
-		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(AI_PATHING_TO_POWERUP_STATE);
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_AI_PATHING_TO_POWERUP_STATE);
 		if (iter != mTransitions.end())//found?
 		{
 			StateTransition* pTransition = iter->second;

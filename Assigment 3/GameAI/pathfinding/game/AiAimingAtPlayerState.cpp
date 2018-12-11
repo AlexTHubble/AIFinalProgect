@@ -30,7 +30,7 @@ StateTransition * AIAimAtPlayerState::update(int elapsedTime)
 
 	if (mTransferToPlayerControll)
 	{
-		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(PLAYER_CONTROLLED_STATE);
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_PLAYER_CONTROLLED_STATE);
 		if (iter != mTransitions.end())//found?
 		{
 			StateTransition* pTransition = iter->second;
@@ -40,7 +40,7 @@ StateTransition * AIAimAtPlayerState::update(int elapsedTime)
 
 	if (testForPlayerSeen()) //Run test to see if the unit is within range of the opposing player, if so transition to the appopriate state
 	{
-		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(AI_CONTROLLED_STATE);
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_AI_CONTROLLED_STATE);
 		if (iter != mTransitions.end())//found?
 		{
 			StateTransition* pTransition = iter->second;
