@@ -98,13 +98,7 @@ bool Game::init()
 	{
 		pBullet = mpSpriteManager->createAndManageSprite(BULLET_ICON_ID, pBulletBuffer, 0, 0, (float)pBulletBuffer->getWidth(), (float)pBulletBuffer->getHeight());
 	}
-	//Setup sprite
-	GraphicsBuffer* pSpeedBuffer = mpGraphicsBufferManager->getBuffer(mSpeedIconBufferID);
-	Sprite* pSpeed = NULL;
-	if (pSpeedBuffer != NULL)
-	{
-		pSpeed = mpSpriteManager->createAndManageSprite(SPEED_ICON_ID, pSpeedBuffer, 0, 0, (float)pSpeedBuffer->getWidth(), (float)pSpeedBuffer->getHeight());
-	}
+
 
 	//Create p1
 	Unit* pPlayer1 = mpUnitManager->createPlayerUnit(*pP1Tank);
@@ -116,11 +110,13 @@ bool Game::init()
 	pPlayer2->getPositionComponent()->setPosition(Vector2D(mpFileSystem->getP2StartX(), mpFileSystem->getP2StartY()));
 	pPlayer2->setTag("Player2");
 
-	//Create Buff
-	Unit* pBuff = mpUnitManager->createPowerUp(*pSpeed);
-	pBuff->getPositionComponent()->setPosition(Vector2D(200, 400));
+
+
+	//Unit* pBuff = mpUnitManager->createPowerUp(*pSpeed);
+	//pBuff->getPositionComponent()->setPosition(Vector2D(200, 400));
 
 	mpUnitManager->setBulletSprite(pBullet);
+
 
 	return true;
 }
@@ -173,6 +169,8 @@ void Game::processLoop()
 	mpUnitManager->updateAll(TARGET_ELAPSED_MS);
 	mpComponentManager->update(TARGET_ELAPSED_MS);
 
+	spawnBuffs();
+
 	//draw units
 	mpUnitManager->drawAll();
 
@@ -184,6 +182,25 @@ bool Game::endLoop()
 	//mpMasterTimer->start();
 	mpLoopTimer->sleepUntilElapsed( mLoopTargetTime );
 	return mShouldExit;
+}
+
+void Game::spawnBuffs()
+{
+	if (currentBuffs < maxBuffsOnScreen)
+	{
+		//Setup sprite
+		GraphicsBuffer* pSpeedBuffer = mpGraphicsBufferManager->getBuffer(mSpeedIconBufferID);
+		Sprite* pSpeed = NULL;
+		if (pSpeedBuffer != NULL)
+		{
+			pSpeed = mpSpriteManager->createAndManageSprite(SPEED_ICON_ID, pSpeedBuffer, 0, 0, (float)pSpeedBuffer->getWidth(), (float)pSpeedBuffer->getHeight());
+		}
+		//Create Buff
+		Unit* pBuff = mpUnitManager->createRandomUnit(*pSpeed);
+		currentBuffs++;
+	}
+
+
 }
 
 

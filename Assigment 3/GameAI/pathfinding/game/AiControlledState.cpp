@@ -44,6 +44,16 @@ StateTransition * AIControlledState::update(int elapsedTime)
 			return pTransition;
 		}
 	}
+ 	if (testForPowerUpSeen())//Run test to see if the unit is within range of a powerup, if so transition to the appopriate state
+	{
+		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_AI_PATHING_TO_POWERUP_STATE);
+		if (iter != mTransitions.end())//found?
+		{
+			StateTransition* pTransition = iter->second;
+			return pTransition;
+		}
+	}
+
 	if (testForPlayerSeen()) //Run test to see if the unit is within range of the opposing player, if so transition to the appopriate state
 	{
 		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_AI_SHOOTING_AT_PLAYER_STATE);
@@ -53,15 +63,7 @@ StateTransition * AIControlledState::update(int elapsedTime)
 			return pTransition;
 		}
 	}
-	if (testForPowerUpSeen())//Run test to see if the unit is within range of a powerup, if so transition to the appopriate state
-	{
-		map<TransitionType, StateTransition*>::iterator iter = mTransitions.find(TO_AI_PATHING_TO_POWERUP_STATE);
-		if (iter != mTransitions.end())//found?
-		{
-			StateTransition* pTransition = iter->second;
-			return pTransition;
-		}
-	}
+
 
 	pathfindToPlayer();
 
@@ -126,6 +128,34 @@ bool AIControlledState::testForPlayerSeen()
 
 bool AIControlledState::testForPowerUpSeen()
 {
+	std::map<UnitID, Unit*> mUnitMapClone = gpGame->getUnitManager()->getUnitMap();
+
+	for (std::map<UnitID, Unit*>::iterator unit = mUnitMapClone.begin(); unit != mUnitMapClone.end(); ++unit)
+	{
+		if (unit->second->getTag() == "PowerUP")
+		{
+			Vector2D powerUpLoc = unit->second->getPositionComponent()->getPosition();
+
+			//Gets the distance between the unit and it's target
+			Vector2D direction = powerUpLoc - gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition();
+			float distance = direction.getLength();
+			//Current x and y position
+			float xPos = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition().getX();
+			float yPos = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition().getY();
+
+			if (!RaycastToTarget(xPos, yPos, powerUpLoc.getX(), powerUpLoc.getY()))
+			{
+				gpGame->getUnitManager()->getUnit(mUnitId)->setClosestPowerUpLoctaion(unit->second);
+
+				return true;
+			}
+		}
+
+	}
+
+
+
+
 	return false;
 }
 

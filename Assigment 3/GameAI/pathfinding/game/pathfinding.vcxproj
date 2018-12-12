@@ -105,6 +105,7 @@
     <ClInclude Include="..\common\UnitManager.h" />
     <ClInclude Include="AiAimingAtPlayerState.h" />
     <ClInclude Include="AiControlledState.h" />
+    <ClInclude Include="AiPathToPowerupState.h" />
     <ClInclude Include="BulletState.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Compare.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="..\common\UnitManager.cpp" />
     <ClCompile Include="AiAimingAtPlayerState.cpp" />
     <ClCompile Include="AiControlledState.cpp" />
+    <ClCompile Include="AiPathToPowerupState.cpp" />
     <ClCompile Include="BulletState.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Connection.cpp" />

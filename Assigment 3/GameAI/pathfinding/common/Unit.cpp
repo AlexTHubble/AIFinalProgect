@@ -21,6 +21,7 @@
 #include "../game/BulletState.h"
 #include "../game/ShootProjectile.h"
 #include "../game/PowerUpState.h"
+#include "../game/AiPathToPowerupState.h"
 #include "Timer.h"
 
 
@@ -53,18 +54,23 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	AIAimAtPlayerState* pAiAimAtPlayerState = new AIAimAtPlayerState(AI_SHOOTING_AT_PLAYER_STATE, mpTankMovement, idToBeSet);
 	BulletState* pBulletState = new BulletState(BULLET_STATE, idToBeSet);
 	PowerUpState* pPowerUpState = new PowerUpState(POWERUP_STATE, idToBeSet);
+	AiPathToPowerUpState* pAiPathToPowerUpState = new AiPathToPowerUpState(AI_PATHING_TO_POWERUP_STATE, mpTankMovement, idToBeSet);
 
 	//Sets up transitions
 	StateTransition* pToAIControlledState = new StateTransition(TO_AI_CONTROLLED_STATE, AI_CONTROLLED_STATE);
 	StateTransition* pToPlayerControlledState = new StateTransition(TO_PLAYER_CONTROLLED_STATE, PLAYER_CONTROLLED_STATE);
 	StateTransition* pToAiAimAtPlayerState = new StateTransition(TO_AI_SHOOTING_AT_PLAYER_STATE, AI_SHOOTING_AT_PLAYER_STATE);
+	StateTransition* pToAiPathToPowerUpState = new StateTransition(TO_AI_PATHING_TO_POWERUP_STATE, TO_AI_PATHING_TO_POWERUP_STATE);
 
 	//Add transtions to states
 	pPlayerControlledState->addTransition(pToAIControlledState);
 	pAiControlledState->addTransition(pToPlayerControlledState);
 	pAiControlledState->addTransition(pToAiAimAtPlayerState);
+	pAiControlledState->addTransition(pToAiPathToPowerUpState);
 	pAiAimAtPlayerState->addTransition(pToAIControlledState);
 	pAiAimAtPlayerState->addTransition(pToPlayerControlledState);
+	pAiPathToPowerUpState->addTransition(pToPlayerControlledState);
+	pAiPathToPowerUpState->addTransition(pToAIControlledState);
 
 	//Adds the states
 	mpUnitStateMachine->addState(pPlayerControlledState);
@@ -72,6 +78,7 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	mpUnitStateMachine->addState(pAiAimAtPlayerState);
 	mpUnitStateMachine->addState(pBulletState);
 	mpUnitStateMachine->addState(pPowerUpState);
+	mpUnitStateMachine->addState(pAiPathToPowerUpState);
 
 	//set the initial state
 	mpUnitStateMachine->setInitialStateID(stateToStartIn);

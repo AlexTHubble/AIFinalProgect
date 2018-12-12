@@ -66,6 +66,8 @@ public:
 	bool getToBeDeleted() { return mToBeDeletedAtNextUpdate; };
 	int getPlayerHealth() { return mCurrentHP; };
 	void applyBuff();
+	void setClosestPowerUpLoctaion(Unit* powerUp) { mClosestPowerUpLocation = powerUp; };
+	Unit* getClosestPowerUpLocation() { return mClosestPowerUpLocation; }
 
 protected:
 	Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn);
@@ -98,6 +100,8 @@ private:
 	float mShootDelay;
 	float mTimeUntillNextShootDelay;
 	bool mShootDelayInitiaed = false;
+
+	Unit* mClosestPowerUpLocation;
 
 	//Class Instances
 	TankMovement* mpTankMovement;

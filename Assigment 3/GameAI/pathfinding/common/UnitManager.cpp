@@ -185,14 +185,7 @@ Unit* UnitManager::createRandomUnit(const Sprite& sprite)
 	Vector2D randomNodeLocation = grid->getULCornerOfSquare(gridGraph->getRandomNonWallNode()->getId());
 
 
-	Unit* pUnit = createUnit(sprite, true, PositionData(randomNodeLocation, 0));
-	if (pUnit != NULL)
-	{
-		UnitID playerId = PLAYER_UNIT_ID;
-		pUnit->setShowTarget(false);
-		pUnit->setSteering(Steering::PATHSEEK, NULL, playerId);
-	
-	}
+	Unit* pUnit = createPowerUp(sprite, true, PositionData(randomNodeLocation, 0));
 	return pUnit;
 }
 
@@ -278,6 +271,8 @@ void UnitManager::updateAll(float elapsedTime)
 	deleteUnitsFromDeletionVector();
 	CheckGameEnd();
 }
+
+
 
 void UnitManager::deleteUnitsFromDeletionVector()
 {

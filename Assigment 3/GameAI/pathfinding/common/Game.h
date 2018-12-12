@@ -85,6 +85,10 @@ protected:
 	GraphicsBufferID mBulletIconBufferID = "bullet";
 	GraphicsBufferID mSpeedIconBufferID = "speed";
 
+	int maxBuffsOnScreen = 3;
+	int currentBuffs = 0;
+	void spawnBuffs();
+
 };
 
 float genRandomBinomial();//range -1:1 from "Artificial Intelligence for Games", Millington and Funge
