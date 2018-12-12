@@ -52,7 +52,7 @@ private:
 	static UnitID msNextUnitID;
 	MemoryPool mPool;
 	std::map<UnitID, Unit*> mUnitMap;
-	std::vector<Unit*> mToBeDeleted;
+	std::vector<UnitID> mToBeDeleted;
 
 	Sprite* mpBulletSprite;
 

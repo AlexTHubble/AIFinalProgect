@@ -23,10 +23,11 @@ UnitManager::UnitManager(Uint32 maxSize)
 void UnitManager::cleanup()
 {
 
-	for (std::map<UnitID, Unit*>::iterator unit = mUnitMap.begin(); unit != mUnitMap.end(); ++unit)
+ 	for (std::map<UnitID, Unit*>::iterator unit = mUnitMap.begin(); unit != mUnitMap.end(); ++unit)
 	{
 		deleteUnit(unit->second->getID());
 	}
+
 }
 
 Unit* UnitManager::createUnit(const Sprite& sprite, bool shouldWrap, const PositionData& posData /*= ZERO_POSITION_DATA*/, const PhysicsData& physicsData /*= ZERO_PHYSICS_DATA*/, const UnitID& id)
@@ -210,8 +211,7 @@ Unit* UnitManager::getUnit(const UnitID& id) const
 
 void UnitManager::setToDeleteUnit(UnitID id)
 {
-	mToBeDeleted.push_back(mUnitMap[id]);
-
+	getUnit(id)->setToBeDeleted();
 }
 
 void UnitManager::deleteUnit(const UnitID& id)
@@ -279,9 +279,15 @@ void UnitManager::updateAll(float elapsedTime)
 
 void UnitManager::deleteUnitsFromDeletionVector()
 {
-	for (int i = 0; i < mToBeDeleted.size(); i++)
+	std::map<UnitID, Unit*> mUnitMapClone = getUnitMap();
+
+	for (std::map<UnitID, Unit*>::iterator unit = mUnitMapClone.begin(); unit != mUnitMapClone.end(); ++unit)
 	{
-		deleteUnit(mToBeDeleted[i]->getID());
+		if (unit->second->getToBeDeleted())
+		{
+			unit->second->getStateMachine()->cleanupStates();
+			gpGame->getUnitManager()->deleteUnit(unit->second->getID());
+		}
+
 	}
-	mToBeDeleted.clear();
 }

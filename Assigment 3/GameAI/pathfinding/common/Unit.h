@@ -62,6 +62,8 @@ public:
 	string getTag() { return mTag; };
 	UnitID getOwnerID(){ return mOwnerID; };
 	void setOwnerID(UnitID owner) { mOwnerID = owner; };
+	void setToBeDeleted() { mToBeDeletedAtNextUpdate = true; };
+	bool getToBeDeleted() { return mToBeDeletedAtNextUpdate; };
 
 protected:
 	Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn);
@@ -88,6 +90,8 @@ private:
 	bool ShouldUpdateTarget;
 	int mCurrentNode;
 	int mCurrentHP = 5;
+
+	bool mToBeDeletedAtNextUpdate = false;
 
 	//Class Instances
 	TankMovement* mpTankMovement;
