@@ -44,7 +44,7 @@ void Collision::CheckForCollisions(Unit* unit)
 					gpGame->getUnitManager()->setToDeleteUnit(unitIter->second->getID());
 				}
 			}
-			if (unitIter->second->getTag() == "PowerUp")
+			if (unitIter->second->getTag() == "PowerUP")
 			{
 				if (HitPowerUp(unit, unitIter->second))
 				{
