@@ -23,6 +23,7 @@ void AiPathToPowerUpState::onEntrance()
 
 void AiPathToPowerUpState::onExit()
 {
+	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(false);
 }
 
 StateTransition * AiPathToPowerUpState::update(int elapsedTime)
@@ -90,6 +91,14 @@ bool AiPathToPowerUpState::testForPowerUpSeen()
 {
 	Unit* powerUp = gpGame->getUnitManager()->getUnit(mUnitId)->getClosestPowerUpLocation();
 	if (mpTankMovment->IsMovementBuffed())
+	{
+		return true;
+	}
+	else if (mUnitId == PLAYER_UNIT_ID && gpGame->getUnitManager()->getUnit(PLAYER2_UNIT_ID)->Movement()->IsMovementBuffed()) //Player 1
+	{
+		return true;
+	}
+	else if (mUnitId == PLAYER2_UNIT_ID && gpGame->getUnitManager()->getUnit(PLAYER_UNIT_ID)->Movement()->IsMovementBuffed()) //Player 2
 	{
 		return true;
 	}

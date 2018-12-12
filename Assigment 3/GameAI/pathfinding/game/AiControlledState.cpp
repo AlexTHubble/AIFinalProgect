@@ -128,6 +128,15 @@ bool AIControlledState::testForPlayerSeen()
 
 bool AIControlledState::testForPowerUpSeen()
 {
+	if (mUnitId == PLAYER_UNIT_ID && gpGame->getUnitManager()->getUnit(PLAYER2_UNIT_ID)->Movement()->IsMovementBuffed()) //Player 1
+	{
+		return false;
+	}
+	else if (mUnitId == PLAYER2_UNIT_ID && gpGame->getUnitManager()->getUnit(PLAYER_UNIT_ID)->Movement()->IsMovementBuffed()) //Player 2
+	{
+		return false;
+	}
+
 	std::map<UnitID, Unit*> mUnitMapClone = gpGame->getUnitManager()->getUnitMap();
 
 	for (std::map<UnitID, Unit*>::iterator unit = mUnitMapClone.begin(); unit != mUnitMapClone.end(); ++unit)
