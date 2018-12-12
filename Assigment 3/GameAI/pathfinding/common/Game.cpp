@@ -118,6 +118,7 @@ bool Game::init()
 
 	//Create Buff
 	Unit* pBuff = mpUnitManager->createPowerUp(*pSpeed);
+	pBuff->getPositionComponent()->setPosition(Vector2D(200, 400));
 
 	mpUnitManager->setBulletSprite(pBullet);
 

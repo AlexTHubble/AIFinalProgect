@@ -65,6 +65,7 @@ public:
 	void setToBeDeleted() { mToBeDeletedAtNextUpdate = true; };
 	bool getToBeDeleted() { return mToBeDeletedAtNextUpdate; };
 	int getPlayerHealth() { return mCurrentHP; };
+	void applyBuff();
 
 protected:
 	Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn);

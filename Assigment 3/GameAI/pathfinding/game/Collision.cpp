@@ -47,6 +47,7 @@ void Collision::CheckForCollisions(Unit* unit)
 			if (unitIter->second->getTag() == "PowerUp")
 			{
 				//Set to buffed
+				unit->applyBuff();
 			}
 		}
 	}

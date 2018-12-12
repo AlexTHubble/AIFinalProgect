@@ -20,8 +20,14 @@
 #include "../game/AiAimingAtPlayerState.h"
 #include "../game/BulletState.h"
 #include "../game/ShootProjectile.h"
+#include "../game/PowerUpState.h"
 #include "Timer.h"
 
+
+void Unit::applyBuff()
+{
+	mpTankMovement->MovementBuff();
+}
 
 Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	:mSprite(sprite)
@@ -46,6 +52,7 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	AIControlledState* pAiControlledState = new AIControlledState(AI_CONTROLLED_STATE, mpTankMovement, idToBeSet);
 	AIAimAtPlayerState* pAiAimAtPlayerState = new AIAimAtPlayerState(AI_SHOOTING_AT_PLAYER_STATE, mpTankMovement, idToBeSet);
 	BulletState* pBulletState = new BulletState(BULLET_STATE, idToBeSet);
+	PowerUpState* pPowerUpState = new PowerUpState(POWERUP_STATE, idToBeSet);
 
 	//Sets up transitions
 	StateTransition* pToAIControlledState = new StateTransition(TO_AI_CONTROLLED_STATE, AI_CONTROLLED_STATE);
@@ -64,6 +71,7 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	mpUnitStateMachine->addState(pAiControlledState);
 	mpUnitStateMachine->addState(pAiAimAtPlayerState);
 	mpUnitStateMachine->addState(pBulletState);
+	mpUnitStateMachine->addState(pPowerUpState);
 
 	//set the initial state
 	mpUnitStateMachine->setInitialStateID(stateToStartIn);
