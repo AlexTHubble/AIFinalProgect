@@ -69,30 +69,47 @@ bool Game::init()
 
 	//load background & arrow 
 	//mpGraphicsBufferManager->loadBuffer(mBackgroundBufferID, "wallpaper.bmp");
-	mpGraphicsBufferManager->loadBuffer(mEnemyIconBufferID, "enemy-arrow.png");
+	mpGraphicsBufferManager->loadBuffer(mP1IconBufferID, "arrow.png");
+	mpGraphicsBufferManager->loadBuffer(mP2IconBufferID, "enemy-arrow.png");
+	mpGraphicsBufferManager->loadBuffer(mBulletIconBufferID, "target.png");
+	mpGraphicsBufferManager->loadBuffer(mSpeedIconBufferID, "speed.png");
 
 	//load Font
 	mpFont = new Font("cour.ttf", 24);
 
 	//Setup sprite
-	GraphicsBuffer* pAIBuffer = mpGraphicsBufferManager->getBuffer(mEnemyIconBufferID);
-	Sprite* pEnemyArrow = NULL;
-	if (pAIBuffer != NULL)
+	GraphicsBuffer* pP1Buffer = mpGraphicsBufferManager->getBuffer(mP1IconBufferID);
+	Sprite* pP1Tank = NULL;
+	if (pP1Buffer != NULL)
 	{
-		pEnemyArrow = mpSpriteManager->createAndManageSprite(AI_ICON_SPRITE_ID, pAIBuffer, 0, 0, (float)pAIBuffer->getWidth(), (float)pAIBuffer->getHeight());
+		pP1Tank = mpSpriteManager->createAndManageSprite(P1_ICON_ID, pP1Buffer, 0, 0, (float)pP1Buffer->getWidth(), (float)pP1Buffer->getHeight());
+	}
+	//Setup sprite
+	GraphicsBuffer* pP2Buffer = mpGraphicsBufferManager->getBuffer(mP2IconBufferID);
+	Sprite* pP2Tank = NULL;
+	if (pP2Buffer != NULL)
+	{
+		pP2Tank = mpSpriteManager->createAndManageSprite(P2_ICON_ID, pP2Buffer, 0, 0, (float)pP2Buffer->getWidth(), (float)pP2Buffer->getHeight());
+	}
+	//Setup sprite
+	GraphicsBuffer* pBulletBuffer = mpGraphicsBufferManager->getBuffer(mBulletIconBufferID);
+	Sprite* pBullet = NULL;
+	if (pBulletBuffer != NULL)
+	{
+		pBullet = mpSpriteManager->createAndManageSprite(BULLET_ICON_ID, pBulletBuffer, 0, 0, (float)pBulletBuffer->getWidth(), (float)pBulletBuffer->getHeight());
 	}
 
 	//Create p1
-	Unit* pPlayer1 = mpUnitManager->createPlayerUnit(*pEnemyArrow);
+	Unit* pPlayer1 = mpUnitManager->createPlayerUnit(*pP1Tank);
 	pPlayer1->getPositionComponent()->setPosition(Vector2D(mpFileSystem->getP1StartX(), mpFileSystem->getP1StartY()));
 	pPlayer1->setTag("Player1");
 
 	//Create p2
-	Unit* pPlayer2 = mpUnitManager->createPlayer2Unit(*pEnemyArrow);
+	Unit* pPlayer2 = mpUnitManager->createPlayer2Unit(*pP2Tank);
 	pPlayer2->getPositionComponent()->setPosition(Vector2D(mpFileSystem->getP2StartX(), mpFileSystem->getP2StartY()));
 	pPlayer2->setTag("Player2");
 
-	mpUnitManager->setBulletSprite(pEnemyArrow);
+	mpUnitManager->setBulletSprite(pBullet);
 
 	return true;
 }

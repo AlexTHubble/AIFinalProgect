@@ -30,6 +30,10 @@ const std::string gFileFolder = "Files/";
 const IDType BACKGROUND_SPRITE_ID = 0;
 const IDType TARGET_SPRITE_ID = 3;
 const IDType AI_ICON_SPRITE_ID = 2;
+const IDType BULLET_ICON_ID = 5;
+const IDType SPEED_ICON_ID = 6;
+const IDType P1_ICON_ID = 7;
+const IDType P2_ICON_ID = 8;
 
 const float LOOP_TARGET_TIME = 33.3f;//how long should each frame of execution take? 30fps = 33.3ms/frame
 
@@ -76,7 +80,10 @@ protected:
 	Font* mpFont;
 
 	GraphicsBufferID mBackgroundBufferID = "background";
-	GraphicsBufferID mEnemyIconBufferID = "enemy";
+	GraphicsBufferID mP1IconBufferID = "player1";
+	GraphicsBufferID mP2IconBufferID = "player2";
+	GraphicsBufferID mBulletIconBufferID = "bullet";
+	GraphicsBufferID mSpeedIconBufferID = "speed";
 
 };
 

@@ -78,7 +78,7 @@ bool GameApp::init()
 	PathfindingDebugContent* pContent = new PathfindingDebugContent( mpPathfinder );
 	mpDebugDisplay = new DebugDisplay( Vector2D(0,12), pContent );
 
-	mpInputSystem = new InputSystem(mpSpriteManager, mpUnitManager, AI_ICON_SPRITE_ID);
+	mpInputSystem = new InputSystem(mpSpriteManager, mpUnitManager, P1_ICON_ID);
 	mpInputSystem->init();
 
 	mpMasterTimer->start();
