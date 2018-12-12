@@ -185,11 +185,6 @@ void AIControlledState::pathfindToPlayer()
 
 void AIControlledState::findAndApplyNewPath()
 {
-	GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
-	GridGraph* pGridGraph = pGame->getGridGraph();
-	mSmoothPathfinding = new SmoothPathFinding(pGridGraph);
-	//mSmoothPathfinding = new SmoothPathFinding(pGridGraph);
-
 	//Gets the enemy player's location
 	if (mUnitId == 0) //If the player is p1
 	{
@@ -200,17 +195,21 @@ void AIControlledState::findAndApplyNewPath()
 		mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition();
 	}
 
+	GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
+	GridGraph* pGridGraph = pGame->getGridGraph();
+	//mSmoothPathfinding = new SmoothPathFinding();
+	//mSmoothPathfinding = new SmoothPathFinding(pGridGraph);
+	Pathfinder* pathFinder = dynamic_cast<GameApp*>(gpGame)->getPathfinder();
+
+
 	Node* from = pGridGraph->getNodeClosestToLocation(gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition());
 	Node* to = pGridGraph->getNodeClosestToLocation(mEnemyPlayerLoc);
 
-	
-	mUnitPath = mSmoothPathfinding->findPath(from, to);
+
+	mUnitPath = pathFinder->findPath(from, to);
 
 	gpGame->getUnitManager()->getUnit(mUnitId)->setPath(mUnitPath);
 	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(true);
-
-	delete mUnitPath;
-	//delete mSmoothPathfinding;
 	
 }
 

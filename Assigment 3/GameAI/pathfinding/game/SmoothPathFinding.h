@@ -2,6 +2,7 @@
 #define SMOOTH_PATHFINDING_H
 
 #include "DijsktraPathfinder.h"
+#include "UnitManager.h"
 
 class Grid;
 class Graph;
@@ -14,7 +15,7 @@ public:
 	SmoothPathFinding(Graph* pGraph);
 	~SmoothPathFinding();
 	//
-	Path* FindPath(Node* pFrom, Node* pTo);
+	Path* FindPath(Node* pFrom, Node* pTo, UnitID id);
 private:
 };
 

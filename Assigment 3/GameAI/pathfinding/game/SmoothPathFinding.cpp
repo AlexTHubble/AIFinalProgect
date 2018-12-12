@@ -2,6 +2,7 @@
 #include "DijsktraPathfinder.h"
 #include "PathSmoothing.h"
 #include "GridGraph.h"
+#include "Game.h"
 
 SmoothPathFinding::SmoothPathFinding(Graph * pGraph)
 	:Dijsktra(dynamic_cast<GridGraph*>(pGraph), true)
@@ -13,7 +14,7 @@ SmoothPathFinding::~SmoothPathFinding()
 	std::cout << "Deconstructor " << std::endl;
 }
 
-Path * SmoothPathFinding::FindPath(Node * pFrom, Node * pTo)
+Path * SmoothPathFinding::FindPath(Node * pFrom, Node * pTo, UnitID id)
 {
 	//Path
 	Path* pPath;

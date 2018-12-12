@@ -28,7 +28,7 @@ private:
 	bool mTransferToPlayerControll = false;
 	Vector2D mPowerUpLocation;
 	Path* mUnitPath;
-	SmoothPathFinding* mSmoothPathfinding;
+	//SmoothPathFinding* mSmoothPathfinding;
 
 	bool testForPowerUpSeen();
 	bool pathToPowerUp();

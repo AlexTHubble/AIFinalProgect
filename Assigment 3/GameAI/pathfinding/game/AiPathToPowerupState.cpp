@@ -7,6 +7,7 @@
 #include "Grid.h"
 #include "Path.h"
 #include "Collision.h"
+#include "GameApp.h"
 
 
 void AiPathToPowerUpState::onEntrance()
@@ -137,19 +138,19 @@ void AiPathToPowerUpState::findAndApplyNewPath()
 {
 	GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
 	GridGraph* pGridGraph = pGame->getGridGraph();
-	mSmoothPathfinding = new SmoothPathFinding(pGridGraph);
+	//mSmoothPathfinding = new SmoothPathFinding();
 	//mSmoothPathfinding = new SmoothPathFinding(pGridGraph);
+	Pathfinder* pathFinder = dynamic_cast<GameApp*>(gpGame)->getPathfinder();
+
 
 	Node* from = pGridGraph->getNodeClosestToLocation(gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition());
 	Node* to = pGridGraph->getNodeClosestToLocation(mPowerUpLocation);
 
 
-	mUnitPath = mSmoothPathfinding->findPath(from, to);
+	mUnitPath = pathFinder->findPath(from, to);
 
 	gpGame->getUnitManager()->getUnit(mUnitId)->setPath(mUnitPath);
 	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(true);
-
-	delete mUnitPath;
 }
 
 bool AiPathToPowerUpState::RaycastToTarget(float xPos, float yPos, float xTarget, float yTarget)
