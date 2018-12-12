@@ -276,8 +276,7 @@ void UnitManager::updateAll(float elapsedTime)
 		it->second->updateTarget();
 	}
 	deleteUnitsFromDeletionVector();
-	if(!mGameOver1 || !mGameOver2)
-		CheckGameEnd();
+	CheckGameEnd();
 }
 
 void UnitManager::deleteUnitsFromDeletionVector()
@@ -299,14 +298,22 @@ void UnitManager::CheckGameEnd()
 {
 	if (!mGameOver1 && !mGameOver2)
 	{
-		if (getPlayerUnit()->getPlayerHealth() == 0)
+
+		if (getPlayerUnit() != NULL)
 		{
-			mGameOver1 = true;
+			if (getPlayerUnit()->getPlayerHealth() == 0)
+			{
+				mGameOver1 = true;
+			}
 		}
-		if (getPlayer2Unit()->getPlayerHealth() == 0)
+		if (getPlayer2Unit() != NULL)
 		{
-			mGameOver2 = true;
+			if (getPlayer2Unit()->getPlayerHealth() == 0)
+			{
+				mGameOver2 = true;
+			}
 		}
+
 	}
 	else
 	{
