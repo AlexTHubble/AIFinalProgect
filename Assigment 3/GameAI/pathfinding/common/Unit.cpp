@@ -33,6 +33,8 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	mCurrentHP = gpGame->getFileSystem()->getPlayerHealth();
 	mShootDelay = gpGame->getFileSystem()->getShootDelay();
 
+	mMaxSpeed = gpGame->getFileSystem()->getPlayerSpeed();
+	//mMaxRotVel = gpGame->getFileSystem()->getPlayerRotateSpeed();
 	mpTankMovement = new TankMovement(gpGame->getFileSystem()->getPlayerSpeed(), gpGame->getFileSystem()->getPlayerRotateSpeed()); // <--- Hard coded values for max speeds
 	mCurrentNode = 0;
 	ShouldUpdateTarget = false;

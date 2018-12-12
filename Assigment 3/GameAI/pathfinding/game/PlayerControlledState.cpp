@@ -13,6 +13,8 @@ void PlayerControlledState::onEntrance()
 	mTransferToAIControll = false;
 	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(false);
  	gpGame->getUnitManager()->getUnit(mUnitId)->setSteering(Steering::NONE, NULL, mUnitId);
+	//gpGame->getUnitManager()->getUnit(mUnitId)->SetMaxRotateSpeed(gpGame->getUnitManager()->getUnit(mUnitId)->getMaxRotVel() * 2);
+	//gpGame->getUnitManager()->getUnit(mUnitId)->SetMaxMoveSpeed(gpGame->getUnitManager()->getUnit(mUnitId)->getMaxSpeed() * 2);
 }
 
 void PlayerControlledState::onExit()

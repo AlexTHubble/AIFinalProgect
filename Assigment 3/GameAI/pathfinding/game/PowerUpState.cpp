@@ -1,7 +1,10 @@
 #include "PowerUpState.h"
+#include "Game.h"
+#include "UnitManager.h"
 
 void PowerUpState::onEntrance()
 {
+	
 }
 
 void PowerUpState::onExit()
