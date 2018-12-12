@@ -23,6 +23,7 @@ private:
 	//Functions
 	void InsideGridBlock(int index, Unit* unit);
 	bool HitByBullet(Unit* player, Unit* bullet);
+	bool HitPowerUp(Unit* player, Unit* bullet);
 	void TankWallCollision(Unit* unit);
 };
 

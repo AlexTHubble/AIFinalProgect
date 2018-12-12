@@ -29,7 +29,7 @@ void Collision::CheckForCollisions(Unit* unit)
 		}
 	}
 	//While unit is not a bullet
-	if (unit->getTag() != "Bullet" || unit->getTag() != "PowerUp")
+	if (unit->getTag() != "Bullet" && unit->getTag() != "PowerUp")
 	{
 		//Search through Unitmanager for bullets
 		std::map<UnitID, Unit*>unitMap = gpGame->getUnitManager()->getUnitMap();
@@ -44,10 +44,13 @@ void Collision::CheckForCollisions(Unit* unit)
 					gpGame->getUnitManager()->setToDeleteUnit(unitIter->second->getID());
 				}
 			}
-			if (unitIter->second->getTag() == "PowerUp")
+			//if (unitIter->second->getTag() == "PowerUp")
 			{
-				//Set to buffed
-				unit->applyBuff();
+				if (HitPowerUp(unit, unitIter->second))
+				{
+					unit->applyBuff();
+					gpGame->getUnitManager()->setToDeleteUnit(unitIter->second->getID());
+				}
 			}
 		}
 	}
@@ -111,7 +114,6 @@ bool Collision::HitByBullet(Unit * player, Unit * bullet)
 	{
 		if (player->getID() != bullet->getOwnerID())
 		{
-			std::cout << "BULLET ID: " << bullet->getOwnerID() << " | Player ID " << player->getID() << std::endl;
 			return true;
 		}
 		else
@@ -123,6 +125,30 @@ bool Collision::HitByBullet(Unit * player, Unit * bullet)
 	{
 		return false;
 	}
+}
+
+bool Collision::HitPowerUp(Unit * player, Unit * bullet)
+{
+	//Unit Center and radius spacing
+	float unitX = player->getPositionComponent()->getPosition().getX();
+	float unitY = player->getPositionComponent()->getPosition().getY();
+	//-------------------------------------------------------------------//
+	//Bullet center and radius
+	float bulletRadius = (bullet->getSprite()->getWidth());
+	float bulletX = bullet->getPositionComponent()->getPosition().getX();
+	float bulletY = bullet->getPositionComponent()->getPosition().getY();
+
+	//Check to see if player is within radius of bullet
+	float yDiff = unitY - bulletY;
+	float xDiff = unitX - bulletX;
+	//Get distance between points
+	float distance = std::sqrtf((xDiff * xDiff) + (yDiff * yDiff));
+	//If within radius of bullet
+	if (distance <= bulletRadius)
+	{
+		return true;
+	}
+	return false;
 }
 
 void Collision::TankWallCollision(Unit* unit)
