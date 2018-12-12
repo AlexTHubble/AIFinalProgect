@@ -269,13 +269,15 @@ void UnitManager::drawAll() const
 
 void UnitManager::updateAll(float elapsedTime)
 {
-	CheckGameEnd();
+	
 	for (auto it = mUnitMap.begin(); it != mUnitMap.end(); ++it)
 	{
 		it->second->update(elapsedTime);
 		it->second->updateTarget();
 	}
 	deleteUnitsFromDeletionVector();
+	if(!mGameOver1 || !mGameOver2)
+		CheckGameEnd();
 }
 
 void UnitManager::deleteUnitsFromDeletionVector()
