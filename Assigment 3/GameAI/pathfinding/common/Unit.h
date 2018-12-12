@@ -33,7 +33,7 @@ public:
 
 	void draw() const;
 	float getFacing() const;
-	void update(int elapsedTime);
+	void update(float elapsedTime);
 
 	PositionComponent* getPositionComponent() const;
 	PhysicsComponent* getPhysicsComponent() const;
@@ -64,6 +64,7 @@ public:
 	void setOwnerID(UnitID owner) { mOwnerID = owner; };
 	void setToBeDeleted() { mToBeDeletedAtNextUpdate = true; };
 	bool getToBeDeleted() { return mToBeDeletedAtNextUpdate; };
+	int getPlayerHealth() { return mCurrentHP; };
 
 protected:
 	Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn);
@@ -92,6 +93,10 @@ private:
 	int mCurrentHP = 5;
 
 	bool mToBeDeletedAtNextUpdate = false;
+
+	float mShootDelay = 3.0f;
+	float mTimeUntillNextShootDelay;
+	bool mShootDelayInitiaed = false;
 
 	//Class Instances
 	TankMovement* mpTankMovement;

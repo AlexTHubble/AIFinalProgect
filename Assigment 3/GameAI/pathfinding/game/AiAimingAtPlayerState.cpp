@@ -49,7 +49,9 @@ StateTransition * AIAimAtPlayerState::update(int elapsedTime)
 		}
 	}
 
+	gpGame->getUnitManager()->getUnit(mUnitId)->shootBullet();
 	aimAtPlayer();
+
 
 	return nullptr;
 }

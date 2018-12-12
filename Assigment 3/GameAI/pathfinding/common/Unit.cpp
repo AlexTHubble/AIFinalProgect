@@ -20,6 +20,7 @@
 #include "../game/AiAimingAtPlayerState.h"
 #include "../game/BulletState.h"
 #include "../game/ShootProjectile.h"
+#include "Timer.h"
 
 
 Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
@@ -180,17 +181,25 @@ void Unit::reducePlayerHp(int hpToReduceBy)
 
 void Unit::shootBullet()
 {
-	//ToDo
-	Unit* bullet;
-	bullet = gpGame->getUnitManager()->createBullet();
 
-	bullet->getPositionComponent()->setPosition(getPositionComponent()->getPosition());
-	bullet->getPositionComponent()->setFacing(getFacing());
+	if (!mShootDelayInitiaed)
+	{
+		mShootDelayInitiaed = true;
+		mTimeUntillNextShootDelay = 0;
 
-	ShootProjectile shootProjectile;
-	shootProjectile.Shoot(bullet);
+		//ToDo
+		Unit* bullet;
+		bullet = gpGame->getUnitManager()->createBullet();
 
-	bullet->setOwnerID(mID);
+		bullet->getPositionComponent()->setPosition(getPositionComponent()->getPosition());
+		bullet->getPositionComponent()->setFacing(getFacing());
+
+		ShootProjectile shootProjectile;
+		shootProjectile.Shoot(bullet);
+
+		bullet->setOwnerID(mID);
+	}
+
 
 }
 
@@ -199,7 +208,16 @@ void Unit::setTag(string tag)
 	mTag = tag;
 }
 
-void Unit::update(int elapsedTime)
+void Unit::update(float elapsedTime)
 {
+	if (mShootDelayInitiaed)
+	{
+		mTimeUntillNextShootDelay += elapsedTime;
+		if (mTimeUntillNextShootDelay > mShootDelay)
+		{
+			mShootDelayInitiaed = false;
+		}
+	}
+
 	mpUnitStateMachine->update(elapsedTime);
 }

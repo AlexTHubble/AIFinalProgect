@@ -32,7 +32,6 @@ void AIControlledState::onExit()
 
 StateTransition * AIControlledState::update(int elapsedTime)
 {
-	std::cout << "IN PATH STATE " << std::endl;
 
 	if (mTransferToPlayerControll) //If the state has been marked to transition into the new state...
 	{
