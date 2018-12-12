@@ -90,11 +90,11 @@ private:
 	Path* mPath;
 	bool ShouldUpdateTarget;
 	int mCurrentNode;
-	int mCurrentHP = 5;
+	int mCurrentHP;
 
 	bool mToBeDeletedAtNextUpdate = false;
 
-	float mShootDelay = 3.0f;
+	float mShootDelay;
 	float mTimeUntillNextShootDelay;
 	bool mShootDelayInitiaed = false;
 

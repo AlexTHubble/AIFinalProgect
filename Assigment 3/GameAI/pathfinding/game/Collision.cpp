@@ -40,7 +40,7 @@ void Collision::CheckForCollisions(Unit* unit)
 				if (HitByBullet(unit, unitIter->second))
 				{
 					//Reduce units health and delete bullet
-					unit->reducePlayerHp(1);
+					unit->reducePlayerHp(gpGame->getFileSystem()->getBulletDamage());
 					gpGame->getUnitManager()->setToDeleteUnit(unitIter->second->getID());
 				}
 			}

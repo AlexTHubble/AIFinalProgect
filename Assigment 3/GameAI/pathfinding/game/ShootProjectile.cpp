@@ -4,7 +4,7 @@
 
 ShootProjectile::ShootProjectile()
 {
-	SetProjectileVelocity(40.0f);
+	SetProjectileVelocity(gpGame->getFileSystem()->getBulletSpeed());
 }
 
 ShootProjectile::~ShootProjectile()

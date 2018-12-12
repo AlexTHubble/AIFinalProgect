@@ -1,8 +1,8 @@
 #include "TankMovement.h"
-
+#include "Game.h"
 #include <math.h>
 
-const double PI = std::atan(1.0) * 4;
+//const double BETTERPI = std::atan(1.0) * 4;
 const float DEGREE_TO_RADIAN = PI / 180;
 
 TankMovement::TankMovement(float maxSpeed, float maxRotateSpeed, float movementMultiplier)
@@ -73,21 +73,21 @@ void TankMovement::ZeroOutRotate()
 	SetRotateSpeed(0);
 }
 
-void TankMovement::MovementBuff(float movementMultiplier, int durationMiliseconds)
+void TankMovement::MovementBuff()
 {
 	if (mIsMovementBuffed)
 	{
 		//Increase timer and change multiplier
-		mMovementBuffTimer += durationMiliseconds;
-		SetMovementMultiplier(movementMultiplier);
+		mMovementBuffTimer += gpGame->getFileSystem()->getBufDuration();
+		SetMovementMultiplier(gpGame->getFileSystem()->getPowerUpSpeedIncrease());
 	}
 	else
 	{
 		//Set buffed to true
 		SetIsMovementBuffed(true);
 		//Set timer and multiplier
-		mMovementBuffTimer = durationMiliseconds;
-		SetMovementMultiplier(mMovementMultiplier);
+		mMovementBuffTimer = gpGame->getFileSystem()->getBufDuration();
+		SetMovementMultiplier(gpGame->getFileSystem()->getPowerUpSpeedIncrease());
 	}
 }
 

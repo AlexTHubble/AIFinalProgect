@@ -62,7 +62,7 @@ bool GameApp::init()
 	
 	loadMapList();
 
-	loadMap(2);
+	loadMap(0);
 
 	//load buffers
 	mpGraphicsBufferManager->loadBuffer(mBackgroundBufferID, "wallpaper.bmp");

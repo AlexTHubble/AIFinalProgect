@@ -30,7 +30,10 @@ Unit::Unit(const Sprite& sprite, UnitID idToBeSet, StateType stateToStartIn)
 	,mSteeringComponentID(INVALID_COMPONENT_ID)
 	,mShowTarget(false)
 {
-	mpTankMovement = new TankMovement(20.0f, 1.0f); // <--- Hard coded values for max speeds
+	mCurrentHP = gpGame->getFileSystem()->getPlayerHealth();
+	mShootDelay = gpGame->getFileSystem()->getShootDelay();
+
+	mpTankMovement = new TankMovement(gpGame->getFileSystem()->getPlayerSpeed(), gpGame->getFileSystem()->getPlayerRotateSpeed()); // <--- Hard coded values for max speeds
 	mCurrentNode = 0;
 	ShouldUpdateTarget = false;
 	mPath = nullptr;

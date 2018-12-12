@@ -21,7 +21,7 @@ public:
 	void ZeroOutMovement();
 	void ZeroOutRotate();
 	//Buff Function
-	void MovementBuff(float movementMultiplier, int miliseconds);
+	void MovementBuff();
 	//Variable Accessors
 	float GetMovementSpeed() { return mMoveSpeed; };
 	float GetRotateSpeed() { return mRotateSpeed; };
