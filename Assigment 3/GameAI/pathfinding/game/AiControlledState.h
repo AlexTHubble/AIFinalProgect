@@ -39,6 +39,7 @@ private:
 	bool testForPowerUpSeen();
 	void pathfindToPlayer();
 	void findAndApplyNewPath();
+	bool RaycastToTarget(float xPos, float yPos, float xTarget, float yTarget);
 };
 
 #endif //!AI_CONTROLLED_STATE_H

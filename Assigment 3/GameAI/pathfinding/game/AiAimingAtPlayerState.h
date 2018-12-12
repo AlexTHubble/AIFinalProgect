@@ -36,6 +36,7 @@ private:
 
 	bool testForPlayerSeen();
 	void aimAtPlayer();
+	bool RaycastToTarget(float xPos, float yPos, float xTarget, float yTarget);
 };
 
 #endif //!AI_AIMING_AT_PLAYER_STATE_H
