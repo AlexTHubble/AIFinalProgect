@@ -98,6 +98,13 @@ bool Game::init()
 	{
 		pBullet = mpSpriteManager->createAndManageSprite(BULLET_ICON_ID, pBulletBuffer, 0, 0, (float)pBulletBuffer->getWidth(), (float)pBulletBuffer->getHeight());
 	}
+	//Setup sprite
+	GraphicsBuffer* pSpeedBuffer = mpGraphicsBufferManager->getBuffer(mSpeedIconBufferID);
+	Sprite* pSpeed = NULL;
+	if (pSpeedBuffer != NULL)
+	{
+		pSpeed = mpSpriteManager->createAndManageSprite(SPEED_ICON_ID, pSpeedBuffer, 0, 0, (float)pSpeedBuffer->getWidth(), (float)pSpeedBuffer->getHeight());
+	}
 
 	//Create p1
 	Unit* pPlayer1 = mpUnitManager->createPlayerUnit(*pP1Tank);
@@ -108,6 +115,9 @@ bool Game::init()
 	Unit* pPlayer2 = mpUnitManager->createPlayer2Unit(*pP2Tank);
 	pPlayer2->getPositionComponent()->setPosition(Vector2D(mpFileSystem->getP2StartX(), mpFileSystem->getP2StartY()));
 	pPlayer2->setTag("Player2");
+
+	//Create Buff
+	Unit* pBuff = mpUnitManager->createPowerUp(*pSpeed);
 
 	mpUnitManager->setBulletSprite(pBullet);
 

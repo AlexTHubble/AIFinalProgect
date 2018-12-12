@@ -29,7 +29,7 @@ void Collision::CheckForCollisions(Unit* unit)
 		}
 	}
 	//While unit is not a bullet
-	if (unit->getTag() != "Bullet")
+	if (unit->getTag() != "Bullet" || unit->getTag() != "PowerUp")
 	{
 		//Search through Unitmanager for bullets
 		std::map<UnitID, Unit*>unitMap = gpGame->getUnitManager()->getUnitMap();
@@ -43,6 +43,10 @@ void Collision::CheckForCollisions(Unit* unit)
 					unit->reducePlayerHp(gpGame->getFileSystem()->getBulletDamage());
 					gpGame->getUnitManager()->setToDeleteUnit(unitIter->second->getID());
 				}
+			}
+			if (unitIter->second->getTag() == "PowerUp")
+			{
+				//Set to buffed
 			}
 		}
 	}
