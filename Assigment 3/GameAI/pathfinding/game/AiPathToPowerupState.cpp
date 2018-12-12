@@ -89,7 +89,7 @@ void AiPathToPowerUpState::cleanupTransitions()
 bool AiPathToPowerUpState::testForPowerUpSeen()
 {
 	Unit* powerUp = gpGame->getUnitManager()->getUnit(mUnitId)->getClosestPowerUpLocation();
-	if (powerUp == nullptr)
+	if (mpTankMovment->IsMovementBuffed())
 	{
 		return true;
 	}
