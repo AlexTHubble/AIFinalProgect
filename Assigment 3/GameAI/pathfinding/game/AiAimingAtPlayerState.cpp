@@ -6,6 +6,7 @@
 #include "GridGraph.h"
 #include "Grid.h"
 #include "../common/Steering.h"
+#include "Collision.h"
 
 void AIAimAtPlayerState::onEntrance()
 {
@@ -52,6 +53,11 @@ StateTransition * AIAimAtPlayerState::update(int elapsedTime)
 	gpGame->getUnitManager()->getUnit(mUnitId)->shootBullet();
 	aimAtPlayer();
 
+	//Check collision
+	Collision* collision = new Collision();
+	collision->CheckForCollisions(gpGame->getUnitManager()->getUnit(mUnitId));
+
+	delete collision;
 
 	return nullptr;
 }

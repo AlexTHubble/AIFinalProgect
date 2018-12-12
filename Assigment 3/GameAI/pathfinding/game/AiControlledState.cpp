@@ -137,6 +137,11 @@ bool AIControlledState::testForPowerUpSeen()
 		return false;
 	}
 
+	if (gpGame->getUnitManager()->getUnit(mUnitId)->Movement()->IsMovementBuffed())
+	{
+		return false;
+	}
+
 	std::map<UnitID, Unit*> mUnitMapClone = gpGame->getUnitManager()->getUnitMap();
 
 	for (std::map<UnitID, Unit*>::iterator unit = mUnitMapClone.begin(); unit != mUnitMapClone.end(); ++unit)

@@ -85,7 +85,7 @@ protected:
 	GraphicsBufferID mBulletIconBufferID = "bullet";
 	GraphicsBufferID mSpeedIconBufferID = "speed";
 
-	int maxBuffsOnScreen = 3;
+	int maxBuffsOnScreen = 6;
 	int currentBuffs = 0;
 	void spawnBuffs();
 
