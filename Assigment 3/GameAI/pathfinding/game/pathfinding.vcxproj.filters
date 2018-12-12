@@ -237,6 +237,9 @@
     <ClInclude Include="PowerUpState.h">
       <Filter>Header Files\StateMachine\States</Filter>
     </ClInclude>
+    <ClInclude Include="FileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\Game.cpp">
@@ -406,6 +409,9 @@
     </ClCompile>
     <ClCompile Include="PowerUpState.cpp">
       <Filter>Source Files\StateMachine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

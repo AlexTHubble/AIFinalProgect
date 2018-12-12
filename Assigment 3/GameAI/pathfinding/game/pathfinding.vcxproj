@@ -114,6 +114,7 @@
     <ClInclude Include="DepthFirstPathfinder.h" />
     <ClInclude Include="DijsktraPathfinder.h" />
     <ClInclude Include="EndGameMessage.h" />
+    <ClInclude Include="FileSystem.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="GameMessage.h" />
     <ClInclude Include="GameMessageManager.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="DepthFirstPathfinder.cpp" />
     <ClCompile Include="DijsktraPathfinder.cpp" />
     <ClCompile Include="EndGameMessage.cpp" />
+    <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="GameMessage.cpp" />
     <ClCompile Include="GameMessageManager.cpp" />

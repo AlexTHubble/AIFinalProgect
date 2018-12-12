@@ -28,7 +28,7 @@
 #include <vector>
 
 const int GRID_SQUARE_SIZE = 32;
-const std::string gFileName = "MapList.txt";
+const std::string gMapFileName = "MapList.txt";
 const std::string gMapFolder = "Maps/";
 
 GameApp::GameApp()
@@ -207,7 +207,7 @@ void GameApp::loadMapList()
 {
 	bool endOfFile = false;
 	std::string data;
-	ifstream file(gMapFolder + gFileName);
+	ifstream file(gMapFolder + gMapFileName);
 
 	if (file.is_open())
 	{

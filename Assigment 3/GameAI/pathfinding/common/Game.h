@@ -9,6 +9,7 @@
 #include <Trackable.h>
 #include <Timer.h>
 #include "Defines.h"
+#include "../game/FileSystem.h"
 
 class MemoryTracker;
 class PerformanceTracker;
@@ -24,7 +25,8 @@ class UnitManager;
 extern PerformanceTracker* gpPerformanceTracker;
 extern Game* gpGame;
 
-
+const std::string gFileName = "Variables.txt";
+const std::string gFileFolder = "Files/";
 const IDType BACKGROUND_SPRITE_ID = 0;
 const IDType TARGET_SPRITE_ID = 3;
 const IDType AI_ICON_SPRITE_ID = 2;
@@ -54,6 +56,7 @@ public:
 	inline void markForExit() { mShouldExit = true; };
 	inline ComponentManager* getComponentManager() { return mpComponentManager; };
 	inline UnitManager* getUnitManager() { return mpUnitManager; };
+	inline FileSystem* getFileSystem() { return mpFileSystem; };
 
 protected:
 	GraphicsSystem* mpGraphicsSystem;
@@ -61,6 +64,7 @@ protected:
 	SpriteManager* mpSpriteManager;
 	ComponentManager* mpComponentManager;
 	UnitManager* mpUnitManager;
+	FileSystem* mpFileSystem;
 	Timer* mpLoopTimer;
 	Timer* mpMasterTimer;
 	float mLoopTargetTime;

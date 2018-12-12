@@ -50,7 +50,8 @@ bool Game::init()
 	mpLoopTimer = new Timer;
 	mpMasterTimer = new Timer;
 
-
+	mpFileSystem = new FileSystem(gFileFolder, gFileName);
+	mpFileSystem->loadFiles();
 	//create and init GraphicsSystem
 	mpGraphicsSystem = new GraphicsSystem();
 	bool goodGraphics = mpGraphicsSystem->init(WIDTH, HEIGHT);
@@ -83,24 +84,24 @@ bool Game::init()
 
 	//Create p1
 	Unit* pPlayer1 = mpUnitManager->createPlayerUnit(*pEnemyArrow);
-	pPlayer1->getPositionComponent()->setPosition(Vector2D(300, 300));
+	pPlayer1->getPositionComponent()->setPosition(Vector2D(mpFileSystem->getP1StartX(), mpFileSystem->getP1StartY()));
 	pPlayer1->setTag("Player1");
 
 	//Create p2
 	Unit* pPlayer2 = mpUnitManager->createPlayer2Unit(*pEnemyArrow);
-	pPlayer2->getPositionComponent()->setPosition(Vector2D(500, 300));
+	pPlayer2->getPositionComponent()->setPosition(Vector2D(mpFileSystem->getP2StartX(), mpFileSystem->getP2StartY()));
 	pPlayer2->setTag("Player2");
 
 	mpUnitManager->setBulletSprite(pEnemyArrow);
-
-	//Unit* pBulletTest = mpUnitManager->createBullet();
-	//pBulletTest->getPositionComponent()->setPosition(Vector2D(500, 100));
 
 	return true;
 }
 
 void Game::cleanup()
 {
+
+	delete mpFileSystem;
+	mpFileSystem = NULL;
 
 	//delete the timers
 	delete mpLoopTimer;
