@@ -55,7 +55,10 @@ private:
 	std::vector<UnitID> mToBeDeleted;
 
 	Sprite* mpBulletSprite;
+	bool mGameOver1 = false;
+	bool mGameOver2 = false;
 
 	void deleteUnitsFromDeletionVector();
+	void CheckGameEnd();
 };
 

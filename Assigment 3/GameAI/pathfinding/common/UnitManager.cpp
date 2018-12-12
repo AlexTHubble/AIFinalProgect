@@ -269,6 +269,7 @@ void UnitManager::drawAll() const
 
 void UnitManager::updateAll(float elapsedTime)
 {
+	CheckGameEnd();
 	for (auto it = mUnitMap.begin(); it != mUnitMap.end(); ++it)
 	{
 		it->second->update(elapsedTime);
@@ -289,5 +290,38 @@ void UnitManager::deleteUnitsFromDeletionVector()
 			gpGame->getUnitManager()->deleteUnit(unit->second->getID());
 		}
 
+	}
+}
+
+void UnitManager::CheckGameEnd()
+{
+	if (!mGameOver1 && !mGameOver2)
+	{
+		if (getPlayerUnit()->getPlayerHealth() == 0)
+		{
+			mGameOver1 = true;
+		}
+		if (getPlayer2Unit()->getPlayerHealth() == 0)
+		{
+			mGameOver2 = true;
+		}
+	}
+	else
+	{
+		string toDisplay;
+		string toDisplay2;
+
+		if (mGameOver1)
+		{
+			toDisplay = "Game Over: Player 2 Wins";
+			toDisplay2 = "Press ESC to exit";
+		}
+		else if (mGameOver2)
+		{
+			toDisplay = "Game Over: Player 1 Wins";
+			toDisplay2 = "Press ESC to exit";
+		}
+		gpGame->getGraphicsSystem()->writeText(*gpGame->getGraphicsSystem()->getBackBuffer(), *(gpGame->getFont()), 350, 180, toDisplay, BLACK_COLOR);
+		gpGame->getGraphicsSystem()->writeText(*gpGame->getGraphicsSystem()->getBackBuffer(), *(gpGame->getFont()), 350, 250, toDisplay2, BLACK_COLOR);
 	}
 }
