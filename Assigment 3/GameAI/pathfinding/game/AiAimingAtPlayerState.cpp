@@ -85,7 +85,7 @@ bool AIAimAtPlayerState::testForPlayerSeen()
 	float xPos = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition().getX();
 	float yPos = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition().getY();
 
-	if (distance < mDistanceForPlayerSeen && RaycastToTarget(xPos, yPos, mEnemyPlayerLoc.getX(), mEnemyPlayerLoc.getY()))
+	if (RaycastToTarget(xPos, yPos, mEnemyPlayerLoc.getX(), mEnemyPlayerLoc.getY()))
 	{
 		return true;
 	}

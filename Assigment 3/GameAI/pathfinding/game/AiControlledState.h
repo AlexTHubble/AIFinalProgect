@@ -30,7 +30,7 @@ private:
 	bool mTransferToPlayerControll = false;
 	Vector2D mEnemyPlayerLoc;
 	float mDistanceToTargetForStop = 30;
-	float mDistanceForPlayerSeen = 60;
+	float mDistanceForPlayerSeen = 999;
 	Node* mPlayerNode;
 	Path* mUnitPath;
 	SmoothPathFinding* mSmoothPathfinding;

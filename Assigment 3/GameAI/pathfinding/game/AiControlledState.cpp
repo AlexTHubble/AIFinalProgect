@@ -25,12 +25,14 @@ void AIControlledState::onEntrance()
 
 void AIControlledState::onExit()
 {
+	gpGame->getUnitManager()->getUnit(mUnitId)->setToUpdateTarget(false);
 	//delete mUnitPath;
 	//delete mSmoothPathfinding;
 }
 
 StateTransition * AIControlledState::update(int elapsedTime)
 {
+	std::cout << "IN PATH STATE " << std::endl;
 
 	if (mTransferToPlayerControll) //If the state has been marked to transition into the new state...
 	{
@@ -95,6 +97,17 @@ void AIControlledState::cleanupTransitions()
 
 bool AIControlledState::testForPlayerSeen()
 {
+	//Gets the enemy player's location
+	if (mUnitId == 0) //If the player is p1
+	{
+		mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayer2Unit()->getPositionComponent()->getPosition();
+	}
+	else if (mUnitId == 1)//If the player is p2
+	{
+		mEnemyPlayerLoc = gpGame->getUnitManager()->getPlayerUnit()->getPositionComponent()->getPosition();
+	}
+
+
 	//Gets the distance between the unit and it's target
 	Vector2D direction = mEnemyPlayerLoc - gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition();
 	float distance = direction.getLength();
@@ -102,7 +115,7 @@ bool AIControlledState::testForPlayerSeen()
 	float xPos = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition().getX();
 	float yPos = gpGame->getUnitManager()->getUnit(mUnitId)->getPositionComponent()->getPosition().getY();
 
-	if (distance < mDistanceForPlayerSeen && !RaycastToTarget(xPos, yPos, mEnemyPlayerLoc.getX(), mEnemyPlayerLoc.getY()))
+	if (!RaycastToTarget(xPos, yPos, mEnemyPlayerLoc.getX(), mEnemyPlayerLoc.getY()))
 	{
 		return true;
 	}
