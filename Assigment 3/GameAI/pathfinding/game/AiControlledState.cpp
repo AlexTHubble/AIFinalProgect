@@ -16,8 +16,6 @@ void AIControlledState::onEntrance()
 
 	GameApp* pGame = dynamic_cast<GameApp*>(gpGame);
 
-	gpGame->getUnitManager()->getUnit(mUnitId)->SetMaxMoveSpeed(gpGame->getUnitManager()->getUnit(mUnitId)->getMaxSpeed() / 2);
-	//gpGame->getUnitManager()->getUnit(mUnitId)->SetMaxRotateSpeed(gpGame->getUnitManager()->getUnit(mUnitId)->getMaxRotVel() / 2);
 
 	mUnitPath = NULL;
 
